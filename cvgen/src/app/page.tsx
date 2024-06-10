@@ -34,7 +34,7 @@ export default function Home() {
       <div className="flex-1 w-full max-w-4xl overflow-hidden border border-gray-300">
         <iframe
           src="/CV/page.html"
-          className="w-full h-full border-none"
+          className="w-full h-full border-none "
           title="CV"
         />
       </div>
