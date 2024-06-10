@@ -1,0 +1,54 @@
+{
+    "resumes": [
+      {
+        "name": "Mahdi Barhoumi",
+        "title": "Computer Science Student",
+        "email": "mahdi.barhoumi@ensi-uma.tn",
+        "phone": "+216 99 422 037",
+        "location": "Jardins D'El Menzeh I, 2094 Mnihla",
+        "linkedin": "https://www.linkedin.com/in/mahdi-barhoumi",
+        "about": [
+          "I am a computer science student with a strong background in Python and C/C++. I have 3 years of experience in developing software applications and have worked on a wide range of projects throughout my career.",
+          "Resourceful and independent in my work, I enjoy learning new technologies, spending time solving problems and producing quality code. My work values: clean code, flexibility and performance."
+        ],
+        "skills": ["C/C++", "Python", "Java", "HTML", "CSS", "JavaScript", "PHP", "SQL"],
+        "languages": {
+          "English": 90,
+          "French": 80
+        },
+        "hobbies": ["Video games", "IT in general", "Sport"],
+        "objectives": "I am actively seeking a month-long summer internship to further my professional growth and gain valuable hands-on experience. With a strong desire to learn and contribute, I am eager to embrace this opportunity and make a meaningful impact in a short-term internship.",
+        "experiences": [
+          {
+            "date": "2020 → 2022",
+            "details": ["Developed various web scraping tools using Python", "Used APIs to handle application to server communications"]
+          },
+          {
+            "date": "2022 → Present",
+            "details": ["Developed a record keeping C application", "Collaboratively designed and developed a charity website", "Actively building a C++ 3D render engine using OpenGL"]
+          }
+        ],
+        "studies": [
+          {
+            "date": "2019 → 2020",
+            "degree": "Baccalauréat's degree in Technology",
+            "institution": "Menzah 9 High School",
+            "honours": "Graduated with Good honours"
+          },
+          {
+            "date": "2020 → 2022",
+            "degree": "Preparatory in Technology and Physics",
+            "institution": "Preparatory Institute for Engineering Studies El Manar",
+            "honours": "Graduated"
+          },
+          {
+            "date": "2022 → Present",
+            "degree": "Computer Science Engineering",
+            "institution": "National School of Computer Science",
+            "honours": "Studying"
+          }
+        ]
+      }
+    ]
+  }
+  
