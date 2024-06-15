@@ -75,7 +75,7 @@ const Cvtest = () => {
       <div className="col-span-1 p-12 bg-blue-600 text-white">
         <img 
           className="rounded-full mx-auto mb-12"
-          src="/CV/images/portrait.png" 
+          src="/images/portrait.png" 
           alt="Portrait" 
           width={200} 
           height={200}
