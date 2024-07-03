@@ -4,18 +4,18 @@ import data from "../../../public/data.json"
 const Cvtemplate = () => {
     return (
         <>
-            <div className="grid grid-cols-5 grid-rows-5 gap-0 text-black   bg-gray-400">
-                <div className="col-start-2 col-end-5 row-start-1 row-end-2 bg-blue-400 flex space-x-4">
+            <div className="grid grid-cols-5 grid-rows-5 gap-0   text-black   bg-gray-400 print:w-[1200px] print:h-[297mm] print:m-auto print:grid print:grid-cols-3 print:grid-rows-3 print:gap-0" >
+                <div className="col-start-2 col-end-5 row-start-1 row-end-2 bg-blue-400 flex space-x-4 print:col-span-3 print:row-span-1 print:border-none break-inside-avoid">
                     <Image
                         className="mx-auto ml-0 mr-0"
                         src="/CV/images/portrait.png"
                         alt="Portrait"
-                        width={200}
-                        height={200}
+                        width={300}
+                        height={300}
                     ></Image>
                     <div className=" pl-7 m-6 text-white ">
                         <h1 className="text-4xl mb-4">
-                            MEHDI <span className="text-blue-600 uppercase">BARHOUMI</span>
+                            {data.name} <span className="text-blue-600 uppercase"></span>
                         </h1>
 
                         <p className="mb-4">{data.title}</p>
@@ -72,7 +72,7 @@ const Cvtemplate = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="col-start-2 col-end-3 row-start-2 row-end-6 p-10 bg-white">
+                <div className="col-start-2 col-end-3 row-start-2 row-end-6 p-10 bg-white print:col-span-1 print:row-span-2 print:border-none break-inside-avoid">
                     <div className="mt-6 ">
                         <h2 className="uppercase mb-4 font-bold text-blue-600">Skills</h2>
                         <ul className="list-none p-0 text-lg tracking-wider">
@@ -106,7 +106,7 @@ const Cvtemplate = () => {
                         </p>
                     </div>
                 </div>
-                <div className="col-start-3 col-end-5 row-start-2 row-end-6 bg-white">
+                <div className="col-start-3 col-end-5 row-start-2 row-end-6 bg-white pr-20 print:col-span-2 print:row-span-2 print:border-none break-inside-avoid">
                     <div className="mb-6 mt-6">
                         <h2 className="uppercase mb-4 font-bold text-blue-600">About Me</h2>
                         <p>{data.about}</p>

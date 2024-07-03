@@ -15,6 +15,16 @@ const config: Config = {
       },
     },
   },
+  variants: {
+    extend: {
+      display: ['print'],
+      margin: ['print'],
+      padding: ['print'],
+      fontSize: ['print'],
+      width: ['print'],
+      height: ['print'],
+    },
+  },
   plugins: [require('daisyui')],
 };
 export default config;
