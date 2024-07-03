@@ -4,30 +4,30 @@ import data from "../../../public/data.json"
 const Cvtemplate = () => {
     return (
         <>
-            <div className="grid grid-cols-5 grid-rows-5 gap-0   text-black   bg-gray-400 print:w-[1200px] print:h-[297mm] print:m-auto print:grid print:grid-cols-3 print:grid-rows-3 print:gap-0" >
+            <div className="grid grid-cols-5 grid-rows-5 gap-0  text-black   bg-white 	 print:w-[1200px] print-h-[297mm]  print:m-auto print:grid print:grid-cols-3 print:grid-rows-5 print:gap-0" >
                 <div className="col-start-2 col-end-5 row-start-1 row-end-2 bg-blue-400 flex space-x-4 print:col-span-3 print:row-span-1 print:border-none break-inside-avoid">
                     <Image
-                        className="mx-auto ml-0 mr-0"
+                        className="mx-auto ml-0 mr-0 "
                         src="/CV/images/portrait.png"
                         alt="Portrait"
                         width={300}
                         height={300}
                     ></Image>
                     <div className=" pl-7 m-6 text-white ">
-                        <h1 className="text-4xl mb-4">
-                            {data.name} <span className="text-blue-600 uppercase"></span>
+                        <h1 className="text-5xl mb-4 print:text-[36px]">
+                            {data.name.split(" ")[0]} <span className="text-blue-600 uppercase">{data.name.split(" ")[1]}</span>
                         </h1>
 
-                        <p className="mb-4">{data.title}</p>
+                        <h1 className="mb-4 text-3xl">{data.title}</h1>
 
-                        <ul className="columns-2 list-none p-0">
+                        <ul className="columns-2 list-none p-0 mb-0">
                             <li className="mb-2">
                                 <a
 
                                     href="https://www.linkedin.com/in/mahdi-barhoumi"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center mb-0"
+                                    className="flex items-center mb-0 "
                                 >
                                     <img
                                         src="/CV/images/linkedin.png"
@@ -72,9 +72,9 @@ const Cvtemplate = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="col-start-2 col-end-3 row-start-2 row-end-6 p-10 bg-white print:col-span-1 print:row-span-2 print:border-none break-inside-avoid">
+                <div className="col-start-2 col-end-3 row-start-2 row-end-6 p-10 bg-white print:col-span-1 print:row-span-4 print:border-none break-inside-avoid">
                     <div className="mt-6 ">
-                        <h2 className="uppercase mb-4 font-bold text-blue-600">Skills</h2>
+                        <h2 className="uppercase mb-4 font-bold text-blue-600 print:text-[24px]">Skills</h2>
                         <ul className="list-none p-0 text-lg tracking-wider">
                             {data.skills.map(skill => (
                                 <li key={skill} className="flex items-center mb-2">
@@ -85,41 +85,41 @@ const Cvtemplate = () => {
                                         height={15}
                                         className="mr-2"
                                     />
-                                    <p>{skill}</p>
+                                    <p  className="print:text-[20px]" >{skill}</p>
                                 </li>
                             ))}
                         </ul>
                     </div>
-                    <h2 className="uppercase mb-4 text-blue-600 font-bold">Languages</h2>
-                    <div className="mb-2">English</div>
+                    <h2 className="uppercase mb-4 text-blue-600 font-bold print:text-[24px]">Languages</h2>
+                    <div className="mb-2 print:text-[20px]">English</div>
                     <div className="w-3/4 h-3 bg-white mb-4">
                         <div className="w-11/12 h-full bg-blue-900"></div>
                     </div>
-                    <div className="mb-2">French</div>
+                    <div className="mb-2 print:text-[20px]">French</div>
                     <div className="w-3/4 h-3 bg-white mb-4">
                         <div className="w-1/2 h-full bg-blue-900"></div>
                     </div>
                     <div>
-                        <h2 className="uppercase mb-4 text-blue-600 font-bold">Hobbies</h2>
-                        <p>
+                        <h2 className="uppercase mb-4 text-blue-600 font-bold print:text-[24px]">Hobbies</h2>
+                        <p className="print:text-[20px]">
                             {data.hobbies.join('\n')}
                         </p>
                     </div>
                 </div>
-                <div className="col-start-3 col-end-5 row-start-2 row-end-6 bg-white pr-20 print:col-span-2 print:row-span-2 print:border-none break-inside-avoid">
+                <div className="col-start-3 col-end-5 row-start-2 row-end-6 pt-10 bg-white pr-20 print:col-span-2 print:row-span-4 print:border-none break-inside-avoid">
                     <div className="mb-6 mt-6">
-                        <h2 className="uppercase mb-4 font-bold text-blue-600">About Me</h2>
-                        <p>{data.about}</p>
+                        <h1 className="uppercase mb-4 font-bold text-blue-600 print:text-[24px]">About Me</h1>
+                        <p className="print:text-[20px]">{data.about}</p>
                     </div>
                     <div className="mb-6">
-                        <h2 className="uppercase mb-4 font-bold text-blue-600">Objectives & Ambitions</h2>
-                        <p>{data.objectives}</p>
+                        <h2 className="uppercase mb-4 font-bold text-blue-600 print:text-[24px]">Objectives & Ambitions</h2>
+                        <p  className="print:text-[20px]" >{data.objectives}</p>
                     </div>
                     <div className="mb-6">
-                        <h2 className="uppercase mb-4 font-bold text-blue-600">Projects & Experiences</h2>
+                        <h2 className="uppercase mb-4 font-bold text-blue-600 print:text-[24px]">Projects & Experiences</h2>
                         {data.projects_experiences.map((project, index) => (
                             <div key={index}>
-                                <p><strong>{project.period}</strong></p>
+                                <p className="print:text-[20px]" ><strong>{project.period}</strong></p>
                                 <ul className="list-disc ml-6 mb-6">
                                     {project.details.map((detail, i) => (
                                         <li key={i}>{detail}</li>
@@ -129,9 +129,9 @@ const Cvtemplate = () => {
                         ))}
                     </div>
                     <div>
-                        <h2 className="uppercase mb-4 font-bold text-blue-600">Studies & Training</h2>
+                        <h2 className="uppercase mb-4 font-bold text-blue-600 print:text-[24px]">Studies & Training</h2>
                         {data.studies_training.map((study, index) => (
-                            <p key={index} className="mb-6">
+                            <p  key={index} className="print:text-[20px]">
                                 <strong>{study.period}</strong>
                                 <br />
                                 <em>{study.degree}</em>, {study.honors}, {study.institution}
