@@ -71,7 +71,7 @@ const resumeData = {
 
 const Cvtest = () => {
   return (
-    <div className="grid grid-cols-3 gap-4 max-w-5xl mx-auto my-24 shadow-lg bg-red-700">
+    <div className="grid grid-cols-3 gap-4 max-w-5xl mx-auto my-24 shadow-lg bg-red-700 cursor-zoom-in">
       <div className="col-span-1 p-12 bg-blue-600 text-white">
         <img 
           className="rounded-full mx-auto mb-12"
