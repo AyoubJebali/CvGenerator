@@ -1,0 +1,62 @@
+{
+    "name": "John Doe",
+    "title": "Software Engineer",
+    "contact": {
+      "email": "john.doe@example.com",
+      "phone": "+123 456 7890",
+      "location": "123 Main Street, Anytown, USA",
+      "linkedin": "https://www.linkedin.com/in/johndoe"
+    },
+    "about": "I am a software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Well-versed in technology and writing code to create reliable and user-friendly systems. Confident communicator, strategic thinker, and innovative creator to develop software that is customized to meet a company's organizational needs, highlight their core competencies, and further their success.",
+    "skills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Python",
+      "Django",
+      "HTML",
+      "CSS",
+      "SQL"
+    ],
+    "languages": {
+      "English": "native",
+      "Spanish": "intermediate"
+    },
+    "hobbies": [
+      "Reading",
+      "Hiking",
+      "Traveling"
+    ],
+    "objectives": "To obtain a challenging position as a software engineer with a forward-thinking company that encourages growth, innovation, and the opportunity to work on cutting-edge projects. Seeking to leverage my expertise in software development to contribute to a dynamic team and further enhance my skills.",
+    "projects_experiences": [
+      {
+        "period": "2018 → 2020",
+        "details": [
+          "Developed a full-stack web application using React and Node.js",
+          "Implemented RESTful APIs to integrate third-party services"
+        ]
+      },
+      {
+        "period": "2020 → Present",
+        "details": [
+          "Led a team to develop a scalable e-commerce platform using Django",
+          "Optimized database performance and implemented caching strategies"
+        ]
+      }
+    ],
+    "studies_training": [
+      {
+        "period": "2014 → 2018",
+        "degree": "Bachelor's degree in Computer Science",
+        "institution": "University of Anytown",
+        "honors": "Graduated with Honors"
+      },
+      {
+        "period": "2018 → 2020",
+        "degree": "Master's degree in Software Engineering",
+        "institution": "Tech Institute of Anytown",
+        "honors": "Graduated"
+      }
+    ]
+  }
+  

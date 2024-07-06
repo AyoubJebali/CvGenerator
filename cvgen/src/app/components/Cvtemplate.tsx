@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import data from "../../../public/data.json"
+import data from "../../../public/data1.json"
 const Cvtemplate = () => {
     return (
         <>
@@ -13,21 +13,21 @@ const Cvtemplate = () => {
                         width={300}
                         height={300}
                     ></Image>
-                    <div className=" pl-7 m-6 text-white ">
-                        <h1 className="text-5xl mb-4 print:text-[36px]">
+                    <div className=" pl-7 m-6 grid items-end text-white ">
+                        <h1 className="text-5xl  print:text-[36px]">
                             {data.name.split(" ")[0]} <span className="text-blue-600 uppercase">{data.name.split(" ")[1]}</span>
                         </h1>
 
-                        <h1 className="mb-4 text-3xl">{data.title}</h1>
+                        <h1 className="text-3xl">{data.title}</h1>
 
                         <ul className="columns-2 list-none p-0 mb-0">
                             <li className="mb-2">
                                 <a
 
-                                    href="https://www.linkedin.com/in/mahdi-barhoumi"
+                                    href={data.contact.linkedin}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center mb-0 "
+                                    className="flex items-center mb-0  print:text-[20px]"
                                 >
                                     <img
                                         src="/CV/images/linkedin.png"
@@ -36,7 +36,7 @@ const Cvtemplate = () => {
                                         height={15}
                                         className="mr-2"
                                     />
-                                    mahdi-barhoumi
+                                    {data.name}
                                 </a>
                             </li>
                             <li className="flex items-center">
@@ -47,7 +47,7 @@ const Cvtemplate = () => {
                                     height={15}
                                     className="mr-2"
                                 />
-                                <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a>
+                                <a href={`mailto:${data.contact.email}`} className="print:text-[20px]">{data.contact.email}</a>
                             </li>
                             <li className="flex items-center mb-2">
                                 <img
@@ -57,7 +57,7 @@ const Cvtemplate = () => {
                                     height={15}
                                     className="mr-2"
                                 />
-                                {data.contact.phone}
+                                <p className="print:text-[20px]"> {data.contact.phone}</p>
                             </li>
                             <li className="flex items-center mb-2">
                                 <img
@@ -67,7 +67,7 @@ const Cvtemplate = () => {
                                     height={15}
                                     className="mr-2"
                                 />
-                                {data.contact.location}
+                                <p className="print:text-[20px]">{data.contact.location}</p>
                             </li>
                         </ul>
                     </div>
