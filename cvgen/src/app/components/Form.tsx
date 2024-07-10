@@ -48,13 +48,21 @@ const Form = () => {
                 <div className="collapse-content">
 
                     <form>
-                        <label htmlFor="inputData" className="block mb-2">Input Data:</label>
+                        <label htmlFor="inputData" className="block mb-2">Name:</label>
                         <input
                             type="text"
-                            id="inputData"
-                            name="inputData"
-                            className="block input input-bordered w-full max-w-xs bg-white mb-4"
+                            id="name"
+                            name="name"
+                            className="block input-bordered w-full p-2 bg-white mb-4"
                         />
+                        <label htmlFor="inputData" className="block mb-2">Title:</label>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            className="block input-bordered w-full p-2 bg-white mb-4"
+                        />
+                        
                         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
                             Submit
                         </button>
