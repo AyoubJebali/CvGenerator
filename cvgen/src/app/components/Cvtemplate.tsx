@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import data from "../../../public/data1.json"
+import data from "../../../public/data.json"
 const Cvtemplate = () => {
     return (
         <>
@@ -17,7 +17,6 @@ const Cvtemplate = () => {
                         <h1 className="text-5xl  print:text-[36px]">
                             {data.name.split(" ")[0]} <span className="text-blue-600 uppercase">{data.name.split(" ")[1]}</span>
                         </h1>
-
                         <h1 className="text-3xl">{data.title}</h1>
 
                         <ul className="columns-2 list-none p-0 mb-0">
