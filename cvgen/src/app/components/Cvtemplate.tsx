@@ -4,7 +4,7 @@ import data from "../../../public/data.json"
 const Cvtemplate = () => {
     return (
         <>
-            <div className="grid grid-cols-5 grid-rows-5 gap-0  text-black   bg-white 	 print:w-[1200px] print-h-[297mm]  print:m-auto print:grid print:grid-cols-3 print:grid-rows-5 print:gap-0" >
+            <div className="grid grid-cols-5 grid-rows-5 gap-0  text-black   bg-sky-200 	 print:w-[1200px] print-h-[297mm]  print:m-auto print:grid print:grid-cols-3 print:grid-rows-5 print:gap-0" >
                 <div className="col-start-2 col-end-5 row-start-1 row-end-2 bg-blue-400 flex space-x-4 print:col-span-3 print:row-span-1 print:border-none break-inside-avoid">
                     <Image
                         className="mx-auto ml-0 mr-0 "
