@@ -52,7 +52,18 @@ type UserProfile = z.infer<typeof UserProfileSchema>;
 
 
 export async function validateForm(prevState:any, formData: FormData) {
-//const validatedFileds = UserProfileSchema.safeParse(formData);
-    console.log(formData);
-    return prevState+1;
+    const validatedFileds = UserProfileSchema.safeParse({
+        name:formData.get("name"),
+        title:formData.get("title"),
+        contact:{
+            email: formData.get("email"),
+            phone: formData.get("number"),
+            location: formData.get("adress"),
+            linkedin: formData.get("linkedin"),
+        },
+        about:formData.get("about"),
+        skills:formData.get("skill")
+    });
+    console.log(validatedFileds.success);
+    //return prevState+1;
 }
