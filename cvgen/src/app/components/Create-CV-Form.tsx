@@ -1,35 +1,30 @@
 "use client";
 import React, { useActionState, useState } from "react";
-import { validateForm , State } from "@/app/lib/actions"
-
+import { validateForm, State } from "@/app/lib/actions";
 
 export default function Form() {
-  const initialState = { message: '', errors: {} };
-  //const [state , formAction] = useActionState();
+  const initialState = { message: "", errors: {} };
+  const [state, dispatch] = useActionState(validateForm, null);
   return (
-    <form>
+    <form action={dispatch}>
       <div className="collapse collapse-arrow bg-white text-white">
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium text-black">
           Personal Information
         </div>
-        <div className="collapse-content  bg-gray-100 rounded-lg shadow-lg text-black" >
+        <div className="collapse-content  bg-gray-100 rounded-lg shadow-lg text-black">
           <div className="form-control mb-4">
             <label htmlFor="name" className="label">
               <span className="label-text">Name:</span>
             </label>
-            <label className="input input-bordered flex items-center gap-2">
-              Name
-              <input
-                type="text"
-                id="name"
-                name="name"
-                className="input input-bordered w-full bg-white"
-                placeholder="Enter your name"
-              />
-            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="input input-bordered w-full bg-white"
+              placeholder="Enter your name"
+            />
           </div>
-
           <div className="form-control mb-4">
             <label htmlFor="email" className="label">
               <span className="label-text">Email Address:</span>
@@ -96,13 +91,15 @@ export default function Form() {
               placeholder="Enter your LinkedIn profile"
             />
           </div>
-          <textarea className="textarea textarea-bordered w-full bg-white" placeholder="Profile"></textarea>
-          <div className="form-control">
-            <button type="submit" className="btn btn-primary w-full">
-              Submit
-            </button>
+          <div className="form-control mb-4">
+            <label htmlFor="profile" className="label">
+              <span className="label-text">Profile:</span>
+            </label>
+            <textarea
+              className="textarea textarea-bordered w-full bg-white"
+              placeholder="Profile"
+            ></textarea>
           </div>
-
         </div>
       </div>
       <div className="collapse mt-5 collapse-arrow bg-white text-white">
@@ -110,10 +107,44 @@ export default function Form() {
         <div className="collapse-title text-xl font-medium text-black">
           Skills
         </div>
+        <div className="collapse-content  bg-gray-100 rounded-lg shadow-lg text-black">
+
+          <div className="form-control mb-4">
+            <input
+              type="text"
+              id="skill"
+              name="skill"
+              className="input input-bordered w-full bg-white"
+              placeholder="Enter your skill"
+            />
+          </div>
+
+          <input
+            type="text"
+            id="skill"
+            name="skill"
+            className="input input-bordered w-full bg-white"
+            placeholder="Enter your skill"
+          />
         </div>
+      </div>
+      <div className="collapse mt-5 collapse-arrow bg-white text-white">
+        <input type="checkbox" />
+        <div className="collapse-title text-xl font-medium text-black">
+          Languages
+        </div>
+      </div>
+      <div className="collapse mt-5 collapse-arrow bg-white text-white">
+        <input type="checkbox" />
+        <div className="collapse-title text-xl font-medium text-black">
+          Hobbies
+        </div>
+      </div>
+      <div className="form-control mt-5">
+        <button type="submit" className="btn btn-primary w-full">
+          Submit
+        </button>
+      </div>
     </form>
-
-
   );
-};
-
+}
