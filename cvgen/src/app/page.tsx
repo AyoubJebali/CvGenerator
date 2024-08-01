@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Cvtest from "./components/Cvtest";
-import Form from "./components/Create-CV-Form";
+import Cvtest from "./components/cvtest";
+import Form from "./components/create-cv-form";
 export default function Home() {
   return (
     <div className="flex h-screen bg-slate-900">
