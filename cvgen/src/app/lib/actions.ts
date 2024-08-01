@@ -27,16 +27,16 @@ const StudyTrainingSchema = z.object({
 });
 
 const UserProfileSchema = z.object({
-    name: z.string(),
-    title: z.string(),
-    contact: ContactSchema,
-    about: z.string(),
-    skills: z.array(z.string()),
-    languages: LanguagesSchema,
-    hobbies: z.array(z.string()),
-    objectives: z.string(),
-    projects_experiences: z.array(ProjectExperienceSchema),
-    studies_training: z.array(StudyTrainingSchema),
+    name: z.string().optional(),
+    title: z.string().optional(),
+    contact: ContactSchema.optional(),
+    about: z.string().optional(),
+    skills: z.array(z.string()).optional(),
+    languages: LanguagesSchema.optional(),
+    hobbies: z.array(z.string()).optional(),
+    objectives: z.string().optional(),
+    projects_experiences: z.array(ProjectExperienceSchema).optional(),
+    studies_training: z.array(StudyTrainingSchema).optional(),
 });
 export type State = {
     errors?: {
@@ -61,9 +61,9 @@ export async function validateForm(prevState:any, formData: FormData) {
             location: formData.get("adress"),
             linkedin: formData.get("linkedin"),
         },
-        about:formData.get("about"),
+        //about:formData.get("about"),
         skills:formData.get("skill")
     });
-    console.log(validatedFileds.success);
+    console.log(validatedFileds);
     //return prevState+1;
 }

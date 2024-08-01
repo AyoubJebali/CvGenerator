@@ -1,5 +1,5 @@
 import React from 'react'
-import Cvtemplate from '../components/Cvtemplate'
+import Cvtemplate from '../components/cv-template'
 
 const home = () => {
   return (

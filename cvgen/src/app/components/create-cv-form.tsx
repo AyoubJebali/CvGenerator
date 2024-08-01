@@ -1,10 +1,11 @@
 "use client";
 import React, { useActionState, useState } from "react";
 import { validateForm, State } from "@/app/lib/actions";
-
+import SkillSection from "./skill-section";
 export default function Form() {
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useActionState(validateForm, null);
+  const [skillInputs , setSkillInputs] = useState(0);
   return (
     <form action={dispatch}>
       <div className="collapse collapse-arrow bg-white text-white">
@@ -78,7 +79,6 @@ export default function Form() {
               placeholder="Enter your address"
             />
           </div>
-
           <div className="form-control mb-4">
             <label htmlFor="linkedin" className="label">
               <span className="label-text">LinkedIn:</span>
@@ -102,32 +102,7 @@ export default function Form() {
           </div>
         </div>
       </div>
-      <div className="collapse mt-5 collapse-arrow bg-white text-white">
-        <input type="checkbox" />
-        <div className="collapse-title text-xl font-medium text-black">
-          Skills
-        </div>
-        <div className="collapse-content  bg-gray-100 rounded-lg shadow-lg text-black">
-
-          <div className="form-control mb-4">
-            <input
-              type="text"
-              id="skill"
-              name="skill"
-              className="input input-bordered w-full bg-white"
-              placeholder="Enter your skill"
-            />
-          </div>
-
-          <input
-            type="text"
-            id="skill"
-            name="skill"
-            className="input input-bordered w-full bg-white"
-            placeholder="Enter your skill"
-          />
-        </div>
-      </div>
+      <SkillSection/>
       <div className="collapse mt-5 collapse-arrow bg-white text-white">
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium text-black">
