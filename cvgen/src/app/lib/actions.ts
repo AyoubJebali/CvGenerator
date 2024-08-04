@@ -64,6 +64,6 @@ export async function validateForm(prevState:any, formData: FormData) {
         //about:formData.get("about"),
         skills:formData.get("skill")
     });
-    console.log(validatedFileds);
+    console.log(formData);
     //return prevState+1;
 }
