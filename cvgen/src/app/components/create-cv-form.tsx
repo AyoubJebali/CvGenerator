@@ -5,7 +5,6 @@ import SkillSection from "./skill-section";
 export default function Form() {
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useActionState(validateForm, null);
-  const [skillInputs , setSkillInputs] = useState(0);
   return (
     <form action={dispatch}>
       <div className="collapse collapse-arrow bg-white text-white">
@@ -98,11 +97,12 @@ export default function Form() {
             <textarea
               className="textarea textarea-bordered w-full bg-white"
               placeholder="Profile"
+              name="profile"
             ></textarea>
           </div>
         </div>
       </div>
-      <SkillSection/>
+      <SkillSection />
       <div className="collapse mt-5 collapse-arrow bg-white text-white">
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium text-black">
