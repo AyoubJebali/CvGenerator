@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 import React from 'react'
+
 interface NumberToLevel {
     [key: number]: string;
 }
@@ -16,9 +17,11 @@ const SkillInput = () => {
     75:"Very Good",
     100:"Excellent"
   }
+  
+
   // Handle the change event
-  const handleRangeChange = (event:any) => {
-        let value:number = (event.target.value)-event.target.value%25 ;
+  const handleRangeChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+        let value:number = Number(event.target.value)- Number(event.target.value)%25 ;
         setRangeValue(value);
         setLevel(levels[value]);
   };
@@ -32,9 +35,11 @@ const SkillInput = () => {
                 placeholder="Enter your skill"
             />
             <label>Level</label>
-            <input type="range" name="proficiency" min={0} max="100" value={rangeValue} onChange={handleRangeChange}  className="range" step="25" />
-            <div className="flex w-full justify-between px-2 text-xs">
+            <div className=" inline-flex w-full justify-center px-2 text-base">
+            <input type="range" name="proficiency" min={0} max="100" value={rangeValue} onChange={handleRangeChange}  className="range-xs range w-full mr-6 [--range-shdw:yellow]" step="25" />
+                <div className='mx-5 w-fit whitespace-nowrap'>
                 <span>{level}</span>
+                </div>
             </div>
         </div>
     )
