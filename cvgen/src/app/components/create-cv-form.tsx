@@ -117,7 +117,7 @@ export default function Form() {
       </div>
       <div className="form-control mt-5">
         <button type="submit" className="btn btn-primary w-full">
-          Submit
+          Generate
         </button>
       </div>
     </form>
