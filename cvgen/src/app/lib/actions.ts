@@ -58,12 +58,14 @@ export async function validateForm(prevState:any, formData: FormData) {
         contact:{
             email: formData.get("email"),
             phone: formData.get("number"),
-            location: formData.get("adress"),
+            location: formData.get("address"),
             linkedin: formData.get("linkedin"),
         },
-        //about:formData.get("about"),
-        skills:formData.get("skill")
+        about:formData.get("profile"),
+        skills:formData.getAll("skill"),
     });
+    console.log(validatedFileds);
     console.log(formData);
+    //console.log(formData.get("skill"));
     //return prevState+1;
 }
