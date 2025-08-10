@@ -18,21 +18,25 @@ const ProjectInput: React.FC<ProjectInputProps> = ({ id, period, details, update
   };
 
   return (
-    <div className="form-control mb-4">
-      <div className="flex gap-4 mb-2">
-        <input
-          type="text"
-          name="project_period"
-          value={period}
-          className="input input-bordered w-full bg-white"
-          placeholder="e.g., 2020 → 2022"
-          onChange={handlePeriodChange}
-        />
-      </div>
+    <div className="space-y-2">
+      <label className="label">
+        <span className="label-text">Period</span>
+      </label>
+      <input
+        type="text"
+        name="project_period"
+        value={period}
+        className="input input-bordered w-full"
+        placeholder="e.g., 2020 → 2022"
+        onChange={handlePeriodChange}
+      />
+      <label className="label">
+        <span className="label-text">Details</span>
+      </label>
       <textarea
         name="project_details"
         value={details}
-        className="textarea textarea-bordered w-full bg-white"
+        className="textarea textarea-bordered w-full"
         placeholder="Enter project details, one per line"
         onChange={handleDetailsChange}
         rows={4}

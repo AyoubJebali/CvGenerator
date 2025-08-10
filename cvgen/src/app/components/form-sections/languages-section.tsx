@@ -30,38 +30,42 @@ export default function LanguagesSection() {
   };
 
   return (
-    <div className="collapse mt-5 collapse-arrow bg-white text-white">
-      <input type="checkbox" />
-      <div className="collapse-title text-xl font-medium text-black">
+    <div className="collapse collapse-arrow bg-base-200 rounded-lg">
+      <input type="checkbox" name="languages-accordion" />
+      <div className="collapse-title text-xl font-medium">
         Languages
       </div>
-      <div className="collapse-content bg-gray-100 rounded-lg shadow-lg text-black">
-        {items.map((item) => (
-          <div key={item.id} className="flex items-center gap-4 mb-4">
-            <div className="flex-grow">
-              <LanguageInput
-                id={item.id}
-                language={item.language}
-                proficiency={item.proficiency}
-                updateItem={updateItem}
-              />
+      <div className="collapse-content">
+        <div className="space-y-4">
+          {items.map((item) => (
+            <div key={item.id} className="flex items-center gap-4">
+              <div className="flex-grow">
+                <LanguageInput
+                  id={item.id}
+                  language={item.language}
+                  proficiency={item.proficiency}
+                  updateItem={updateItem}
+                />
+              </div>
+              <button
+                className="btn btn-outline btn-error btn-sm"
+                type="button"
+                onClick={() => deleteItem(item.id)}
+              >
+                Delete
+              </button>
             </div>
-            <button
-              className='btn btn-neutral'
-              type='button'
-              onClick={() => deleteItem(item.id)}
-            >
-              Delete
-            </button>
-          </div>
-        ))}
-        <button
-          className='btn btn-neutral float-right'
-          type='button'
-          onClick={addToArray}
-        >
-          Add Language
-        </button>
+          ))}
+        </div>
+        <div className="text-right mt-4">
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={addToArray}
+          >
+            Add Language
+          </button>
+        </div>
       </div>
     </div>
   );

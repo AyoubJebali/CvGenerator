@@ -18,25 +18,23 @@ const LanguageInput: React.FC<LanguageInputProps> = ({ id, language, proficiency
   };
 
   return (
-    <div className="form-control mb-4">
-      <div className="flex gap-4">
-        <input
-          type="text"
-          name="language"
-          value={language}
-          className="input input-bordered w-full bg-white"
-          placeholder="Enter a language"
-          onChange={handleLanguageChange}
-        />
-        <input
-          type="text"
-          name="proficiency"
-          value={proficiency}
-          className="input input-bordered w-full bg-white"
-          placeholder="e.g., Proficient, Native"
-          onChange={handleProficiencyChange}
-        />
-      </div>
+    <div className="grid grid-cols-2 gap-4">
+      <input
+        type="text"
+        name="language"
+        value={language}
+        className="input input-bordered w-full"
+        placeholder="Enter a language"
+        onChange={handleLanguageChange}
+      />
+      <input
+        type="text"
+        name="proficiency"
+        value={proficiency}
+        className="input input-bordered w-full"
+        placeholder="e.g., Proficient, Native"
+        onChange={handleProficiencyChange}
+      />
     </div>
   );
 };

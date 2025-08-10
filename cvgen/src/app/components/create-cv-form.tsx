@@ -13,19 +13,27 @@ export default function Form() {
   const [state, dispatch] = useActionState(validateForm, null);
 
   return (
-    <form action={dispatch}>
-      <PersonalInfoSection />
-      <SkillSection />
-      <LanguagesSection />
-      <HobbiesSection />
-      <ObjectivesSection />
-      <ProjectsSection />
-      <StudiesSection />
-      <div className="form-control mt-5">
-        <button type="submit" className="btn btn-primary w-full">
-          Generate
-        </button>
-      </div>
-    </form>
+    <div className="max-w-4xl mx-auto p-8 bg-base-100 rounded-xl shadow-lg">
+      <h1 className="text-4xl font-bold text-center mb-8">Create Your CV</h1>
+      <form action={dispatch}>
+        <div className="space-y-6">
+          <PersonalInfoSection />
+          <SkillSection />
+          <LanguagesSection />
+          <HobbiesSection />
+          <ObjectivesSection />
+          <ProjectsSection />
+          <StudiesSection />
+        </div>
+        <div className="form-control mt-8">
+          <button type="submit" className="btn btn-primary w-full text-lg">
+            Generate CV
+          </button>
+        </div>
+        {state?.message && (
+          <div className="text-center mt-4 text-success">{state.message}</div>
+        )}
+      </form>
+    </div>
   );
 }

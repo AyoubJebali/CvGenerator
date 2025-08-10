@@ -29,37 +29,41 @@ export default function HobbiesSection() {
   };
 
   return (
-    <div className="collapse mt-5 collapse-arrow bg-white text-white">
-      <input type="checkbox" />
-      <div className="collapse-title text-xl font-medium text-black">
+    <div className="collapse collapse-arrow bg-base-200 rounded-lg">
+      <input type="checkbox" name="hobbies-accordion" />
+      <div className="collapse-title text-xl font-medium">
         Hobbies
       </div>
-      <div className="collapse-content bg-gray-100 rounded-lg shadow-lg text-black">
-        {items.map((item) => (
-          <div key={item.id} className="flex items-center gap-4 mb-4">
-            <div className="flex-grow">
-              <HobbyInput
-                id={item.id}
-                hobby={item.hobby}
-                updateItem={updateItem}
-              />
+      <div className="collapse-content">
+        <div className="space-y-4">
+          {items.map((item) => (
+            <div key={item.id} className="flex items-center gap-4">
+              <div className="flex-grow">
+                <HobbyInput
+                  id={item.id}
+                  hobby={item.hobby}
+                  updateItem={updateItem}
+                />
+              </div>
+              <button
+                className="btn btn-outline btn-error btn-sm"
+                type="button"
+                onClick={() => deleteItem(item.id)}
+              >
+                Delete
+              </button>
             </div>
-            <button
-              className='btn btn-neutral'
-              type='button'
-              onClick={() => deleteItem(item.id)}
-            >
-              Delete
-            </button>
-          </div>
-        ))}
-        <button
-          className='btn btn-neutral float-right'
-          type='button'
-          onClick={addToArray}
-        >
-          Add Hobby
-        </button>
+          ))}
+        </div>
+        <div className="text-right mt-4">
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={addToArray}
+          >
+            Add Hobby
+          </button>
+        </div>
       </div>
     </div>
   );

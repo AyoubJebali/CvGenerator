@@ -30,36 +30,42 @@ export default function ProjectsSection() {
   };
 
   return (
-    <div className="collapse mt-5 collapse-arrow bg-white text-white">
-      <input type="checkbox" />
-      <div className="collapse-title text-xl font-medium text-black">
+    <div className="collapse collapse-arrow bg-base-200 rounded-lg">
+      <input type="checkbox" name="projects-accordion" />
+      <div className="collapse-title text-xl font-medium">
         Projects and Experiences
       </div>
-      <div className="collapse-content bg-gray-100 rounded-lg shadow-lg text-black">
-        {items.map((item) => (
-          <div key={item.id} className="mb-4 p-4 border border-gray-300 rounded-lg">
-            <ProjectInput
-              id={item.id}
-              period={item.period}
-              details={item.details}
-              updateItem={updateItem}
-            />
-            <button
-              className='btn btn-neutral float-right'
-              type='button'
-              onClick={() => deleteItem(item.id)}
-            >
-              Delete
-            </button>
-          </div>
-        ))}
-        <button
-          className='btn btn-neutral float-right'
-          type='button'
-          onClick={addToArray}
-        >
-          Add Project/Experience
-        </button>
+      <div className="collapse-content">
+        <div className="space-y-6">
+          {items.map((item) => (
+            <div key={item.id} className="p-4 border border-base-300 rounded-lg">
+              <ProjectInput
+                id={item.id}
+                period={item.period}
+                details={item.details}
+                updateItem={updateItem}
+              />
+              <div className="text-right mt-2">
+                <button
+                  className="btn btn-outline btn-error btn-sm"
+                  type="button"
+                  onClick={() => deleteItem(item.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="text-right mt-4">
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={addToArray}
+          >
+            Add Project/Experience
+          </button>
+        </div>
       </div>
     </div>
   );

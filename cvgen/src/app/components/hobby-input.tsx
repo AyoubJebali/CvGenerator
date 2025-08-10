@@ -13,12 +13,12 @@ const HobbyInput: React.FC<HobbyInputProps> = ({ id, hobby, updateItem }) => {
   };
 
   return (
-    <div className="form-control mb-4">
+    <div className="form-control">
       <input
         type="text"
         name="hobby"
         value={hobby}
-        className="input input-bordered w-full bg-white"
+        className="input input-bordered w-full"
         placeholder="Enter a hobby"
         onChange={handleHobbyChange}
       />
