@@ -48,6 +48,10 @@ export type State = {
     message?: string | null;
   };
 
+function validateCvData(data: unknown) {
+    return UserProfileSchema.safeParse(data);
+}
+
 export async function validateForm(prevState: any, formData: FormData) {
     const languages = formData.getAll('language').map((lang, index) => ({
         language: lang.toString(),
@@ -66,7 +70,7 @@ export async function validateForm(prevState: any, formData: FormData) {
         honors: formData.getAll('study_honors')[index].toString(),
     }));
 
-    const validatedFields = UserProfileSchema.safeParse({
+    const cvData = {
         name: formData.get("name"),
         title: formData.get("title"),
         contact: {
@@ -82,7 +86,9 @@ export async function validateForm(prevState: any, formData: FormData) {
         objectives: formData.get("objectives"),
         projects_experiences: projects_experiences,
         studies_training: studies_training,
-    });
+    };
+
+    const validatedFields = validateCvData(cvData);
 
     if (!validatedFields.success) {
         return {
