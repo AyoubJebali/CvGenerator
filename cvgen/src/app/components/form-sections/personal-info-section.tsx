@@ -2,9 +2,9 @@ import React from "react";
 
 export default function PersonalInfoSection() {
   return (
-    <div className="collapse collapse-arrow bg-base-200 rounded-lg">
+    <div className="collapse collapse-arrow bg-base-200 rounded-lg	">
       <input type="checkbox" name="personal-info-accordion" defaultChecked />
-      <div className="collapse-title text-xl font-medium">
+      <div className="text-black collapse-title text-xl font-medium">
         Personal Information
       </div>
       <div className="collapse-content">

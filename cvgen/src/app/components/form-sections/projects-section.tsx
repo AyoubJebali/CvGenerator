@@ -32,7 +32,7 @@ export default function ProjectsSection() {
   return (
     <div className="collapse collapse-arrow bg-base-200 rounded-lg">
       <input type="checkbox" name="projects-accordion" />
-      <div className="collapse-title text-xl font-medium">
+      <div className="text-black collapse-title text-xl font-medium">
         Projects and Experiences
       </div>
       <div className="collapse-content">

@@ -31,7 +31,7 @@ export default function HobbiesSection() {
   return (
     <div className="collapse collapse-arrow bg-base-200 rounded-lg">
       <input type="checkbox" name="hobbies-accordion" />
-      <div className="collapse-title text-xl font-medium">
+      <div className="text-black collapse-title text-xl font-medium">
         Hobbies
       </div>
       <div className="collapse-content">

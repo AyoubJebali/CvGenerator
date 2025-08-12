@@ -14,7 +14,7 @@ export default function Form() {
 
   return (
     <div className="max-w-4xl mx-auto p-8 bg-base-100 rounded-xl shadow-lg">
-      <h1 className="text-4xl font-bold text-center mb-8">Create Your CV</h1>
+      <h1 className="text-4xl text-black font-bold text-center mb-8">Create Your CV</h1>
       <form action={dispatch}>
         <div className="space-y-6">
           <PersonalInfoSection />
@@ -26,7 +26,7 @@ export default function Form() {
           <StudiesSection />
         </div>
         <div className="form-control mt-8">
-          <button type="submit" className="btn btn-primary w-full text-lg">
+          <button type="submit" className="btn btn-outline btn-primary   w-full text-lg">
             Generate CV
           </button>
         </div>

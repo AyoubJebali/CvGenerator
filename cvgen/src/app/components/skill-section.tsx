@@ -30,7 +30,7 @@ export default function SkillSection() {
   return (
     <div className="collapse collapse-arrow bg-base-200 rounded-lg">
       <input type="checkbox" name="skills-accordion" />
-      <div className="collapse-title text-xl font-medium">
+      <div className="collapse-title text-xl text-black font-medium">
         Skills
       </div>
       <div className="collapse-content">

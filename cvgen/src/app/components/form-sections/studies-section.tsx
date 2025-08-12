@@ -34,7 +34,7 @@ export default function StudiesSection() {
   return (
     <div className="collapse collapse-arrow bg-base-200 rounded-lg">
       <input type="checkbox" name="studies-accordion" />
-      <div className="collapse-title text-xl font-medium">
+      <div className="text-black collapse-title text-xl font-medium">
         Studies and Training
       </div>
       <div className="collapse-content">
