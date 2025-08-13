@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import data from "../../../public/data.json"
+import data from "../../../public/data2.json"
 const Cvtemplate = () => {
     return (
         <>
@@ -8,7 +8,7 @@ const Cvtemplate = () => {
                 <div className="col-start-2 col-end-5 row-start-1 row-end-2 bg-blue-400 flex space-x-4 print:col-span-3 print:row-span-1 print:border-none break-inside-avoid">
                     <Image
                         className="mx-auto ml-0 mr-0 "
-                        src="/CV/images/portrait.png"
+                        src="/CV/images/portrait.jpeg"
                         alt="Portrait"
                         width={300}
                         height={300}

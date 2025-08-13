@@ -1,0 +1,24 @@
+{
+  "name": "ayoub",
+  "title": "software engineer",
+  "contact": {
+    "email": "a@a.com",
+    "phone": "123123",
+    "location": "adress",
+    "linkedin": "https://www.linkedin.com/"
+  },
+  "about": "nothing",
+  "skills": [
+    "skill1"
+  ],
+  "languages": [
+    {
+      "language": "english",
+      "proficiency": "native"
+    }
+  ],
+  "hobbies": [],
+  "objectives": "",
+  "projects_experiences": [],
+  "studies_training": []
+}
