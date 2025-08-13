@@ -1,0 +1,87 @@
+{
+  "name": "John Doe",
+  "title": "Full Stack Software Engineer",
+  "contact": {
+    "email": "john.doe@example.com",
+    "phone": "+1 (123) 456-7890",
+    "location": "123 Main Street, Anytown, USA",
+    "linkedin": "https://www.linkedin.com/in/johndoe",
+    "github": "https://github.com/johndoe",
+    "portfolio": "https://johndoe.dev"
+  },
+  "about": "Full Stack Software Engineer with 6+ years of experience designing, developing, and deploying high-performance web applications. Proficient in JavaScript, Python, and modern frameworks with a proven track record of building scalable, secure, and user-centric solutions. Strong problem-solving skills, collaborative mindset, and deep understanding of software architecture, APIs, and cloud infrastructure.",
+  "skills": [
+    "JavaScript (ES6+)",
+    "React.js",
+    "Next.js",
+    "Node.js",
+    "Express.js",
+    "Python",
+    "Django",
+    "REST API Development",
+    "GraphQL",
+    "PostgreSQL",
+    "MongoDB",
+    "SQL",
+    "HTML5",
+    "CSS3",
+    "Tailwind CSS",
+    "TypeScript",
+    "Git",
+    "Docker",
+    "AWS (EC2, S3, Lambda)",
+    "CI/CD Pipelines"
+  ],
+  "languages": {
+    "English": "Native",
+    "Spanish": "Intermediate"
+  },
+  "hobbies": [
+    "Reading technology blogs",
+    "Hiking",
+    "Traveling",
+    "Open-source contributions"
+  ],
+  "objectives": "Seeking a challenging software engineering role in a growth-oriented company where I can apply my expertise in full-stack development, cloud deployment, and API architecture to deliver high-quality, innovative solutions. Interested in projects involving scalable web platforms, SaaS products, and modern DevOps practices.",
+  "projects_experiences": [
+    {
+      "period": "2018 → 2020",
+      "title": "Full Stack Developer | WebTech Solutions",
+      "details": [
+        "Developed and deployed a customer-facing web application using React.js, Node.js, and PostgreSQL, improving client engagement by 40%",
+        "Implemented RESTful APIs and integrated third-party services, reducing data processing time by 25%",
+        "Collaborated with UX designers to improve interface responsiveness and accessibility compliance (WCAG 2.1)"
+      ]
+    },
+    {
+      "period": "2020 → Present",
+      "title": "Lead Software Engineer | EcomX",
+      "details": [
+        "Led a 6-member development team to build a scalable e-commerce platform with Django, React, and AWS infrastructure",
+        "Optimized PostgreSQL database queries, achieving a 45% performance boost",
+        "Implemented Redis-based caching and Celery task queues, reducing page load times by 60%",
+        "Oversaw migration from monolithic architecture to microservices, improving deployment agility"
+      ]
+    }
+  ],
+  "studies_training": [
+    {
+      "period": "2014 → 2018",
+      "degree": "Bachelor of Science in Computer Science",
+      "institution": "University of Anytown",
+      "honors": "Graduated with Honors (GPA: 3.8/4.0)"
+    },
+    {
+      "period": "2018 → 2020",
+      "degree": "Master of Science in Software Engineering",
+      "institution": "Tech Institute of Anytown",
+      "honors": "Graduated (GPA: 3.9/4.0)"
+    },
+    {
+      "period": "2021",
+      "degree": "AWS Certified Solutions Architect – Associate",
+      "institution": "Amazon Web Services",
+      "honors": "Certification Achieved"
+    }
+  ]
+}

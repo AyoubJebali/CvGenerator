@@ -17,7 +17,7 @@ export default function PersonalInfoSection() {
               type="text"
               id="name"
               name="name"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-black"
               placeholder="Enter your name"
             />
           </div>
@@ -29,7 +29,7 @@ export default function PersonalInfoSection() {
               type="email"
               id="email"
               name="email"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-black"
               placeholder="Enter your email"
             />
           </div>
@@ -41,7 +41,7 @@ export default function PersonalInfoSection() {
               type="text"
               id="title"
               name="title"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-black"
               placeholder="Enter your title"
             />
           </div>
@@ -53,7 +53,7 @@ export default function PersonalInfoSection() {
               type="tel"
               id="number"
               name="number"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-black"
               placeholder="123-456-7890"
             />
           </div>
@@ -65,7 +65,7 @@ export default function PersonalInfoSection() {
               type="text"
               id="address"
               name="address"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-black"
               placeholder="Enter your address"
             />
           </div>
@@ -77,7 +77,7 @@ export default function PersonalInfoSection() {
               type="url"
               id="linkedin"
               name="linkedin"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-black"
               placeholder="https://linkedin.com/in/yourprofile"
             />
           </div>
@@ -87,7 +87,7 @@ export default function PersonalInfoSection() {
             <span className="label-text">Profile</span>
           </label>
           <textarea
-            className="textarea textarea-bordered w-full"
+            className="textarea textarea-bordered w-full text-black"
             placeholder="Tell us about yourself"
             name="profile"
             rows={4}
