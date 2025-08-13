@@ -1,17 +1,19 @@
+"use client";
 import React, { useState } from 'react';
-import SkillInput from './skill-input';
 import { v4 as uuidv4 } from 'uuid';
+import LanguageInput from '../language-input';
 
 interface Item {
   id: string;
-  skill: string;
+  language: string;
+  proficiency: string;
 }
 
-export default function SkillSection() {
+export default function LanguagesSection() {
   const [items, setItems] = useState<Item[]>([]);
 
   const addToArray = () => {
-    const newItem: Item = { id: uuidv4(), skill: '' };
+    const newItem: Item = { id: uuidv4(), language: '', proficiency: '' };
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
@@ -19,28 +21,29 @@ export default function SkillSection() {
     setItems((prevItems) => prevItems.filter(item => item.id !== id));
   };
 
-  const updateItem = (id: string, newString: string) => {
+  const updateItem = (id: string, language: string, proficiency: string) => {
     setItems((prevItems) =>
       prevItems.map(item =>
-        item.id === id ? { ...item, skill: newString } : item
+        item.id === id ? { ...item, language, proficiency } : item
       )
     );
   };
 
   return (
     <div className="collapse collapse-arrow bg-base-200 rounded-lg">
-      <input type="checkbox" name="skills-accordion" />
-      <div className="collapse-title text-xl text-black font-medium">
-        Skills
+      <input type="checkbox" name="languages-accordion" />
+      <div className="text-black collapse-title text-xl font-medium">
+        Languages
       </div>
       <div className="collapse-content">
         <div className="space-y-4">
           {items.map((item) => (
             <div key={item.id} className="flex items-center gap-4">
               <div className="flex-grow">
-                <SkillInput
+                <LanguageInput
                   id={item.id}
-                  skill={item.skill}
+                  language={item.language}
+                  proficiency={item.proficiency}
                   updateItem={updateItem}
                 />
               </div>
@@ -60,11 +63,10 @@ export default function SkillSection() {
             type="button"
             onClick={addToArray}
           >
-            Add Skill
+            Add Language
           </button>
         </div>
       </div>
     </div>
   );
 }
-

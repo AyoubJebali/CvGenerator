@@ -1,125 +1,39 @@
 "use client";
-import React, { useActionState, useState } from "react";
-import { validateForm, State } from "@/app/lib/actions";
+import React, { useActionState } from "react";
+import { validateForm } from "@/app/lib/actions";
 import SkillSection from "./skill-section";
+import PersonalInfoSection from "./form-sections/personal-info-section";
+import LanguagesSection from "./form-sections/languages-section";
+import HobbiesSection from "./form-sections/hobbies-section";
+import ObjectivesSection from "./form-sections/objectives-section";
+import ProjectsSection from "./form-sections/projects-section";
+import StudiesSection from "./form-sections/studies-section";
+
 export default function Form() {
-  const initialState = { message: "", errors: {} };
   const [state, dispatch] = useActionState(validateForm, null);
+
   return (
-    <form action={dispatch}>
-      <div className="collapse collapse-arrow bg-white text-white">
-        <input type="checkbox" />
-        <div className="collapse-title text-xl font-medium text-black">
-          Personal Information
+    <div className="max-w-4xl mx-auto p-8 bg-base-100 rounded-xl shadow-lg">
+      <h1 className="text-4xl text-black font-bold text-center mb-8">Create Your CV</h1>
+      <form action={dispatch}>
+        <div className="space-y-6">
+          <PersonalInfoSection />
+          <SkillSection />
+          <LanguagesSection />
+          <HobbiesSection />
+          <ObjectivesSection />
+          <ProjectsSection />
+          <StudiesSection />
         </div>
-        <div className="collapse-content  bg-gray-100 rounded-lg shadow-lg text-black">
-          <div className="form-control mb-4">
-            <label htmlFor="name" className="label">
-              <span className="label-text">Name:</span>
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="input input-bordered w-full bg-white"
-              placeholder="Enter your name"
-            />
-          </div>
-          <div className="form-control mb-4">
-            <label htmlFor="email" className="label">
-              <span className="label-text">Email Address:</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="input input-bordered w-full bg-white"
-              placeholder="Enter your email"
-            />
-          </div>
-
-          <div className="form-control mb-4">
-            <label htmlFor="title" className="label">
-              <span className="label-text">Title:</span>
-            </label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              className="input input-bordered w-full bg-white"
-              placeholder="Enter your title"
-            />
-          </div>
-
-          <div className="form-control mb-4">
-            <label htmlFor="number" className="label">
-              <span className="label-text">Phone Number:</span>
-            </label>
-            <input
-              type="number"
-              id="number"
-              name="number"
-              className="input input-bordered w-full bg-white"
-              placeholder="123-456-7890"
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-              required
-            />
-          </div>
-
-          <div className="form-control mb-4">
-            <label htmlFor="address" className="label">
-              <span className="label-text">Address:</span>
-            </label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              className="input input-bordered w-full bg-white"
-              placeholder="Enter your address"
-            />
-          </div>
-          <div className="form-control mb-4">
-            <label htmlFor="linkedin" className="label">
-              <span className="label-text">LinkedIn:</span>
-            </label>
-            <input
-              type="text"
-              id="linkedin"
-              name="linkedin"
-              className="input input-bordered w-full bg-white text-black"
-              placeholder="Enter your LinkedIn profile"
-            />
-          </div>
-          <div className="form-control mb-4">
-            <label htmlFor="profile" className="label">
-              <span className="label-text">Profile:</span>
-            </label>
-            <textarea
-              className="textarea textarea-bordered w-full bg-white"
-              placeholder="Profile"
-              name="profile"
-            ></textarea>
-          </div>
+        <div className="form-control mt-8">
+          <button type="submit" className="btn btn-outline btn-primary   w-full text-lg">
+            Generate CV
+          </button>
         </div>
-      </div>
-      <SkillSection />
-      <div className="collapse mt-5 collapse-arrow bg-white text-white">
-        <input type="checkbox" />
-        <div className="collapse-title text-xl font-medium text-black">
-          Languages
-        </div>
-      </div>
-      <div className="collapse mt-5 collapse-arrow bg-white text-white">
-        <input type="checkbox" />
-        <div className="collapse-title text-xl font-medium text-black">
-          Hobbies
-        </div>
-      </div>
-      <div className="form-control mt-5">
-        <button type="submit" className="btn btn-primary w-full">
-          Generate
-        </button>
-      </div>
-    </form>
+        {state?.message && (
+          <div className="text-center mt-4 text-success">{state.message}</div>
+        )}
+      </form>
+    </div>
   );
 }
