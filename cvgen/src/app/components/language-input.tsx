@@ -23,7 +23,7 @@ const LanguageInput: React.FC<LanguageInputProps> = ({ id, language, proficiency
         type="text"
         name="language"
         value={language}
-        className="input input-bordered w-full"
+        className="input input-bordered w-full text-black"
         placeholder="Enter a language"
         onChange={handleLanguageChange}
       />
@@ -31,7 +31,7 @@ const LanguageInput: React.FC<LanguageInputProps> = ({ id, language, proficiency
         type="text"
         name="proficiency"
         value={proficiency}
-        className="input input-bordered w-full"
+        className="input input-bordered w-full text-black"
         placeholder="e.g., Proficient, Native"
         onChange={handleProficiencyChange}
       />

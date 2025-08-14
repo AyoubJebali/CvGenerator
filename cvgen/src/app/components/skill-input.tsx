@@ -18,7 +18,7 @@ const SkillInput: React.FC<SkillInputProps> = ({ id, skill, updateItem }) => {
         type="text"
         name="skill"
         value={skill}
-        className="input input-bordered w-full"
+        className="input input-bordered w-full text-black"
         placeholder="Enter a skill"
         onChange={handleSkillChange}
       />

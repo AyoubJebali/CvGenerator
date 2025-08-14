@@ -26,7 +26,7 @@ const ProjectInput: React.FC<ProjectInputProps> = ({ id, period, details, update
         type="text"
         name="project_period"
         value={period}
-        className="input input-bordered w-full"
+        className="input input-bordered w-full text-black"
         placeholder="e.g., 2020 → 2022"
         onChange={handlePeriodChange}
       />
@@ -36,7 +36,7 @@ const ProjectInput: React.FC<ProjectInputProps> = ({ id, period, details, update
       <textarea
         name="project_details"
         value={details}
-        className="textarea textarea-bordered w-full"
+        className="textarea textarea-bordered w-full text-black"
         placeholder="Enter project details, one per line"
         onChange={handleDetailsChange}
         rows={4}

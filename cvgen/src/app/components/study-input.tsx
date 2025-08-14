@@ -26,7 +26,7 @@ const StudyInput: React.FC<StudyInputProps> = ({ id, period, degree, institution
         type="text"
         name="study_period"
         value={period}
-        className="input input-bordered w-full"
+        className="input input-bordered w-full text-black"
         placeholder="e.g., 2019 → 2020"
         onChange={handleInputChange('period')}
       />
@@ -34,7 +34,7 @@ const StudyInput: React.FC<StudyInputProps> = ({ id, period, degree, institution
         type="text"
         name="study_degree"
         value={degree}
-        className="input input-bordered w-full"
+        className="input input-bordered w-full text-black"
         placeholder="e.g., Bachelor's degree"
         onChange={handleInputChange('degree')}
       />
@@ -42,7 +42,7 @@ const StudyInput: React.FC<StudyInputProps> = ({ id, period, degree, institution
         type="text"
         name="study_institution"
         value={institution}
-        className="input input-bordered w-full"
+        className="input input-bordered w-full text-black"
         placeholder="e.g., University of Anytown"
         onChange={handleInputChange('institution')}
       />
@@ -50,7 +50,7 @@ const StudyInput: React.FC<StudyInputProps> = ({ id, period, degree, institution
         type="text"
         name="study_honors"
         value={honors}
-        className="input input-bordered w-full"
+        className="input input-bordered w-full text-black"
         placeholder="e.g., Graduated with Honors"
         onChange={handleInputChange('honors')}
       />
