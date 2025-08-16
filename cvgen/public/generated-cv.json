@@ -1,24 +1,26 @@
 {
-  "name": "ayoub",
-  "title": "software engineer",
+  "name": "Ayoub Jebali",
+  "title": "software",
   "contact": {
     "email": "a@a.com",
     "phone": "123123",
-    "location": "adress",
+    "location": "Sanheji",
     "linkedin": "https://www.linkedin.com/"
   },
-  "about": "nothing",
-  "skills": [
-    "skill1"
-  ],
-  "languages": [
-    {
-      "language": "english",
-      "proficiency": "native"
-    }
-  ],
+  "about": "profile",
+  "skills": [],
+  "languages": [],
   "hobbies": [],
   "objectives": "",
-  "projects_experiences": [],
+  "projects_experiences": [
+    {
+      "title": "testtitle",
+      "start": "2025-08-17",
+      "end": "2025-08-20",
+      "details": [
+        "testtest"
+      ]
+    }
+  ],
   "studies_training": []
 }

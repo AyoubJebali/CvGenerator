@@ -5,7 +5,8 @@ import StudyInput from '../study-input';
 
 interface Item {
   id: string;
-  period: string;
+  start: string;
+  end: string;
   degree: string;
   institution: string;
   honors: string;
@@ -15,7 +16,7 @@ export default function StudiesSection() {
   const [items, setItems] = useState<Item[]>([]);
 
   const addToArray = () => {
-    const newItem: Item = { id: uuidv4(), period: '', degree: '', institution: '', honors: '' };
+    const newItem: Item = { id: uuidv4(), start: '', end: '', degree: '', institution: '', honors: '' };
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
@@ -23,10 +24,10 @@ export default function StudiesSection() {
     setItems((prevItems) => prevItems.filter(item => item.id !== id));
   };
 
-  const updateItem = (id: string, period: string, degree: string, institution: string, honors: string) => {
+  const updateItem = (id: string, start: string, end: string, degree: string, institution: string, honors: string) => {
     setItems((prevItems) =>
       prevItems.map(item =>
-        item.id === id ? { ...item, period, degree, institution, honors } : item
+        item.id === id ? { ...item, start, end, degree, institution, honors } : item
       )
     );
   };
@@ -35,7 +36,7 @@ export default function StudiesSection() {
     <div className="collapse collapse-arrow bg-base-200 rounded-lg">
       <input type="checkbox" name="studies-accordion" />
       <div className="text-black collapse-title text-xl font-medium">
-        Studies and Training
+        Education and Training
       </div>
       <div className="collapse-content">
         <div className="space-y-6">
@@ -43,7 +44,8 @@ export default function StudiesSection() {
             <div key={item.id} className="p-4 border border-base-300 rounded-lg">
               <StudyInput
                 id={item.id}
-                period={item.period}
+                start={item.start}
+                end={item.end}
                 degree={item.degree}
                 institution={item.institution}
                 honors={item.honors}
@@ -67,7 +69,7 @@ export default function StudiesSection() {
             type="button"
             onClick={addToArray}
           >
-            Add Study/Training
+            Add Education/Training
           </button>
         </div>
       </div>

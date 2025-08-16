@@ -18,12 +18,15 @@ const LanguageSchema = z.object({
 });
 
 const ProjectExperienceSchema = z.object({
-  period: z.string(),
+  title: z.string(),
+  start: z.string(),
+  end: z.string(),
   details: z.array(z.string()),
 });
 
 const StudyTrainingSchema = z.object({
-  period: z.string(),
+  start: z.string(),
+  end: z.string(),
   degree: z.string(),
   institution: z.string(),
   honors: z.string(),
@@ -60,9 +63,11 @@ export async function validateForm(prevState: any, formData: FormData) {
   }));
 
   const projects_experiences = formData
-    .getAll("project_period")
-    .map((period, index) => ({
-      period: period.toString(),
+    .getAll("project_title")
+    .map((title, index) => ({
+      title: title.toString(),
+      start: formData.getAll("project_start")[index].toString(),
+      end: formData.getAll("project_end")[index].toString(),
       details: formData
         .getAll("project_details")
         [index].toString()
@@ -71,9 +76,10 @@ export async function validateForm(prevState: any, formData: FormData) {
     }));
 
   const studies_training = formData
-    .getAll("study_period")
-    .map((period, index) => ({
-      period: period.toString(),
+    .getAll("study_start")
+    .map((start, index) => ({
+      start: start.toString(),
+      end: formData.getAll("study_end")[index].toString(),
       degree: formData.getAll("study_degree")[index].toString(),
       institution: formData.getAll("study_institution")[index].toString(),
       honors: formData.getAll("study_honors")[index].toString(),

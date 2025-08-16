@@ -7,7 +7,7 @@ const Cvtemplate = () => {
             <div className="grid grid-cols-5 grid-rows-5 gap-0  text-black   bg-sky-200 	 print:w-[1200px] print-h-[297mm]  print:m-auto print:grid print:grid-cols-3 print:grid-rows-5 print:gap-0" >
                 <div className="col-start-2 col-end-5 row-start-1 row-end-2 bg-blue-400 flex space-x-4 print:col-span-3 print:row-span-1 print:border-none break-inside-avoid">
                     <Image
-                        className="mx-auto ml-0 mr-0 "
+                        className="mx-auto ml-0 mr-0"
                         src="/CV/images/portrait.jpeg"
                         alt="Portrait"
                         width={300}
@@ -18,11 +18,9 @@ const Cvtemplate = () => {
                             {data.name.split(" ")[0]} <span className="text-blue-600 uppercase">{data.name.split(" ")[1]}</span>
                         </h1>
                         <h1 className="text-3xl">{data.title}</h1>
-
                         <ul className="columns-2 list-none p-0 mb-0">
                             <li className="mb-2">
                                 <a
-
                                     href={data.contact.linkedin}
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -84,12 +82,36 @@ const Cvtemplate = () => {
                                         height={15}
                                         className="mr-2"
                                     />
-                                    <p  className="print:text-[20px]" >{skill}</p>
+                                    <p className="print:text-[20px]" >{skill}</p>
                                 </li>
                             ))}
                         </ul>
                     </div>
                     <h2 className="uppercase mb-4 text-blue-600 font-bold print:text-[24px]">Languages</h2>
+                    {
+                        data.languages.map((language, index) => {
+                            // Map proficiency to a percentage
+                            const proficiencyMap: { [key: string]: number } = {
+                                "Native": 100,
+                                "Fluent": 90,
+                                "Proficient": 75,
+                                "Intermediate": 50,
+                                "Basic": 25,
+                            };
+                            const widthPercent = proficiencyMap[language.proficiency] || 0;
+                            return (
+                                <div key={index} className="mb-4">
+                                    <div className="mb-2 print:text-[20px]">{language.language}</div>
+                                    <div className="w-3/4 h-3 bg-white mb-4">
+                                        <div
+                                            className="h-full bg-blue-900"
+                                            style={{ width: `${widthPercent}%` }}
+                                        ></div>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
                     <div className="mb-2 print:text-[20px]">English</div>
                     <div className="w-3/4 h-3 bg-white mb-4">
                         <div className="w-11/12 h-full bg-blue-900"></div>
@@ -112,7 +134,7 @@ const Cvtemplate = () => {
                     </div>
                     <div className="mb-6">
                         <h2 className="uppercase mb-4 font-bold text-blue-600 print:text-[24px]">Objectives & Ambitions</h2>
-                        <p  className="print:text-[20px]" >{data.objectives}</p>
+                        <p className="print:text-[20px]" >{data.objectives}</p>
                     </div>
                     <div className="mb-6">
                         <h2 className="uppercase mb-4 font-bold text-blue-600 print:text-[24px]">Projects & Experiences</h2>
@@ -129,13 +151,23 @@ const Cvtemplate = () => {
                     </div>
                     <div>
                         <h2 className="uppercase mb-4 font-bold text-blue-600 print:text-[24px]">Studies & Training</h2>
-                        {data.studies_training.map((study, index) => (
-                            <p  key={index} className="print:text-[20px]">
-                                <strong>{study.period}</strong>
-                                <br />
-                                <em>{study.degree}</em>, {study.honors}, {study.institution}
-                            </p>
-                        ))}
+                        {data.studies_training.map((study, index) => {
+                            const formatDate = (dateStr: string) => {
+                                if (!dateStr) return "";
+                                const date = new Date(dateStr);
+                                if (isNaN(date.getTime())) return dateStr;
+                                return date.toLocaleString("default", { month: "short", year: "numeric" });
+                            };
+                            return (
+                                <p key={index} className="print:text-[20px]">
+                                    <em>{study.degree}</em>, {study.honors}, {study.institution}
+                                    <br />
+                                    <strong>{formatDate(study.start)}</strong> to <strong>{formatDate(study.end)}</strong>
+                                </p>
+
+                            );
+                        })}
+
                     </div>
                 </div>
             </div>

@@ -5,7 +5,9 @@ import ProjectInput from '../project-input';
 
 interface Item {
   id: string;
-  period: string;
+  title: string;
+  start: string;
+  end: string;
   details: string;
 }
 
@@ -13,7 +15,7 @@ export default function ProjectsSection() {
   const [items, setItems] = useState<Item[]>([]);
 
   const addToArray = () => {
-    const newItem: Item = { id: uuidv4(), period: '', details: '' };
+    const newItem: Item = { id: uuidv4(), title: '', start: '', end: '' , details: '' };
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
@@ -21,10 +23,10 @@ export default function ProjectsSection() {
     setItems((prevItems) => prevItems.filter(item => item.id !== id));
   };
 
-  const updateItem = (id: string, period: string, details: string) => {
+  const updateItem = (id: string, title: string,start: string, end: string, details: string) => {
     setItems((prevItems) =>
       prevItems.map(item =>
-        item.id === id ? { ...item, period, details } : item
+        item.id === id ? { ...item, title,start,end, details } : item
       )
     );
   };
@@ -41,7 +43,9 @@ export default function ProjectsSection() {
             <div key={item.id} className="p-4 border border-base-300 rounded-lg">
               <ProjectInput
                 id={item.id}
-                period={item.period}
+                title={item.title}
+                start={item.start}
+                end={item.end}
                 details={item.details}
                 updateItem={updateItem}
               />

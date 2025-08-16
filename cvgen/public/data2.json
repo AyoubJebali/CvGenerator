@@ -32,10 +32,10 @@
     "AWS (EC2, S3, Lambda)",
     "CI/CD Pipelines"
   ],
-  "languages": {
-    "English": "Native",
-    "Spanish": "Intermediate"
-  },
+  "languages": [
+    { "language": "English", "proficiency": "Native" },
+    { "language": "Spanish", "proficiency": "Intermediate" }
+  ],
   "hobbies": [
     "Reading technology blogs",
     "Hiking",
@@ -45,7 +45,8 @@
   "objectives": "Seeking a challenging software engineering role in a growth-oriented company where I can apply my expertise in full-stack development, cloud deployment, and API architecture to deliver high-quality, innovative solutions. Interested in projects involving scalable web platforms, SaaS products, and modern DevOps practices.",
   "projects_experiences": [
     {
-      "period": "2018 → 2020",
+      "start": "2018",
+      "end": "2020",
       "title": "Full Stack Developer | WebTech Solutions",
       "details": [
         "Developed and deployed a customer-facing web application using React.js, Node.js, and PostgreSQL, improving client engagement by 40%",
@@ -54,7 +55,8 @@
       ]
     },
     {
-      "period": "2020 → Present",
+      "start": "2020",
+      "end": "Present",
       "title": "Lead Software Engineer | EcomX",
       "details": [
         "Led a 6-member development team to build a scalable e-commerce platform with Django, React, and AWS infrastructure",
@@ -66,19 +68,22 @@
   ],
   "studies_training": [
     {
-      "period": "2014 → 2018",
+      "start": "2014",
+      "end": "2018",
       "degree": "Bachelor of Science in Computer Science",
       "institution": "University of Anytown",
       "honors": "Graduated with Honors (GPA: 3.8/4.0)"
     },
     {
-      "period": "2018 → 2020",
+      "start": "2018",
+      "end": "2020",
       "degree": "Master of Science in Software Engineering",
       "institution": "Tech Institute of Anytown",
       "honors": "Graduated (GPA: 3.9/4.0)"
     },
     {
-      "period": "2021",
+      "start": "2021",
+      "end": "2021",
       "degree": "AWS Certified Solutions Architect – Associate",
       "institution": "Amazon Web Services",
       "honors": "Certification Achieved"
