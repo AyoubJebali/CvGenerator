@@ -17,7 +17,7 @@ const LanguageSchema = z.object({
   proficiency: z.string(),
 });
 
-const ProjectExperienceSchema = z.object({
+const ProjectSchema = z.object({
   title: z.string(),
   start: z.string(),
   end: z.string(),
@@ -32,6 +32,14 @@ const StudyTrainingSchema = z.object({
   honors: z.string(),
 });
 
+const ExperienceSchema = z.object({
+  position: z.string(),
+  company: z.string(),
+  start: z.string(),
+  end: z.string(),
+  details: z.array(z.string()),
+});
+
 const UserProfileSchema = z.object({
   name: z.string(),
   title: z.string(),
@@ -41,8 +49,9 @@ const UserProfileSchema = z.object({
   languages: z.array(LanguageSchema),
   hobbies: z.array(z.string()),
   objectives: z.string(),
-  projects_experiences: z.array(ProjectExperienceSchema),
+  projects: z.array(ProjectSchema),
   studies_training: z.array(StudyTrainingSchema),
+  experiences: z.array(ExperienceSchema),
 });
 
 export type State = {
@@ -62,7 +71,7 @@ export async function validateForm(prevState: any, formData: FormData) {
     proficiency: formData.getAll("proficiency")[index].toString(),
   }));
 
-  const projects_experiences = formData
+  const projects = formData
     .getAll("project_title")
     .map((title, index) => ({
       title: title.toString(),
@@ -85,6 +94,20 @@ export async function validateForm(prevState: any, formData: FormData) {
       honors: formData.getAll("study_honors")[index].toString(),
     }));
 
+  const experiences = formData
+    .getAll("experience_position")
+    .map((position, index) => ({
+      position: position.toString(),
+      company: formData.getAll("experience_company")[index].toString(),
+      start: formData.getAll("experience_start")[index].toString(),
+      end: formData.getAll("experience_end")[index].toString(),
+      details: formData
+        .getAll("experience_details")
+        [index].toString()
+        .split("\n")
+        .filter((line) => line.trim() !== ""),
+    }));
+
   const cvData = {
     name: formData.get("name"),
     title: formData.get("title"),
@@ -93,14 +116,16 @@ export async function validateForm(prevState: any, formData: FormData) {
       phone: formData.get("number"),
       location: formData.get("address"),
       linkedin: formData.get("linkedin"),
+      github: formData.get("github"),
     },
     about: formData.get("profile"),
     skills: formData.getAll("skill"),
     languages: languages,
     hobbies: formData.getAll("hobby"),
     objectives: formData.get("objectives"),
-    projects_experiences: projects_experiences,
+    projects: projects,
     studies_training: studies_training,
+    experiences: experiences,
   };
 
   const validatedFields = validateCvData(cvData);

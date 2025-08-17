@@ -8,6 +8,7 @@ import HobbiesSection from "./form-sections/hobbies-section";
 import ObjectivesSection from "./form-sections/objectives-section";
 import ProjectsSection from "./form-sections/projects-section";
 import StudiesSection from "./form-sections/education-section";
+import ExperienceSection from "./form-sections/experience-section";
 
 export default function Form() {
   const [state, dispatch] = useActionState(validateForm, null);
@@ -24,6 +25,7 @@ export default function Form() {
           <ObjectivesSection />
           <ProjectsSection />
           <StudiesSection />
+          <ExperienceSection />
         </div>
         <div className="form-control mt-8">
           <button type="submit" className="btn btn-outline btn-primary   w-full text-lg">
