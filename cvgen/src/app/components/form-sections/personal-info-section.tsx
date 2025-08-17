@@ -81,6 +81,18 @@ export default function PersonalInfoSection() {
               placeholder="https://linkedin.com/in/yourprofile"
             />
           </div>
+          <div className="form-control">
+            <label htmlFor="github" className="label">
+              <span className="label-text">GitHub</span>
+            </label>
+            <input
+              type="url"
+              id="github"
+              name="github"
+              className="input input-bordered w-full text-black"
+              placeholder="https://github.com/yourusername"
+            />
+          </div>
         </div>
         <div className="form-control mt-4">
           <label htmlFor="profile" className="label">

@@ -7,20 +7,21 @@
     "location": "Sanheji",
     "linkedin": "https://www.linkedin.com/"
   },
-  "about": "profile",
+  "about": "",
   "skills": [],
   "languages": [],
   "hobbies": [],
   "objectives": "",
-  "projects_experiences": [
+  "projects": [
     {
       "title": "testtitle",
-      "start": "2025-08-17",
+      "start": "2025-08-19",
       "end": "2025-08-20",
       "details": [
-        "testtest"
+        "taaataaa"
       ]
     }
   ],
-  "studies_training": []
+  "studies_training": [],
+  "experiences": []
 }
