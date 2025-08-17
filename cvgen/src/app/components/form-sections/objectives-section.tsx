@@ -10,7 +10,7 @@ export default function ObjectivesSection() {
       <div className="collapse-content">
         <div className="form-control">
           <textarea
-            className="textarea textarea-bordered w-full"
+            className="textarea textarea-bordered w-full text-black"
             placeholder="What are your career objectives?"
             name="objectives"
             rows={4}

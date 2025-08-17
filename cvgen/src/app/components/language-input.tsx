@@ -13,7 +13,7 @@ const LanguageInput: React.FC<LanguageInputProps> = ({ id, language, proficiency
     updateItem(id, event.target.value, proficiency);
   };
 
-  const handleProficiencyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleProficiencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     updateItem(id, language, event.target.value);
   };
 
@@ -23,18 +23,23 @@ const LanguageInput: React.FC<LanguageInputProps> = ({ id, language, proficiency
         type="text"
         name="language"
         value={language}
-        className="input input-bordered w-full"
+        className="input input-bordered w-full text-black"
         placeholder="Enter a language"
         onChange={handleLanguageChange}
       />
-      <input
-        type="text"
+      <select
         name="proficiency"
         value={proficiency}
-        className="input input-bordered w-full"
-        placeholder="e.g., Proficient, Native"
+        className="select select-bordered w-full text-black"
         onChange={handleProficiencyChange}
-      />
+      >
+        <option value="">Select proficiency</option>
+        <option value="Native">Native</option>
+        <option value="Fluent">Fluent</option>
+        <option value="Proficient">Proficient</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Basic">Basic</option>
+      </select>
     </div>
   );
 };

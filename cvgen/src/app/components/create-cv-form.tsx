@@ -7,7 +7,7 @@ import LanguagesSection from "./form-sections/languages-section";
 import HobbiesSection from "./form-sections/hobbies-section";
 import ObjectivesSection from "./form-sections/objectives-section";
 import ProjectsSection from "./form-sections/projects-section";
-import StudiesSection from "./form-sections/studies-section";
+import StudiesSection from "./form-sections/education-section";
 
 export default function Form() {
   const [state, dispatch] = useActionState(validateForm, null);
