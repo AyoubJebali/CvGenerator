@@ -7,21 +7,17 @@
     "location": "Sanheji",
     "linkedin": "https://www.linkedin.com/"
   },
-  "about": "",
-  "skills": [],
+  "about": "test",
+  "skills": [
+    {
+      "skill": "skill1",
+      "category": "Programming Languages"
+    }
+  ],
   "languages": [],
   "hobbies": [],
   "objectives": "",
-  "projects": [
-    {
-      "title": "testtitle",
-      "start": "2025-08-19",
-      "end": "2025-08-20",
-      "details": [
-        "taaataaa"
-      ]
-    }
-  ],
+  "projects": [],
   "studies_training": [],
   "experiences": []
 }

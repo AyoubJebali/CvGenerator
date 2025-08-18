@@ -19,13 +19,13 @@ export default function Form() {
       <form action={dispatch}>
         <div className="space-y-6">
           <PersonalInfoSection />
-          <SkillSection />
-          <LanguagesSection />
-          <HobbiesSection />
-          <ObjectivesSection />
-          <ProjectsSection />
           <StudiesSection />
           <ExperienceSection />
+          <ProjectsSection />
+          <SkillSection />
+          <LanguagesSection />
+          {/* <HobbiesSection />
+          <ObjectivesSection /> */}
         </div>
         <div className="form-control mt-8">
           <button type="submit" className="btn btn-outline btn-primary   w-full text-lg">
