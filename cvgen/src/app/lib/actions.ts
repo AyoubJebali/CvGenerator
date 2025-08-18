@@ -40,15 +40,20 @@ const ExperienceSchema = z.object({
   details: z.array(z.string()),
 });
 
+const SkillSchema = z.object({
+  skill: z.string(),
+  category: z.string(),
+});
+
 const UserProfileSchema = z.object({
   name: z.string(),
   title: z.string(),
   contact: ContactSchema,
   about: z.string(),
-  skills: z.array(z.string()),
+  skills: z.array(SkillSchema), // <-- update to array of SkillSchema
   languages: z.array(LanguageSchema),
   hobbies: z.array(z.string()),
-  objectives: z.string(),
+  objectives: z.string().optional().default(""),
   projects: z.array(ProjectSchema),
   studies_training: z.array(StudyTrainingSchema),
   experiences: z.array(ExperienceSchema),
@@ -66,6 +71,7 @@ function validateCvData(data: unknown) {
 }
 
 export async function validateForm(prevState: any, formData: FormData) {
+  console.log("Form data received:", Object.fromEntries(formData.entries()));
   const languages = formData.getAll("language").map((lang, index) => ({
     language: lang.toString(),
     proficiency: formData.getAll("proficiency")[index].toString(),
@@ -108,6 +114,11 @@ export async function validateForm(prevState: any, formData: FormData) {
         .filter((line) => line.trim() !== ""),
     }));
 
+  const skills = formData.getAll("skill").map((skill, index) => ({
+    skill: skill.toString(),
+    category: formData.getAll("skill_category")[index]?.toString() || "",
+  }));
+
   const cvData = {
     name: formData.get("name"),
     title: formData.get("title"),
@@ -119,10 +130,10 @@ export async function validateForm(prevState: any, formData: FormData) {
       github: formData.get("github"),
     },
     about: formData.get("profile"),
-    skills: formData.getAll("skill"),
+    skills: skills,
     languages: languages,
     hobbies: formData.getAll("hobby"),
-    objectives: formData.get("objectives"),
+    objectives: formData.get("objectives")?.toString() || "",
     projects: projects,
     studies_training: studies_training,
     experiences: experiences,

@@ -5,13 +5,14 @@ import { v4 as uuidv4 } from 'uuid';
 interface Item {
   id: string;
   skill: string;
+  catergory: string;
 }
 
 export default function SkillSection() {
   const [items, setItems] = useState<Item[]>([]);
 
   const addToArray = () => {
-    const newItem: Item = { id: uuidv4(), skill: '' };
+    const newItem: Item = { id: uuidv4(), skill: '' , catergory: '' };
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
@@ -19,10 +20,10 @@ export default function SkillSection() {
     setItems((prevItems) => prevItems.filter(item => item.id !== id));
   };
 
-  const updateItem = (id: string, newString: string) => {
+  const updateItem = (id: string, newSkill: string, newCategory: string) => {
     setItems((prevItems) =>
       prevItems.map(item =>
-        item.id === id ? { ...item, skill: newString } : item
+        item.id === id ? { ...item, skill: newSkill, catergory: newCategory } : item
       )
     );
   };
@@ -41,6 +42,7 @@ export default function SkillSection() {
                 <SkillInput
                   id={item.id}
                   skill={item.skill}
+                  category={item.catergory}
                   updateItem={updateItem}
                 />
               </div>

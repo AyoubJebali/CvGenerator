@@ -1,0 +1,93 @@
+{
+  "name": "Prashant Singh",
+  "title": "Bachelor of Technology in Computer Science and Engineering (Cyber Security)",
+  "contact": {
+    "phone": "+91-xxxxxxxx",
+    "email": "prashantxxxxx@gmail.com",
+    "github": "https://github.com/xxxxx",
+    "linkedin": "https://linkedin.com/in/xxxxx"
+  },
+  "education": [
+    {
+      "degree": "Bachelor of Technology in Computer Science and Engineering (Cyber Security)",
+      "institution": "Shri Ramdeobaba College of Engineering and Management, Nagpur",
+      "duration": "2020 - 2024",
+      "cgpa": "xx"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Web Based Facial Authentication (Liveness Detection)",
+      "details": [
+        "Developed a facial authentication system as a Chrome Extension.",
+        "Enabled passwordless login using live detection techniques.",
+        "Technologies Used: Python, React.js, Bootstrap."
+      ]
+    },
+    {
+      "name": "Realtime Chat App",
+      "details": [
+        "Built a React-based web application for real-time chatting.",
+        "Integrated Firebase Authentication and Cloud Firestore.",
+        "Technologies Used: React.js, Firebase, Bootstrap, HTML."
+      ]
+    },
+    {
+      "name": "Covid-19 Tracker",
+      "details": [
+        "Developed a tracker for daily and weekly COVID-19 statistics.",
+        "Used Google Maps API and live datasets for visualization.",
+        "Technologies Used: JavaScript, CSS, HTML, API."
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "AWS Cloud Virtual Internship",
+      "organization": "AICTE-Eduskills Online",
+      "period": "May - July 2023",
+      "details": [
+        "Worked with EC2, S3, RDS, Lambda, IAM, VPC.",
+        "Designed scalable and fault-tolerant AWS solutions.",
+        "Hands-on with AWS CLI and Management Console."
+      ]
+    },
+    {
+      "role": "Palo Alto Cybersecurity Virtual Internship",
+      "organization": "AICTE-Eduskills Online",
+      "period": "Dec 2022 - Feb 2023",
+      "details": [
+        "Learned Security Operations Center fundamentals.",
+        "Studied Network & Cloud Security basics."
+      ]
+    }
+  ],
+  "technical_skills": [
+    "C/C++, Python, JavaScript, HTML/CSS",
+    "C++ STL, Python Libraries, React.js",
+    "Node.js, Git, GitHub, VSCode",
+    "MongoDB, Firebase, MySQL",
+    "React.js Framework"
+  ],
+  "areas_of_interest": [
+    "Web Design and Development",
+    "Cloud Security"
+  ],
+  "soft_skills": [
+    "Problem Solving",
+    "Self-learning",
+    "Presentation",
+    "Adaptability"
+  ],
+  "positions": [
+    {
+      "title": "On Desk Registrations Volunteer",
+      "organization": "Aarhant Cyber Week Event - RCOEM, Nagpur",
+      "period": "Oct - Dec 2022",
+      "details": [
+        "Attracted nearly 300 attendees.",
+        "Managed over Rs. 20,000 in collected entry fees."
+      ]
+    }
+  ]
+}
