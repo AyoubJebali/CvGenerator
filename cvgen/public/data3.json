@@ -1,0 +1,112 @@
+{
+  "name": "David Johnson",
+  "title": "Senior Full Stack Developer",
+  "contact": {
+    "email": "david.johnson@example.com",
+    "phone": "+1 (222) 333-4444",
+    "location": "New York, USA",
+    "linkedin": "https://www.linkedin.com/in/davidjohnson",
+    "github": "https://github.com/davidjohnson"
+  },
+  "about": "Senior Full Stack Developer with 10+ years of experience delivering scalable web and enterprise applications across finance, healthcare, and e-commerce industries.",
+  "skills": [
+    { "skill": "JavaScript (ES6+)", "category": "Programming Languages" },
+    { "skill": "TypeScript", "category": "Programming Languages" },
+    { "skill": "React.js", "category": "Frontend" },
+    { "skill": "Next.js", "category": "Frontend" },
+    { "skill": "Node.js", "category": "Backend" },
+    { "skill": "Express.js", "category": "Backend" },
+    { "skill": "PostgreSQL", "category": "Databases" },
+    { "skill": "MongoDB", "category": "Databases" },
+    { "skill": "AWS (EC2, S3, Lambda, RDS)", "category": "Cloud" },
+    { "skill": "Docker & Kubernetes", "category": "DevOps" }
+  ],
+  "languages": [
+    { "language": "English", "proficiency": "Native" },
+    { "language": "French", "proficiency": "Intermediate" }
+  ],
+  "hobbies": ["Tech Blogging", "Mentoring Juniors", "Traveling", "Music"],
+  "objectives": "To lead development teams in creating robust, scalable, and impactful applications while mentoring engineers and contributing to open-source projects.",
+  "projects": [
+    {
+      "title": "Healthcare Patient Portal",
+      "start": "2017-01-01",
+      "end": "2018-12-01",
+      "details": [
+        "Built a secure portal for patients to access health records and schedule appointments.",
+        "Implemented HIPAA-compliant authentication and authorization.",
+        "Stack: React.js, Node.js, PostgreSQL, AWS."
+      ]
+    },
+    {
+      "title": "Real-Time Analytics Dashboard",
+      "start": "2022-01-01",
+      "end": "2023-06-01",
+      "details": [
+        "Developed a dashboard for monitoring live user activity with WebSockets.",
+        "Implemented data visualization with D3.js and Chart.js.",
+        "Reduced response latency by 40% with Redis caching."
+      ]
+    },
+    {
+      "title": "Open Source Contribution – DevTools Library",
+      "start": "2020-03-01",
+      "end": "2020-12-01",
+      "details": [
+        "Contributed to a popular JavaScript developer tools library used by 5k+ developers.",
+        "Implemented performance optimizations and fixed critical bugs."
+      ]
+    }
+  ],
+  "studies_training": [
+    {
+      "start": "2008-09-01",
+      "end": "2012-06-01",
+      "degree": "Bachelor of Science in Computer Science",
+      "institution": "New York University",
+      "honors": "Graduated with Honors"
+    },
+    {
+      "start": "2013-01-01",
+      "end": "2013-12-01",
+      "degree": "Certified AWS Solutions Architect – Professional",
+      "institution": "Amazon Web Services",
+      "honors": "Certification Achieved"
+    }
+  ],
+  "experiences": [
+    {
+      "position": "Lead Software Engineer",
+      "company": "FinTech Innovations",
+      "start": "2020-01-01",
+      "end": "Present",
+      "details": [
+        "Leading a team of 10 engineers to develop high-frequency trading applications.",
+        "Optimized system performance, reducing transaction latency by 50%.",
+        "Collaborated with product managers to define technical roadmaps."
+      ]
+    },
+    {
+      "position": "Senior Full Stack Developer",
+      "company": "MediCare Systems",
+      "start": "2016-01-01",
+      "end": "2019-12-01",
+      "details": [
+        "Developed secure healthcare applications with React, Node.js, and PostgreSQL.",
+        "Implemented CI/CD pipelines with Jenkins and Docker.",
+        "Ensured HIPAA and GDPR compliance across applications."
+      ]
+    },
+    {
+      "position": "Full Stack Developer",
+      "company": "TechStart Solutions",
+      "start": "2012-07-01",
+      "end": "2015-12-01",
+      "details": [
+        "Developed web applications for SMEs using LAMP and MERN stacks.",
+        "Worked closely with clients to gather requirements and deliver solutions.",
+        "Introduced automated testing practices that improved product reliability."
+      ]
+    }
+  ]
+}
