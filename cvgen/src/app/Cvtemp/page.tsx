@@ -4,11 +4,12 @@ import CvTemplatePdf from '../components/CvTemplatePdf'
 import CvTemplateHeaderBanner from '../components/cvTemplate3'
 import CvTemplateSidebarDark from '../components/cvTemplate3'
 import CvTemplateTwoColumn from '../components/cvTemplate3'
+import CvTemplateOneColumn from '../components/cv-templates/one-column-cv-template'
 const home = () => {
   return (
     <div>
     
-    <CvTemplateTwoColumn></CvTemplateTwoColumn>
+    <CvTemplateOneColumn></CvTemplateOneColumn>
     </div>
   )
 }
