@@ -1,5 +1,5 @@
 import React from "react";
-import data from "../../../public/datapdf.json";
+import data from "../../../../public/datapdf.json";
 
 const CvTemplatePdf = () => {
   return (

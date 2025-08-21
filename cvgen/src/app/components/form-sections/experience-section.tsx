@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import ExperienceInput from "../experience-input";
+import ExperienceInput from "../form-inputs/experience-input";
 
 
 interface Item {

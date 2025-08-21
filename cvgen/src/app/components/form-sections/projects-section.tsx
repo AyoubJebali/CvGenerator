@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import ProjectInput from '../project-input';
+import ProjectInput from '../form-inputs/project-input';
 
 interface Item {
   id: string;

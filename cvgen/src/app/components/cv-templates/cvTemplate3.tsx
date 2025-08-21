@@ -1,5 +1,5 @@
 import React from "react";
-import data from "../../../public/data2.json";
+import data from "../../../../public/data2.json";
 
 // ---------------- Template 3: Sidebar Dark ----------------
  const CvTemplateSidebarDark = () => {

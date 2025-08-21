@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Cvtest from "./components/cvtest";
+import Cvtest from "./components/cv-templates/cvtest";
 import Form from "./components/create-cv-form";
 export default function Home() {
   return (

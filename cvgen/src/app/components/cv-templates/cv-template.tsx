@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import data from "../../../public/data2.json"
+import data from "../../../../public/data2.json"
 const Cvtemplate = () => {
     return (
         <>
