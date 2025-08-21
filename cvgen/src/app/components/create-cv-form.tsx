@@ -1,7 +1,7 @@
 "use client";
 import React, { useActionState } from "react";
 import { validateForm } from "@/app/lib/actions";
-import SkillSection from "./skill-section";
+import SkillSection from "./form-sections/skill-section";
 import PersonalInfoSection from "./form-sections/personal-info-section";
 import LanguagesSection from "./form-sections/languages-section";
 import HobbiesSection from "./form-sections/hobbies-section";

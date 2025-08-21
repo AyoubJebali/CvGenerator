@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import HobbyInput from '../hobby-input';
+import HobbyInput from '../form-inputs/hobby-input';
 
 interface Item {
   id: string;
