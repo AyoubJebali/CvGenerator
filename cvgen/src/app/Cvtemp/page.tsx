@@ -5,11 +5,13 @@ import CvTemplateHeaderBanner from '../components/cv-templates/cvTemplate3'
 import CvTemplateSidebarDark from '../components/cv-templates/cvTemplate3'
 import CvTemplateTwoColumn from '../components/cv-templates/cvTemplate3'
 import CvTemplateOneColumn from '../components/cv-templates/one-column-cv-template'
+import ZoomWrapper from '../components/zoomWrapper'
 const home = () => {
   return (
     <div>
-    
-    <CvTemplateOneColumn></CvTemplateOneColumn>
+      <ZoomWrapper>
+        <CvTemplateOneColumn></CvTemplateOneColumn>
+      </ZoomWrapper>
     </div>
   )
 }

@@ -65,7 +65,7 @@ import data from "../../../../public/data2.json";
 // ---------------- Template 4: Two-Column Modern ----------------
  const CvTemplateTwoColumn = () => {
   return (
-    <div className="grid grid-cols-2 gap-6 bg-gray-50 text-black p-10 print:w-[1200px] print:m-auto">
+    <div className="grid grid-cols-2 gap-6 bg-gray-50 text-black p-10 print:w-[1200px] print:m-auto border-black border-solid border-2">
       {/* Left Column */}
       <div>
         <h1 className="text-4xl font-bold text-blue-700 mb-2">{data.name}</h1>
@@ -171,4 +171,4 @@ const CvTemplateHeaderBanner = () => {
     </div>
   );
 };
-export default CvTemplateTwoColumn;
+export default CvTemplateHeaderBanner;
