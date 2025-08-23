@@ -24,8 +24,8 @@ export default function Form() {
           <ProjectsSection />
           <SkillSection />
           <LanguagesSection />
-          {/* <HobbiesSection />
-          <ObjectivesSection /> */}
+           <HobbiesSection />
+          <ObjectivesSection /> 
         </div>
         <div className="form-control mt-8">
           <button type="submit" className="btn btn-outline btn-primary   w-full text-lg">

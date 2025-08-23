@@ -1,6 +1,6 @@
 {
   "name": "Ayoub Jebali",
-  "title": "Sofware Engineer",
+  "title": "Software Engineer",
   "contact": {
     "email": "ayoub.jebali434@gmail.com",
     "phone": "015511002880",
@@ -10,22 +10,10 @@
   "about": "",
   "skills": [],
   "languages": [
-    {
-      "language": "English",
-      "proficiency": "Fluent"
-    },
-    {
-      "language": "Arabic",
-      "proficiency": "Native"
-    },
-    {
-      "language": "French",
-      "proficiency": "Fluent"
-    },
-    {
-      "language": "German",
-      "proficiency": "Basic"
-    }
+    { "language": "English", "proficiency": "Fluent" },
+    { "language": "Arabic", "proficiency": "Native" },
+    { "language": "French", "proficiency": "Fluent" },
+    { "language": "German", "proficiency": "Basic" }
   ],
   "hobbies": [],
   "objectives": "",
@@ -35,13 +23,10 @@
       "start": "",
       "end": "",
       "details": [
-        "Engineered a full-stack quiz platform using Angular (frontend) and Flask (backend), supporting real-time\r",
-        "scoring, leaderboards, and secure authentication for 50+ concurrent users.\r",
-        "•Developed REST APIs in Flask and linked a relational database to manage 1,000+ quiz questions and user\r",
-        "scores.\r",
-        "•Enabled real-time competition, increasing engagement with live leaderboard updates every second.\r",
-        "•Deployed the application locally for testing and demonstration, gaining hands-on experience in client–server\r",
-        "architecture, authentication flows, and state management."
+        "Engineered a full-stack quiz platform using Angular (frontend) and Flask (backend), supporting real-time scoring, leaderboards, and secure authentication for 50+ concurrent users.",
+        "Developed REST APIs in Flask and linked a relational database to manage 1,000+ quiz questions and user scores.",
+        "Enabled real-time competition, increasing engagement with live leaderboard updates every second.",
+        "Deployed the application locally for testing and demonstration, gaining hands-on experience in client–server architecture, authentication flows, and state management."
       ]
     },
     {
@@ -49,12 +34,9 @@
       "start": "",
       "end": "",
       "details": [
-        "Designed user registration, login, and personalized meal plan generation based on dietary preferences and\r",
-        "calorie limits.\r",
-        "•Built the frontend with HTML, CSS, JavaScript and backend with PHP, including session management for\r",
-        "secure authentication across 100+ test users.\r",
-        "•Devised a recommendation system to tailor meal plans to individual calorie goals, increasing user engagement\r",
-        "by ~25% during testing."
+        "Designed user registration, login, and personalized meal plan generation based on dietary preferences and calorie limits.",
+        "Built the frontend with HTML, CSS, JavaScript and backend with PHP, including session management for secure authentication across 100+ test users.",
+        "Devised a recommendation system to tailor meal plans to individual calorie goals, increasing user engagement by ~25% during testing."
       ]
     }
   ],
@@ -81,14 +63,10 @@
       "start": "2023-02-01",
       "end": "2023-06-01",
       "details": [
-        "Created a full-stack web application for automated data extraction and import into\r",
-        "NeoXam’s software, reducing manual integration time by ~30%.\r",
-        "•Developed the frontend using React and backend with Django, leveraging SQLite\r",
-        "for efficient database management.\r",
-        "•Containerized and deployed the application on a production server using Docker,\r",
-        "ensuring 99% uptime and scalable access for the QA team.\r",
-        "•Boosted QA team efficiency by 20%, enabling faster responses and quicker bug\r",
-        "identification."
+        "Created a full-stack web application for automated data extraction and import into NeoXam’s software, reducing manual integration time by ~30%.",
+        "Developed the frontend using React and backend with Django, leveraging SQLite for efficient database management.",
+        "Containerized and deployed the application on a production server using Docker, ensuring 99% uptime and scalable access for the QA team.",
+        "Boosted QA team efficiency by 20%, enabling faster responses and quicker bug identification."
       ]
     },
     {
@@ -97,14 +75,10 @@
       "start": "2022-07-01",
       "end": "2022-08-15",
       "details": [
-        "•Engineered an Android pedometer app for daily step tracking, integrated with a\r",
-        "smart shoe using Arduino Nano and Bluetooth Low Energy (BLE).\r",
-        "•Programmed the microcontroller in C via Arduino IDE and the mobile app in Java\r",
-        "and XML using Android Studio.\r",
-        "•Enabled real-time step data synchronization with Firebase for multiple users\r",
-        "simultaneously.\r",
-        "•Achieved step-count accuracy of ~95%, improving reliability for daily step tracking\r",
-        "and fitness monitoring."
+        "Engineered an Android pedometer app for daily step tracking, integrated with a smart shoe using Arduino Nano and Bluetooth Low Energy (BLE).",
+        "Programmed the microcontroller in C via Arduino IDE and the mobile app in Java and XML using Android Studio.",
+        "Enabled real-time step data synchronization with Firebase for multiple users simultaneously.",
+        "Achieved step-count accuracy of ~95%, improving reliability for daily step tracking and fitness monitoring."
       ]
     }
   ]

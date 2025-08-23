@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import data from "../../../../public/data2.json"
+import data from "../../../../public/data3.json"
 const Cvtemplate = () => {
     return (
         <>
@@ -73,8 +73,8 @@ const Cvtemplate = () => {
                     <div className="mt-6 ">
                         <h2 className="uppercase mb-4 font-bold text-blue-600 print:text-[24px]">Skills</h2>
                         <ul className="list-none p-0 text-lg tracking-wider">
-                            {data.skills.map(skill => (
-                                <li key={skill} className="flex items-center mb-2">
+                            {Array.isArray(data.skills) && data.skills.map((skill, idx) => (
+                                <li key={idx} className="flex items-center mb-2">
                                     <img
                                         src="/CV/images/checkmark.png"
                                         alt="Checkmark"
@@ -82,7 +82,11 @@ const Cvtemplate = () => {
                                         height={15}
                                         className="mr-2"
                                     />
-                                    <p className="print:text-[20px]" >{skill}</p>
+                                    <p className="print:text-[20px]">
+                                        {typeof skill === "string"
+                                            ? skill
+                                            : `${skill.skill}${skill.category ? ` (${skill.category})` : ""}`}
+                                    </p>
                                 </li>
                             ))}
                         </ul>
@@ -138,7 +142,7 @@ const Cvtemplate = () => {
                     </div>
                     <div className="mb-6">
                         <h2 className="uppercase mb-4 font-bold text-blue-600 print:text-[24px]">Projects & Experiences</h2>
-                        {data.projects_experiences.map((project, index) => (
+                        {data.experiences.map((project, index) => (
                             <div key={index}>
                                 <p className="print:text-[20px]" ><strong>{project.period}</strong></p>
                                 <ul className="list-disc ml-6 mb-6">
