@@ -2,7 +2,7 @@ import React from "react";
 import data from "../../../../public/generated-cv.json";
 
 // ---------------- Template 6: One-Column Clean ----------------
-const CvTemplateOneColumn = () => {
+const CvOneColumn = () => {
   return (
     <div className="bg-white text-black max-w-6xl mx-auto p-10 space-y-0 print:w-[1200px] print:m-auto">
       {/* Header */}
@@ -135,4 +135,4 @@ const CvTemplateOneColumn = () => {
     </div>
   );
 };
-export default CvTemplateOneColumn;
+export default CvOneColumn;

@@ -1,6 +1,6 @@
 "use client";
 import Form from "./components/create-cv-form";
-import CvTemplateOneColumn from "./components/cv-templates/one-column-cv-template";
+import CvOneColumn from "./components/templates/CvOneColumn";
 import ZoomWrapper from "./components/zoomWrapper";
 import CVTemplateSelector from "./components/CVTemplateSelector";
 import { useState } from "react";
@@ -13,7 +13,7 @@ export default function Home() {
       </div>
       <div className="w-full xl:col-start-2 xl:col-span-1 xl:row-start-1 xl:row-span-1 p-4">
         <ZoomWrapper>
-        <CvTemplateOneColumn></CvTemplateOneColumn>
+        <CvOneColumn></CvOneColumn>
           {/* Render different templates based on selection */}
           {/* {selectedTemplate === "modern" && <CvTemplateOneColumn />}
             {selectedTemplate === "classic" && <CvTemplateOneColumn />}
