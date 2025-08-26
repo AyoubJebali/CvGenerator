@@ -1,92 +1,85 @@
 {
-  "name": "Prashant Singh",
-  "title": "Bachelor of Technology in Computer Science and Engineering (Cyber Security)",
+  "name": "Ayoub Jebali",
+  "title": "Software Engineer",
   "contact": {
-    "phone": "+91-xxxxxxxx",
-    "email": "prashantxxxxx@gmail.com",
+    "email": "ayoub.jebali434@gmail.com",
+    "phone": "015511002880",
+    "location": "Neuburger str. 76, Passau",
     "github": "https://github.com/xxxxx",
-    "linkedin": "https://linkedin.com/in/xxxxx"
+    "linkedin": "https://www.linkedin.com/in/ayoub-jebali-94702823b/"
   },
-  "education": [
-    {
-      "degree": "Bachelor of Technology in Computer Science and Engineering (Cyber Security)",
-      "institution": "Shri Ramdeobaba College of Engineering and Management, Nagpur",
-      "duration": "2020 - 2024",
-      "cgpa": "xx"
-    }
+  "about": "",
+  "skills": [],
+  "languages": [
+    { "language": "English", "proficiency": "Fluent" },
+    { "language": "Arabic", "proficiency": "Native" },
+    { "language": "French", "proficiency": "Fluent" },
+    { "language": "German", "proficiency": "Basic" }
   ],
+  "hobbies": [],
+  "objectives": "",
   "projects": [
     {
-      "name": "Web Based Facial Authentication (Liveness Detection)",
+      "title": "AngularQuiz",
+      "start": "",
+      "end": "",
       "details": [
-        "Developed a facial authentication system as a Chrome Extension.",
-        "Enabled passwordless login using live detection techniques.",
-        "Technologies Used: Python, React.js, Bootstrap."
+        "Engineered a full-stack quiz platform using Angular (frontend) and Flask (backend), supporting real-time scoring, leaderboards, and secure authentication for 50+ concurrent users.",
+        "Developed REST APIs in Flask and linked a relational database to manage 1,000+ quiz questions and user scores.",
+        "Enabled real-time competition, increasing engagement with live leaderboard updates every second.",
+        "Deployed the application locally for testing and demonstration, gaining hands-on experience in client–server architecture, authentication flows, and state management."
       ]
     },
     {
-      "name": "Realtime Chat App",
+      "title": "Saneflii",
+      "start": "",
+      "end": "",
       "details": [
-        "Built a React-based web application for real-time chatting.",
-        "Integrated Firebase Authentication and Cloud Firestore.",
-        "Technologies Used: React.js, Firebase, Bootstrap, HTML."
-      ]
-    },
-    {
-      "name": "Covid-19 Tracker",
-      "details": [
-        "Developed a tracker for daily and weekly COVID-19 statistics.",
-        "Used Google Maps API and live datasets for visualization.",
-        "Technologies Used: JavaScript, CSS, HTML, API."
+        "Designed user registration, login, and personalized meal plan generation based on dietary preferences and calorie limits.",
+        "Built the frontend with HTML, CSS, JavaScript and backend with PHP, including session management for secure authentication across 100+ test users.",
+        "Devised a recommendation system to tailor meal plans to individual calorie goals, increasing user engagement by ~25% during testing."
       ]
     }
   ],
-  "experience": [
+  "studies_training": [
     {
-      "role": "AWS Cloud Virtual Internship",
-      "organization": "AICTE-Eduskills Online",
-      "period": "May - July 2023",
+      "start": "2024-10-15",
+      "end": "2025-08-21",
+      "degree": "Masters in Computer Science",
+      "institution": "University of Passau",
+      "honors": ""
+    },
+    {
+      "start": "2020-09-15",
+      "end": "2023-06-15",
+      "degree": "Computer Engineering Bachelor Degree: Embedded Systems and IoT",
+      "institution": "Faculty of Science of Tunis",
+      "honors": ""
+    }
+  ],
+  "experiences": [
+    {
+      "position": "Full-Stack Developer",
+      "company": "Neoxam",
+      "start": "2023-02-01",
+      "end": "2023-06-01",
       "details": [
-        "Worked with EC2, S3, RDS, Lambda, IAM, VPC.",
-        "Designed scalable and fault-tolerant AWS solutions.",
-        "Hands-on with AWS CLI and Management Console."
+        "Created a full-stack web application for automated data extraction and import into NeoXam’s software, reducing manual integration time by ~30%.",
+        "Developed the frontend using React and backend with Django, leveraging SQLite for efficient database management.",
+        "Containerized and deployed the application on a production server using Docker, ensuring 99% uptime and scalable access for the QA team.",
+        "Boosted QA team efficiency by 20%, enabling faster responses and quicker bug identification."
       ]
     },
     {
-      "role": "Palo Alto Cybersecurity Virtual Internship",
-      "organization": "AICTE-Eduskills Online",
-      "period": "Dec 2022 - Feb 2023",
+      "position": "Mobile and Embedded Developer",
+      "company": "Eklectic",
+      "start": "2022-07-01",
+      "end": "2022-08-15",
       "details": [
-        "Learned Security Operations Center fundamentals.",
-        "Studied Network & Cloud Security basics."
-      ]
-    }
-  ],
-  "technical_skills": [
-    "C/C++, Python, JavaScript, HTML/CSS",
-    "C++ STL, Python Libraries, React.js",
-    "Node.js, Git, GitHub, VSCode",
-    "MongoDB, Firebase, MySQL",
-    "React.js Framework"
-  ],
-  "areas_of_interest": [
-    "Web Design and Development",
-    "Cloud Security"
-  ],
-  "soft_skills": [
-    "Problem Solving",
-    "Self-learning",
-    "Presentation",
-    "Adaptability"
-  ],
-  "positions": [
-    {
-      "title": "On Desk Registrations Volunteer",
-      "organization": "Aarhant Cyber Week Event - RCOEM, Nagpur",
-      "period": "Oct - Dec 2022",
-      "details": [
-        "Attracted nearly 300 attendees.",
-        "Managed over Rs. 20,000 in collected entry fees."
+        "Engineered an Android pedometer app for daily step tracking, integrated with a smart shoe using Arduino Nano and Bluetooth Low Energy (BLE).",
+        "Programmed the microcontroller in C via Arduino IDE and the mobile app in Java and XML using Android Studio.",
+        "Enabled real-time step data synchronization with Firebase for multiple users simultaneously.",
+        "Achieved step-count accuracy of ~95%, improving reliability for daily step tracking and fitness monitoring."
       ]
     }
   ]

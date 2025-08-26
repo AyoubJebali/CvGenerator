@@ -29,7 +29,7 @@ export default function Form() {
         </div>
         <div className="form-control mt-8">
           <button type="submit" className="btn btn-outline btn-primary   w-full text-lg">
-            Generate CV
+            Preview CV
           </button>
         </div>
         {state?.message && (
