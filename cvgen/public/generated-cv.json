@@ -1,20 +1,28 @@
 {
-  "name": "Ayoub Jebali",
+  "name": "AYOUB JEBALI",
   "title": "Software Engineer",
   "contact": {
     "email": "ayoub.jebali434@gmail.com",
     "phone": "015511002880",
-    "location": "Neuburger str. 76, Passau",
-    "github": "https://github.com/xxxxx",
-    "linkedin": "https://www.linkedin.com/in/ayoub-jebali-94702823b/"
+    "location": "Neuburger str. 76, 76",
+    "linkedin": "https://www.linkedin.com/"
   },
-  "about": "",
-  "skills": [],
+  "about": "I am a software developer",
+  "skills": [
+    {
+      "skill": "skill0",
+      "category": "Programming Languages"
+    },
+    {
+      "skill": "skill1",
+      "category": "Web Technologies"
+    }
+  ],
   "languages": [
-    { "language": "English", "proficiency": "Fluent" },
-    { "language": "Arabic", "proficiency": "Native" },
-    { "language": "French", "proficiency": "Fluent" },
-    { "language": "German", "proficiency": "Basic" }
+    {
+      "language": "english",
+      "proficiency": "Fluent"
+    }
   ],
   "hobbies": [],
   "objectives": "",
@@ -24,63 +32,21 @@
       "start": "",
       "end": "",
       "details": [
-        "Engineered a full-stack quiz platform using Angular (frontend) and Flask (backend), supporting real-time scoring, leaderboards, and secure authentication for 50+ concurrent users.",
-        "Developed REST APIs in Flask and linked a relational database to manage 1,000+ quiz questions and user scores.",
-        "Enabled real-time competition, increasing engagement with live leaderboard updates every second.",
+        "Engineered a full-stack quiz platform using Angular (frontend) and Flask (backend), supporting real-time scoring, leaderboards, and secure authentication for 50+ concurrent users.\r",
+        "Developed REST APIs in Flask and linked a relational database to manage 1,000+ quiz questions and user scores.\r",
+        "Enabled real-time competition, increasing engagement with live leaderboard updates every second.\r",
         "Deployed the application locally for testing and demonstration, gaining hands-on experience in client–server architecture, authentication flows, and state management."
-      ]
-    },
-    {
-      "title": "Saneflii",
-      "start": "",
-      "end": "",
-      "details": [
-        "Designed user registration, login, and personalized meal plan generation based on dietary preferences and calorie limits.",
-        "Built the frontend with HTML, CSS, JavaScript and backend with PHP, including session management for secure authentication across 100+ test users.",
-        "Devised a recommendation system to tailor meal plans to individual calorie goals, increasing user engagement by ~25% during testing."
       ]
     }
   ],
   "studies_training": [
     {
-      "start": "2024-10-15",
-      "end": "2025-08-21",
+      "start": "2023-02-26",
+      "end": "2023-07-26",
       "degree": "Masters in Computer Science",
-      "institution": "University of Passau",
-      "honors": ""
-    },
-    {
-      "start": "2020-09-15",
-      "end": "2023-06-15",
-      "degree": "Computer Engineering Bachelor Degree: Embedded Systems and IoT",
-      "institution": "Faculty of Science of Tunis",
+      "institution": "Passau",
       "honors": ""
     }
   ],
-  "experiences": [
-    {
-      "position": "Full-Stack Developer",
-      "company": "Neoxam",
-      "start": "2023-02-01",
-      "end": "2023-06-01",
-      "details": [
-        "Created a full-stack web application for automated data extraction and import into NeoXam’s software, reducing manual integration time by ~30%.",
-        "Developed the frontend using React and backend with Django, leveraging SQLite for efficient database management.",
-        "Containerized and deployed the application on a production server using Docker, ensuring 99% uptime and scalable access for the QA team.",
-        "Boosted QA team efficiency by 20%, enabling faster responses and quicker bug identification."
-      ]
-    },
-    {
-      "position": "Mobile and Embedded Developer",
-      "company": "Eklectic",
-      "start": "2022-07-01",
-      "end": "2022-08-15",
-      "details": [
-        "Engineered an Android pedometer app for daily step tracking, integrated with a smart shoe using Arduino Nano and Bluetooth Low Energy (BLE).",
-        "Programmed the microcontroller in C via Arduino IDE and the mobile app in Java and XML using Android Studio.",
-        "Enabled real-time step data synchronization with Firebase for multiple users simultaneously.",
-        "Achieved step-count accuracy of ~95%, improving reliability for daily step tracking and fitness monitoring."
-      ]
-    }
-  ]
+  "experiences": []
 }

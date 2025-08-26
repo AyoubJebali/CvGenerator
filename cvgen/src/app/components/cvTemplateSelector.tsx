@@ -5,7 +5,7 @@ import { useState } from "react";
 type TemplateOption = {
     id: string;
     name: string;
-    preview: string; // could be an image or JSX
+    preview: string;
 };
 
 const templates: TemplateOption[] = [
@@ -31,7 +31,7 @@ export default function CVTemplateSelector({
 }: {
     onSelect: (templateId: string) => void;
 }) {
-    const [selected, setSelected] = useState<string>("");
+    const [selected, setSelected] = useState<string>("modern");
 
     const handleSelect = (id: string) => {
         setSelected(id);
