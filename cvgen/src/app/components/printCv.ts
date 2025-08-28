@@ -8,7 +8,7 @@ type PrintOptions = {
   theme?: string; // daisyUI theme name
   pageWidthMm?: number; // default 210
   pageHeightMm?: number; // default 297
-  marginMm?: number; // default 5
+  marginMm?: number; // default 2
 };
 
 export function printReactToIframe(element: React.ReactElement, opts: PrintOptions = {}) {
@@ -19,7 +19,7 @@ export function printReactToIframe(element: React.ReactElement, opts: PrintOptio
     theme = "light",
     pageWidthMm = 210,
     pageHeightMm = 297,
-    marginMm = 5,
+    marginMm = 2,
   } = opts;
 
   const htmlString = ReactDOMServer.renderToStaticMarkup(element);

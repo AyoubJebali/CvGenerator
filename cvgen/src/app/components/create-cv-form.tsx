@@ -11,7 +11,7 @@ import StudiesSectionBase from "./form-sections/education-section";
 import ExperienceSectionBase from "./form-sections/experience-section";
 import { printComponent } from "@/app/components/printCv";
 import CvOneColumn from "@/app/components/templates/CvOneColumn";
-
+import CvHeaderBanner from "@/app/components/templates/CvHeaderBanner";
 export default function Form() {
   const [state, dispatch] = useActionState(validateForm, null);
   // Memoize sections to prevent unnecessary re-renders of heavy subtrees
@@ -23,9 +23,8 @@ export default function Form() {
   const LanguagesSection = React.useMemo(() => React.memo(LanguagesSectionBase), []);
   const HobbiesSection = React.useMemo(() => React.memo(HobbiesSectionBase), []);
   const ObjectivesSection = React.useMemo(() => React.memo(ObjectivesSectionBase), []);
-
   const handlePrint = useCallback(() => {
-    printComponent(CvOneColumn, {}, { title: "My CV", theme: "winter" });
+    printComponent(CvHeaderBanner, {}, { title: "My CV", theme: "winter" });
   }, []);
   return (
     <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 bg-base-100 rounded-2xl shadow-xl md:h-[85vh] border border-base-200">

@@ -5,6 +5,7 @@ import CvHeaderBanner from '../components/templates/CvHeaderBanner'
 import CvSidebarDark from '../components/templates/CvSideBarDark'
 import CvTwoColumn from '../components/templates/CvTwoColumn'
 import Cvtemplate from '../components/templates/cv-template'
+import cvTemplatepdf from '../components/templates/CvTemplatePdf'
 import ZoomWrapper from '../components/zoomWrapper'
 import data from '../../../public/generated-cv.json'
 const home = () => {
@@ -12,7 +13,7 @@ const home = () => {
     <div>
       {/* <ZoomWrapper>
       </ZoomWrapper> */}
-        <CvOneColumn  ></CvOneColumn>
+        <cvTemplatepdf  ></cvTemplatepdf>
     </div>
   )
 }
