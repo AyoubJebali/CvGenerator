@@ -8,48 +8,19 @@
     "linkedin": "https://www.linkedin.com/"
   },
   "about": "",
-  "skills": [
-    {
-      "skill": "skill0",
-      "category": "Web Technologies"
-    }
-  ],
-  "languages": [
-    {
-      "language": "german",
-      "proficiency": "Intermediate"
-    }
-  ],
+  "skills": [],
+  "languages": [],
   "hobbies": [],
   "objectives": "",
-  "projects": [
-    {
-      "title": "AngularQuiz",
-      "start": "2025-08-28",
-      "end": "2025-08-31",
-      "details": [
-        "asdasdasdasdasdasdasd"
-      ]
-    }
-  ],
+  "projects": [],
   "studies_training": [
     {
-      "start": "2023-01-28",
-      "end": "2025-08-28",
+      "start": "2025-08-14",
+      "end": "2025-08-21",
       "degree": "Masters in Computer Science",
       "institution": "Passau",
       "honors": ""
     }
   ],
-  "experiences": [
-    {
-      "position": "Full-Stack Developer",
-      "company": "Neoxam",
-      "start": "2023-02-28",
-      "end": "2025-08-31",
-      "details": [
-        "ssdasda"
-      ]
-    }
-  ]
+  "experiences": []
 }

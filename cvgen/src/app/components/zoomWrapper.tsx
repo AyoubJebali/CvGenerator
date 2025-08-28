@@ -12,14 +12,14 @@ export default function ZoomWrapper({ children, baseWidth = 800 }: ZoomWrapperPr
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="flex flex-col items-center gap-4 w-full">
+    <div className="flex flex-col items-center gap-4 w-full h-full">
       
       
 
       {/* Zoomable Preview Area */}
       <div
         ref={containerRef}
-        className="overflow-auto border rounded bg-gray-50 shadow-inner p-4 w-full max-h-[90vh]"
+        className="overflow-auto border rounded bg-base-200 shadow-inner p-4 w-full h-[70vh] md:h-[80vh] xl:h-[85vh]"
       >
         <div
           className="mx-auto origin-top"
