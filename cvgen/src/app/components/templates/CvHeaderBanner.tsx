@@ -1,123 +1,179 @@
 import React from "react";
 import { useCv } from "../CvContext";
+import data from '../../../../public/datapdf.json'
+
+const getYear = (dateStr: string) => {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? dateStr : d.getFullYear();
+};
+
 // ---------------- Template 5: Top Header Banner ----------------
 const CvHeaderBanner = () => {
-  const { data } = useCv();
+   //const { data } = useCv();
+
   return (
-    <div className="bg-white text-black print:w-[1200px] print:m-auto">
+    <div className="w-[210mm] mx-auto bg-white print:w-[210mm] print:h-[297mm] print:p-0 print:m-0 shadow-lg">
       {/* Header */}
-      <div className="bg-blue-700 text-white p-10 text-center">
-        <h1 className="text-5xl font-bold mb-2">{data.name}</h1>
-        <h2 className="text-2xl mb-4">{data.title}</h2>
-        <p>
-          {data.contact.email} | {data.contact.phone} | {data.contact.location}
-        </p>
-        <p>
-          <a href={data.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a> |{" "}
-          <a href={data.contact.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-        </p>
+      <div className="bg-blue-700 text-white p-4 print:p-3 text-center">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2">{data.name}</h1>
+        <h2 className="text-lg md:text-xl mb-3">{data.title}</h2>
+        <div className="space-y-1 text-xs md:text-sm">
+          <p>
+            {data.contact.email} | {data.contact.phone} | {data.contact.location}
+          </p>
+          <p>
+            <span className="text-blue-200">{data.contact.linkedin}</span>
+            {data.contact.github && (
+              <> | <span className="text-blue-200">{data.contact.github}</span></>
+            )}
+          </p>
+        </div>
       </div>
 
       {/* Content */}
-      <div className="p-10">
+      <div className="p-4 print:p-3 h-[calc(297mm-120px)] overflow-hidden">
         {data.about && (
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-blue-600 mb-2">About</h2>
-            <p>{data.about}</p>
+          <section className="mb-3">
+            <h2 className="text-lg font-bold text-gray-800 mb-1 border-b border-gray-300 pb-1">About</h2>
+            <p className="text-xs text-gray-700 leading-tight">{data.about}</p>
           </section>
         )}
 
         {data.objectives && (
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-blue-600 mb-2">Objectives</h2>
-            <p>{data.objectives}</p>
+          <section className="mb-3">
+            <h2 className="text-lg font-bold text-gray-800 mb-1 border-b border-gray-300 pb-1">Objectives</h2>
+            <p className="text-xs text-gray-700 leading-tight">{data.objectives}</p>
           </section>
         )}
 
         {/* Experiences */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-2">Experience</h2>
-          {(Array.isArray(data.experiences) ? data.experiences : []).map((exp, i) => (
-            <div key={i} className="mb-6">
-              <p className="font-semibold">
-                {exp.position} – {exp.company}
-              </p>
-              <p className="italic">
-                {exp.start} - {exp.end}
-              </p>
-              <ul className="list-disc ml-6">
-                {(Array.isArray(exp.details) ? exp.details : []).map((d, j) => (
-                  <li key={j}>{d}</li>
-                ))}
-              </ul>
+        {Array.isArray(data.experiences) && data.experiences.length > 0 && (
+          <section className="mb-3">
+            <h2 className="text-lg font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">Experience</h2>
+            <div className="space-y-2">
+              {data.experiences.map((exp, i) => (
+                <div key={i} className="border-l-2 border-blue-400 pl-2">
+                  <div className="flex justify-between items-start mb-1">
+                    <div>
+                      <p className="font-semibold text-xs text-gray-800">{exp.position}</p>
+                      <p className="text-xs text-blue-600">{exp.company}</p>
+                    </div>
+                    <span className="text-xs text-gray-500">
+                      {getYear(exp.start)} - {getYear(exp.end)}
+                    </span>
+                  </div>
+                  <ul className="list-none space-y-0.5">
+                    {(Array.isArray(exp.details) ? exp.details : []).map((d, j) => (
+                      <li key={j} className="text-xs text-gray-700 flex items-start">
+                        <span className="w-1 h-1 bg-blue-400 rounded-full mr-1 mt-1.5 flex-shrink-0"></span>
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-          ))}
-        </section>
+          </section>
+        )}
 
         {/* Projects */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-2">Projects</h2>
-          {(Array.isArray(data.projects) ? data.projects : []).map((proj, i) => (
-            <div key={i} className="mb-6">
-              <p className="font-semibold">{proj.title}</p>
-              <p className="italic">
-                {proj.start} - {proj.end}
-              </p>
-              <ul className="list-disc ml-6">
-                {(Array.isArray(proj.details) ? proj.details : []).map((d, j) => (
-                  <li key={j}>{d}</li>
-                ))}
-              </ul>
+        {Array.isArray(data.projects) && data.projects.length > 0 && (
+          <section className="mb-3">
+            <h2 className="text-lg font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">Projects</h2>
+            <div className="space-y-2">
+              {data.projects.map((proj, i) => (
+                <div key={i} className="border-l-2 border-green-400 pl-2">
+                  <div className="flex justify-between items-start mb-1">
+                    <p className="font-semibold text-xs text-gray-800">{proj.title}</p>
+                    <span className="text-xs text-gray-500">
+                      {getYear(proj.start)} - {getYear(proj.end)}
+                    </span>
+                  </div>
+                  <ul className="list-none space-y-0.5">
+                    {(Array.isArray(proj.details) ? proj.details : []).map((d, j) => (
+                      <li key={j} className="text-xs text-gray-700 flex items-start">
+                        <span className="w-1 h-1 bg-green-400 rounded-full mr-1 mt-1.5 flex-shrink-0"></span>
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-          ))}
-        </section>
+          </section>
+        )}
 
         {/* Education */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-2">Education</h2>
-          {(Array.isArray(data.studies_training) ? data.studies_training : []).map((edu, i) => (
-            <p key={i} className="mb-2">
-              <em>{edu.degree}</em> – {edu.institution} ({edu.start} - {edu.end})
-            </p>
-          ))}
-        </section>
+        {Array.isArray(data.studies_training) && data.studies_training.length > 0 && (
+          <section className="mb-3">
+            <h2 className="text-lg font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">Education</h2>
+            <div className="space-y-1">
+              {data.studies_training.map((edu, i) => (
+                <div key={i} className="border-l-2 border-purple-400 pl-2">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="font-semibold text-xs text-gray-800 italic">{edu.degree}</p>
+                      <p className="text-xs text-purple-600">{edu.institution}</p>
+                    </div>
+                    <span className="text-xs text-gray-500">
+                      {getYear(edu.start)} - {getYear(edu.end)}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Skills */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-2">Skills</h2>
-          <ul className="list-disc ml-6">
-            {(Array.isArray(data.skills) ? data.skills : []).map((skillObj, i) => (
-              <li key={i}>
-                {skillObj.skill} {skillObj.category ? `(${skillObj.category})` : ""}
-              </li>
-            ))}
-          </ul>
-        </section>
+        {Array.isArray(data.skills) && data.skills.length > 0 && (
+          <section className="mb-3">
+            <h2 className="text-lg font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">Skills</h2>
+            <div className="grid grid-cols-2 gap-1">
+              {(data.skills as any[]).map((skillObj, i) => (
+                <div key={i} className="flex items-center">
+                  <span className="w-1 h-1 bg-orange-400 rounded-full mr-1"></span>
+                  <span className="text-xs text-gray-700">
+                    {skillObj.skill} {skillObj.category && <span className="text-gray-500">({skillObj.category})</span>}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Languages */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-2">Languages</h2>
-          <ul className="list-disc ml-6">
-            {(Array.isArray(data.languages) ? data.languages : []).map((lang, i) => (
-              <li key={i}>
-                {lang.language} – {lang.proficiency}
-              </li>
-            ))}
-          </ul>
-        </section>
+        {Array.isArray(data.languages) && data.languages.length > 0 && (
+          <section className="mb-3">
+            <h2 className="text-lg font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">Languages</h2>
+            <div className="grid grid-cols-2 gap-1">
+              {data.languages.map((lang, i) => (
+                <div key={i} className="flex justify-between items-center">
+                  <span className="text-xs text-gray-700">{lang.language}</span>
+                  <span className="text-xs text-gray-500">{lang.proficiency}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Hobbies */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-2">Hobbies</h2>
-          <ul className="list-disc ml-6">
-            {(Array.isArray(data.hobbies) ? data.hobbies : []).map((h, i) => (
-              <li key={i}>{h}</li>
-            ))}
-          </ul>
-        </section>
+        {Array.isArray(data.hobbies) && data.hobbies.length > 0 && (
+          <section className="mb-3">
+            <h2 className="text-lg font-bold text-gray-800 mb-2 border-b border-gray-300 pb-1">Hobbies</h2>
+            <div className="flex flex-wrap gap-1">
+              {data.hobbies.map((h, i) => (
+                <span key={i} className="text-xs text-gray-700 bg-gray-100 px-2 py-0.5 rounded">
+                  {h}
+                </span>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
 };
 
-export default CvHeaderBanner;
+export default React.memo(CvHeaderBanner);

@@ -9,7 +9,18 @@
     "linkedin": "https://www.linkedin.com/in/ayoub-jebali-94702823b/"
   },
   "about": "",
-  "skills": [],
+  "skills": [
+    { "skill": "JavaScript (ES6+)", "category": "Programming Languages" },
+    { "skill": "TypeScript", "category": "Programming Languages" },
+    { "skill": "React.js", "category": "Frontend" },
+    { "skill": "Next.js", "category": "Frontend" },
+    { "skill": "Node.js", "category": "Backend" },
+    { "skill": "Express.js", "category": "Backend" },
+    { "skill": "PostgreSQL", "category": "Databases" },
+    { "skill": "MongoDB", "category": "Databases" },
+    { "skill": "AWS (EC2, S3, Lambda, RDS)", "category": "Cloud" },
+    { "skill": "Docker & Kubernetes", "category": "DevOps" }
+  ],
   "languages": [
     { "language": "English", "proficiency": "Fluent" },
     { "language": "Arabic", "proficiency": "Native" },

@@ -22,7 +22,7 @@ const CvOneColumn = () => {
     return grouped;
   }, []);
   return (
-    <div className="bg-white text-black max-w-6xl mx-auto w-[210mm]  p-10 space-y-0 print:w-[210mm] print:p-6 print:m-0">
+    <div className="bg-white text-black max-w-6xl mx-auto w-[210mm]  p-10 space-y-4 print:w-[210mm] print:p-2 print:m-0">
       {/* Header */}
       <div className="flex items-center">
         {/* Name and Title to the left */}
@@ -52,7 +52,7 @@ const CvOneColumn = () => {
           <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Education & Training</h2>
           {data.studies_training.map((edu, i) => {
             return (
-              <div key={i} className="flex items-center justify-between">
+              <div key={i} className="flex items-center justify-between mt-2">
                 <div>
                   <p className="font-semibold">{edu.degree}</p>
                   <p>{edu.institution}</p>
@@ -73,11 +73,11 @@ const CvOneColumn = () => {
           <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Experience</h2>
           {data.experiences.map((exp, i) => {
             return (
-              <div key={i}>
+              <div key={i} className="mt-2">
                 <p className="font-semibold text-lg">{exp.position}</p>
                 <p>{exp.company}</p>
                 <p className="italic">{getYear(exp.start)} - {getYear(exp.end)}</p>
-                <ul className="list-disc ml-6">
+                <ul className="list-disc ml-6 mt-1">
                   {Array.isArray(exp.details) && exp.details.map((d, j) => <li key={j}>{d}</li>)}
                 </ul>
               </div>
@@ -92,10 +92,10 @@ const CvOneColumn = () => {
           <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Projects</h2>
           {data.projects.map((proj, i) => {
             return (
-              <div key={i}>
+              <div key={i} className="mt-2">
                 <p className="font-semibold text-lg">{proj.title}</p>
                 <p className="italic">{getYear(proj.start)} - {getYear(proj.end)}</p>
-                <ul className="list-disc ml-6">
+                <ul className="list-disc ml-6 mt-1">
                   {Array.isArray(proj.details) && proj.details.map((d, j) => <li key={j}>{d}</li>)}
                 </ul>
               </div>
@@ -108,7 +108,7 @@ const CvOneColumn = () => {
       {Array.isArray(data.skills) && data.skills.length > 0 && (
         <section>
           <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Skills</h2>
-          <div className="ml-2">
+          <div className="ml-2 mt-2">
             {Object.entries(groupedSkills).map(([cat, skills]) => (
               <p key={cat}>
                 <span className="font-semibold">{cat}:</span> {skills.join(", ")}
@@ -123,7 +123,7 @@ const CvOneColumn = () => {
         <section>
           <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Languages</h2>
           {data.languages.map((lang, i) => (
-            <p key={i}>{lang.language} – {lang.proficiency}</p>
+            <p key={i} className="mt-2">{lang.language} – {lang.proficiency}</p>
           ))}
         </section>
       )}
