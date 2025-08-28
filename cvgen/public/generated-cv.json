@@ -1,27 +1,23 @@
 {
-  "name": "AYOUB JEBALI",
-  "title": "Software Engineer",
+  "name": "Ayoub Jebali",
+  "title": "Software Developer",
   "contact": {
-    "email": "ayoub.jebali434@gmail.com",
+    "email": "jebali_ayoub@live.com",
     "phone": "015511002880",
-    "location": "Neuburger str. 76, 76",
+    "location": "Sanheji",
     "linkedin": "https://www.linkedin.com/"
   },
-  "about": "I am a software developer",
+  "about": "",
   "skills": [
     {
       "skill": "skill0",
-      "category": "Programming Languages"
-    },
-    {
-      "skill": "skill1",
       "category": "Web Technologies"
     }
   ],
   "languages": [
     {
-      "language": "english",
-      "proficiency": "Fluent"
+      "language": "german",
+      "proficiency": "Intermediate"
     }
   ],
   "hobbies": [],
@@ -29,24 +25,31 @@
   "projects": [
     {
       "title": "AngularQuiz",
-      "start": "",
-      "end": "",
+      "start": "2025-08-28",
+      "end": "2025-08-31",
       "details": [
-        "Engineered a full-stack quiz platform using Angular (frontend) and Flask (backend), supporting real-time scoring, leaderboards, and secure authentication for 50+ concurrent users.\r",
-        "Developed REST APIs in Flask and linked a relational database to manage 1,000+ quiz questions and user scores.\r",
-        "Enabled real-time competition, increasing engagement with live leaderboard updates every second.\r",
-        "Deployed the application locally for testing and demonstration, gaining hands-on experience in client–server architecture, authentication flows, and state management."
+        "asdasdasdasdasdasdasd"
       ]
     }
   ],
   "studies_training": [
     {
-      "start": "2023-02-26",
-      "end": "2023-07-26",
+      "start": "2023-01-28",
+      "end": "2025-08-28",
       "degree": "Masters in Computer Science",
       "institution": "Passau",
       "honors": ""
     }
   ],
-  "experiences": []
+  "experiences": [
+    {
+      "position": "Full-Stack Developer",
+      "company": "Neoxam",
+      "start": "2023-02-28",
+      "end": "2025-08-31",
+      "details": [
+        "ssdasda"
+      ]
+    }
+  ]
 }

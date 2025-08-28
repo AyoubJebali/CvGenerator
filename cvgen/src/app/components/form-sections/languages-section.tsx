@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import LanguageInput from '../form-inputs/language-input';
-
+import { useCv } from "../CvContext";
 interface Item {
   id: string;
   language: string;
@@ -11,7 +11,7 @@ interface Item {
 
 export default function LanguagesSection() {
   const [items, setItems] = useState<Item[]>([]);
-
+  const { data, setData } = useCv();
   const addToArray = () => {
     const newItem: Item = { id: uuidv4(), language: '', proficiency: '' };
     setItems((prevItems) => [...prevItems, newItem]);
@@ -19,6 +19,9 @@ export default function LanguagesSection() {
 
   const deleteItem = (id: string) => {
     setItems((prevItems) => prevItems.filter(item => item.id !== id));
+    // Update the context data as well
+    setData({
+      ...data, languages: items.filter(item => item.id !== id)});
   };
 
   const updateItem = (id: string, language: string, proficiency: string) => {
@@ -27,6 +30,8 @@ export default function LanguagesSection() {
         item.id === id ? { ...item, language, proficiency } : item
       )
     );
+    // Update the context data as well
+    setData({ ...data, languages: items });
   };
 
   return (

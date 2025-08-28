@@ -1,6 +1,9 @@
 import React from "react";
+import { useCv } from "../CvContext";
 
 export default function PersonalInfoSection() {
+  const { data, setData } = useCv();
+
   return (
     <div className="collapse collapse-arrow bg-base-200 rounded-lg	">
       <input type="checkbox" name="personal-info-accordion" defaultChecked />
@@ -17,6 +20,8 @@ export default function PersonalInfoSection() {
               type="text"
               id="name"
               name="name"
+              value={data.name}
+              onChange={(e) => setData({ ...data, name: e.target.value })}
               className="input input-bordered w-full text-black"
               placeholder="Enter your name"
             />
@@ -29,6 +34,13 @@ export default function PersonalInfoSection() {
               type="email"
               id="email"
               name="email"
+              value={data.contact.email}
+              onChange={(e) =>
+                setData({
+                  ...data,
+                  contact: { ...data.contact, email: e.target.value },
+                })    
+              }
               className="input input-bordered w-full text-black"
               placeholder="Enter your email"
             />
@@ -41,6 +53,8 @@ export default function PersonalInfoSection() {
               type="text"
               id="title"
               name="title"
+              value={data.title}
+              onChange={(e) => setData({ ...data, title: e.target.value })}
               className="input input-bordered w-full text-black"
               placeholder="Enter your title"
             />
@@ -53,6 +67,13 @@ export default function PersonalInfoSection() {
               type="tel"
               id="number"
               name="number"
+              value={data.contact.phone}
+              onChange={(e) =>
+                setData({
+                  ...data,
+                  contact: { ...data.contact, phone: e.target.value },
+                })
+              }
               className="input input-bordered w-full text-black"
               placeholder="123-456-7890"
             />
@@ -65,6 +86,13 @@ export default function PersonalInfoSection() {
               type="text"
               id="address"
               name="address"
+              value={data.contact.location}
+              onChange={(e) =>
+                setData({
+                  ...data,
+                  contact: { ...data.contact, location: e.target.value },
+                })
+              }
               className="input input-bordered w-full text-black"
               placeholder="Enter your address"
             />
@@ -77,6 +105,13 @@ export default function PersonalInfoSection() {
               type="url"
               id="linkedin"
               name="linkedin"
+              value={data.contact.linkedin}
+              onChange={(e) =>
+                setData({
+                  ...data,
+                  contact: { ...data.contact, linkedin: e.target.value },
+                })
+              }
               className="input input-bordered w-full text-black"
               placeholder="https://linkedin.com/in/yourprofile"
             />
@@ -89,6 +124,13 @@ export default function PersonalInfoSection() {
               type="url"
               id="github"
               name="github"
+              value={data.contact.github || ""}
+              onChange={(e) =>
+                setData({
+                  ...data,
+                  contact: { ...data.contact, github: e.target.value },
+                })
+              }    
               className="input input-bordered w-full text-black"
               placeholder="https://github.com/yourusername"
             />
@@ -102,6 +144,9 @@ export default function PersonalInfoSection() {
             className="textarea textarea-bordered w-full text-black"
             placeholder="Tell us about yourself"
             name="profile"
+            value={data.about}
+            onChange={(e) => setData({ ...data, about: e.target.value })}
+            id="profile"
             rows={4}
           ></textarea>
         </div>

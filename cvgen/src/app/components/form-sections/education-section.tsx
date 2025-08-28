@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import StudyInput from '../form-inputs/study-input';
+import { useCv } from "../CvContext";
 
 interface Item {
   id: string;
@@ -14,7 +15,7 @@ interface Item {
 
 export default function StudiesSection() {
   const [items, setItems] = useState<Item[]>([]);
-
+  const { data, setData } = useCv();
   const addToArray = () => {
     const newItem: Item = { id: uuidv4(), start: '', end: '', degree: '', institution: '', honors: '' };
     setItems((prevItems) => [...prevItems, newItem]);
@@ -22,6 +23,8 @@ export default function StudiesSection() {
 
   const deleteItem = (id: string) => {
     setItems((prevItems) => prevItems.filter(item => item.id !== id));
+    // Update the context data as well
+    setData({ ...data, studies_training: items.filter(item => item.id !== id) });
   };
 
   const updateItem = (id: string, start: string, end: string, degree: string, institution: string, honors: string) => {
@@ -30,6 +33,12 @@ export default function StudiesSection() {
         item.id === id ? { ...item, start, end, degree, institution, honors } : item
       )
     );
+
+    // Update the context data as well
+    const updatedStudies = items.map(item =>
+      item.id === id ? { start, end, degree, institution, honors } : item
+    );
+    setData({ ...data, studies_training: updatedStudies });
   };
 
   return (

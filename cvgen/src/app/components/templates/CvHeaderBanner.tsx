@@ -1,8 +1,8 @@
 import React from "react";
-import data from "../../../../public/generated-cv.json";
-
+import { useCv } from "../CvContext";
 // ---------------- Template 5: Top Header Banner ----------------
 const CvHeaderBanner = () => {
+  const { data } = useCv();
   return (
     <div className="bg-white text-black print:w-[1200px] print:m-auto">
       {/* Header */}

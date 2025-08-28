@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ProjectInput from '../form-inputs/project-input';
+import { useCv } from "../CvContext";
 
 interface Item {
   id: string;
@@ -13,22 +14,40 @@ interface Item {
 
 export default function ProjectsSection() {
   const [items, setItems] = useState<Item[]>([]);
-
+  const { data, setData } = useCv();
   const addToArray = () => {
-    const newItem: Item = { id: uuidv4(), title: '', start: '', end: '' , details: '' };
+    const newItem: Item = { id: uuidv4(), title: '', start: '', end: '', details: '' };
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
   const deleteItem = (id: string) => {
     setItems((prevItems) => prevItems.filter(item => item.id !== id));
+    // Update the context data as well
+    setData({
+      ...data, projects: items.filter(item => item.id !== id).map
+        (item => ({
+          title: item.title,
+          start: item.start,
+          end: item.end,
+          details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
+        }))
+    });
   };
 
-  const updateItem = (id: string, title: string,start: string, end: string, details: string) => {
+  const updateItem = (id: string, title: string, start: string, end: string, details: string) => {
     setItems((prevItems) =>
       prevItems.map(item =>
-        item.id === id ? { ...item, title,start,end, details } : item
+        item.id === id ? { ...item, title, start, end, details } : item
       )
     );
+    // Update the context data as well
+    const updatedProjects = items.map(item => ({
+      title: item.title,
+      start: item.start,
+      end: item.end,
+      details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
+    }));
+    setData({ ...data, projects: updatedProjects });
   };
 
   return (

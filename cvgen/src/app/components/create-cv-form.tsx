@@ -14,10 +14,11 @@ export default function Form() {
   const [state, dispatch] = useActionState(validateForm, null);
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-base-100 rounded-xl shadow-lg">
+    <div className="max-w-4xl mx-auto p-8 bg-base-100 rounded-xl shadow-lg h-[80vh]">
       <h1 className="text-4xl text-black font-bold text-center mb-8">Create Your CV</h1>
+      
       <form action={dispatch}>
-        <div className="space-y-6">
+        <div className="space-y-6 max-h-[65vh] overflow-y-auto">
           <PersonalInfoSection />
           <StudiesSection />
           <ExperienceSection />
@@ -36,6 +37,7 @@ export default function Form() {
           <div className="text-center mt-4 text-success">{state.message}</div>
         )}
       </form>
+      
     </div>
   );
 }
