@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useMemo } from "react";
 import data from "../../../../public/datapdf.json";
 import { UserProfile } from "@/types" 
 import { useCv } from "../CvContext";
 
+const getYear = (dateStr: string) => {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? dateStr : d.getFullYear();
+};
+
 // ---------------- Template 6: One-Column Clean ----------------
 const CvOneColumn = () => {
   //const { data } = useCv();
+  const groupedSkills = useMemo(() => {
+    const grouped: { [key: string]: string[] } = {};
+    (data.skills as any[]).forEach((skill: any) => {
+      const cat = skill.category || "Other";
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push(skill.skill);
+    });
+    return grouped;
+  }, []);
   return (
-    <div className="bg-white text-black max-w-6xl mx-auto w-[210mm]  p-10 space-y-0 print:w-[1200px] print:m-auto">
+    <div className="bg-white text-black max-w-6xl mx-auto w-[210mm]  p-10 space-y-0 print:w-[210mm] print:p-6 print:m-0">
       {/* Header */}
       <div className="flex items-center">
         {/* Name and Title to the left */}
@@ -36,11 +51,6 @@ const CvOneColumn = () => {
         <section>
           <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Education & Training</h2>
           {data.studies_training.map((edu, i) => {
-            const getYear = (dateStr: string) => {
-              if (!dateStr) return "";
-              const d = new Date(dateStr);
-              return isNaN(d.getTime()) ? dateStr : d.getFullYear();
-            };
             return (
               <div key={i} className="flex items-center justify-between">
                 <div>
@@ -62,11 +72,6 @@ const CvOneColumn = () => {
         <section>
           <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Experience</h2>
           {data.experiences.map((exp, i) => {
-            const getYear = (dateStr: string) => {
-              if (!dateStr) return "";
-              const d = new Date(dateStr);
-              return isNaN(d.getTime()) ? dateStr : d.getFullYear();
-            };
             return (
               <div key={i}>
                 <p className="font-semibold text-lg">{exp.position}</p>
@@ -86,11 +91,6 @@ const CvOneColumn = () => {
         <section>
           <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Projects</h2>
           {data.projects.map((proj, i) => {
-            const getYear = (dateStr: string) => {
-              if (!dateStr) return "";
-              const d = new Date(dateStr);
-              return isNaN(d.getTime()) ? dateStr : d.getFullYear();
-            };
             return (
               <div key={i}>
                 <p className="font-semibold text-lg">{proj.title}</p>
@@ -109,19 +109,11 @@ const CvOneColumn = () => {
         <section>
           <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Skills</h2>
           <div className="ml-2">
-            {(() => {
-              const grouped: { [key: string]: string[] } = {};
-              data.skills.forEach(skill => {
-                const cat = skill.category || "Other";
-                if (!grouped[cat]) grouped[cat] = [];
-                grouped[cat].push(skill.skill);
-              });
-              return Object.entries(grouped).map(([cat, skills]) => (
-                <p key={cat}>
-                  <span className="font-semibold">{cat}:</span> {skills.join(", ")}
-                </p>
-              ));
-            })()}
+            {Object.entries(groupedSkills).map(([cat, skills]) => (
+              <p key={cat}>
+                <span className="font-semibold">{cat}:</span> {skills.join(", ")}
+              </p>
+            ))}
           </div>
         </section>
       )}
@@ -138,4 +130,4 @@ const CvOneColumn = () => {
     </div>
   );
 };
-export default CvOneColumn;
+export default React.memo(CvOneColumn);
