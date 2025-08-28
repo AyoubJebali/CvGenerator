@@ -1,7 +1,6 @@
 "use client";
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import LanguageInput from '../form-inputs/language-input';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import LanguageInputBase from '../form-inputs/language-input';
 import { useCv } from "../CvContext";
 interface Item {
   id: string;
@@ -12,27 +11,58 @@ interface Item {
 export default function LanguagesSection() {
   const [items, setItems] = useState<Item[]>([]);
   const { data, setData } = useCv();
-  const addToArray = () => {
-    const newItem: Item = { id: uuidv4(), language: '', proficiency: '' };
-    setItems((prevItems) => [...prevItems, newItem]);
+  const MemoLanguageInput = useMemo(() => React.memo(LanguageInputBase), []);
+
+  const generateId = () => {
+    try {
+      // @ts-ignore
+      if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        // @ts-ignore
+        return crypto.randomUUID();
+      }
+    } catch {}
+    return Math.random().toString(36).slice(2);
   };
 
-  const deleteItem = (id: string) => {
-    setItems((prevItems) => prevItems.filter(item => item.id !== id));
-    // Update the context data as well
-    setData({
-      ...data, languages: items.filter(item => item.id !== id)});
-  };
+  // Initialize from context if languages exist
+  useEffect(() => {
+    if (Array.isArray(data?.languages) && data.languages.length) {
+      const normalized = data.languages.map((l: any) => ({
+        id: generateId(),
+        language: l.language || '',
+        proficiency: l.proficiency || '',
+      }));
+      setItems(normalized);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const updateItem = (id: string, language: string, proficiency: string) => {
-    setItems((prevItems) =>
-      prevItems.map(item =>
+  const addToArray = useCallback(() => {
+    const newItem: Item = { id: generateId(), language: '', proficiency: '' };
+    setItems((prevItems) => {
+      const next = [...prevItems, newItem];
+      setData((prev: any) => ({ ...prev, languages: next }));
+      return next;
+    });
+  }, [setData]);
+
+  const deleteItem = useCallback((id: string) => {
+    setItems((prevItems) => {
+      const next = prevItems.filter(item => item.id !== id);
+      setData((prev: any) => ({ ...prev, languages: next }));
+      return next;
+    });
+  }, [setData]);
+
+  const updateItem = useCallback((id: string, language: string, proficiency: string) => {
+    setItems((prevItems) => {
+      const next = prevItems.map(item =>
         item.id === id ? { ...item, language, proficiency } : item
-      )
-    );
-    // Update the context data as well
-    setData({ ...data, languages: items });
-  };
+      );
+      setData((prev: any) => ({ ...prev, languages: next }));
+      return next;
+    });
+  }, [setData]);
 
   return (
     <div className="collapse collapse-arrow bg-base-200 rounded-lg">
@@ -45,7 +75,7 @@ export default function LanguagesSection() {
           {items.map((item) => (
             <div key={item.id} className="flex items-center gap-4">
               <div className="flex-grow">
-                <LanguageInput
+                <MemoLanguageInput
                   id={item.id}
                   language={item.language}
                   proficiency={item.proficiency}

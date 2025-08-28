@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import ProjectInput from '../form-inputs/project-input';
+import ProjectInputBase from '../form-inputs/project-input';
 import { useCv } from "../CvContext";
 
 interface Item {
@@ -14,41 +14,58 @@ interface Item {
 
 export default function ProjectsSection() {
   const [items, setItems] = useState<Item[]>([]);
-  const { data, setData } = useCv();
-  const addToArray = () => {
+  const { setData } = useCv();
+  const ProjectInput = useMemo(() => React.memo(ProjectInputBase), []);
+  const addToArray = useCallback(() => {
     const newItem: Item = { id: uuidv4(), title: '', start: '', end: '', details: '' };
-    setItems((prevItems) => [...prevItems, newItem]);
-  };
-
-  const deleteItem = (id: string) => {
-    setItems((prevItems) => prevItems.filter(item => item.id !== id));
-    // Update the context data as well
-    setData({
-      ...data, projects: items.filter(item => item.id !== id).map
-        (item => ({
+    setItems((prevItems) => {
+      const next = [...prevItems, newItem];
+      setData((prev: any) => ({
+        ...prev,
+        projects: next.map(item => ({
           title: item.title,
           start: item.start,
           end: item.end,
           details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
         }))
+      }));
+      return next;
     });
-  };
+  }, [setData]);
 
-  const updateItem = (id: string, title: string, start: string, end: string, details: string) => {
-    setItems((prevItems) =>
-      prevItems.map(item =>
+  const deleteItem = useCallback((id: string) => {
+    setItems((prevItems) => {
+      const next = prevItems.filter(item => item.id !== id);
+      setData((prev: any) => ({
+        ...prev,
+        projects: next.map(item => ({
+          title: item.title,
+          start: item.start,
+          end: item.end,
+          details: item.details.split('\n').map(line => line.trim()).filter(line => line !== ''),
+        }))
+      }));
+      return next;
+    });
+  }, [setData]);
+
+  const updateItem = useCallback((id: string, title: string, start: string, end: string, details: string) => {
+    setItems((prevItems) => {
+      const next = prevItems.map(item =>
         item.id === id ? { ...item, title, start, end, details } : item
-      )
-    );
-    // Update the context data as well
-    const updatedProjects = items.map(item => ({
-      title: item.title,
-      start: item.start,
-      end: item.end,
-      details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
-    }));
-    setData({ ...data, projects: updatedProjects });
-  };
+      );
+      setData((prev: any) => ({
+        ...prev,
+        projects: next.map(item => ({
+          title: item.title,
+          start: item.start,
+          end: item.end,
+          details: item.details.split('\n').map(line => line.trim()).filter(line => line !== ''),
+        }))
+      }));
+      return next;
+    });
+  }, [setData]);
 
   return (
     <div className="collapse collapse-arrow bg-base-200 rounded-lg">

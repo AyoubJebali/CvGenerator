@@ -1,15 +1,13 @@
 import React from "react";
-// import data from "../../../../public/generated-cv.json";
+import data from "../../../../public/datapdf.json";
 import { UserProfile } from "@/types" 
 import { useCv } from "../CvContext";
 
 // ---------------- Template 6: One-Column Clean ----------------
 const CvOneColumn = () => {
-  const { data } = useCv();
-    
-
+  //const { data } = useCv();
   return (
-    <div className="bg-white text-black max-w-6xl mx-auto w-[210mm] h-[297mm] p-10 space-y-0 print:w-[1200px] print:m-auto">
+    <div className="bg-white text-black max-w-6xl mx-auto w-[210mm]  p-10 space-y-0 print:w-[1200px] print:m-auto">
       {/* Header */}
       <div className="flex items-center">
         {/* Name and Title to the left */}
