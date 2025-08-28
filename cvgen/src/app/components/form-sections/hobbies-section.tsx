@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import HobbyInput from '../form-inputs/hobby-input';
-
+import { useCv } from "../CvContext";
 interface Item {
   id: string;
   hobby: string;
@@ -10,7 +10,7 @@ interface Item {
 
 export default function HobbiesSection() {
   const [items, setItems] = useState<Item[]>([]);
-
+  const { data, setData } = useCv();
   const addToArray = () => {
     const newItem: Item = { id: uuidv4(), hobby: '' };
     setItems((prevItems) => [...prevItems, newItem]);
@@ -18,6 +18,8 @@ export default function HobbiesSection() {
 
   const deleteItem = (id: string) => {
     setItems((prevItems) => prevItems.filter(item => item.id !== id));
+    // Update the context data as well
+    setData({ ...data, hobbies: items.filter(item => item.id !== id).map(item => item.hobby) });
   };
 
   const updateItem = (id: string, hobby: string) => {
@@ -26,6 +28,11 @@ export default function HobbiesSection() {
         item.id === id ? { ...item, hobby } : item
       )
     );
+    // Update the context data as well
+    const updatedHobbies = items.map(item =>
+      item.id === id ? hobby : item.hobby
+    );
+    setData({ ...data, hobbies: updatedHobbies });
   };
 
   return (

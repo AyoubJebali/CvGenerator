@@ -1,7 +1,12 @@
 import React from "react";
 import Image from "next/image";
-import data from "../../../../public/data3.json"
-const Cvtemplate = () => {
+import { UserProfile } from "@/types" 
+
+type CvPreviewProps = {
+  data: UserProfile;
+};
+
+const Cvtemplate = ({ data }: CvPreviewProps) => {
     return (
         <>
             <div className="grid grid-cols-5 grid-rows-5 gap-0  text-black   bg-sky-200 	 print:w-[1200px] print-h-[297mm]  print:m-auto print:grid print:grid-cols-3 print:grid-rows-5 print:gap-0" >

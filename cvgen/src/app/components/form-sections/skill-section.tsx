@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import SkillInput from '../form-inputs/skill-input';
 import { v4 as uuidv4 } from 'uuid';
-
+import { useCv } from "../CvContext";
 interface Item {
   id: string;
   skill: string;
-  catergory: string;
+  category: string;
 }
 
 export default function SkillSection() {
   const [items, setItems] = useState<Item[]>([]);
-
+  const { data, setData } = useCv();
   const addToArray = () => {
-    const newItem: Item = { id: uuidv4(), skill: '' , catergory: '' };
+    const newItem: Item = { id: uuidv4(), skill: '' , category: '' };
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
   const deleteItem = (id: string) => {
     setItems((prevItems) => prevItems.filter(item => item.id !== id));
+    // Update the context data as well
+    const updatedSkills = items.filter(item => item.id !== id);
+    setData({ ...data, skills: updatedSkills });
   };
 
   const updateItem = (id: string, newSkill: string, newCategory: string) => {
@@ -26,6 +29,13 @@ export default function SkillSection() {
         item.id === id ? { ...item, skill: newSkill, catergory: newCategory } : item
       )
     );
+
+    // Update the context data as well
+    const updatedSkills = items.map(item =>
+  item.id === id ? { ...item, skill: newSkill, catergory: newCategory } : item 
+  // make sure it's an object
+);
+    setData({ ...data, skills: updatedSkills });
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import ExperienceInput from "../form-inputs/experience-input";
-
+import { useCv } from "../CvContext";
 
 interface Item {
     id: string;
@@ -15,6 +15,7 @@ interface Item {
 export default function ExperienceSection() {
 
     const [items, setItems] = useState<Item[]>([]);
+    const { data, setData } = useCv();
     const addToArray = () => {
         const newItem: Item = { id: uuidv4(), position: '', company: '',  start: '', end: '', details: '' };
         setItems((prevItems) => [...prevItems, newItem]);
@@ -22,6 +23,15 @@ export default function ExperienceSection() {
 
     const deleteItem = (id: string) => {
         setItems((prevItems) => prevItems.filter(item => item.id !== id));
+        //Update the context data as well
+        
+        setData({ ...data, experiences: items.filter(item => item.id !== id).map(item =>({
+            position: item.position,
+            company: item.company,
+            start: item.start,
+            end: item.end,
+            details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
+        })) });
     };
 
     const updateItem = (id: string, position: string, company:string, start: string, end: string, details: string) => {
@@ -30,6 +40,16 @@ export default function ExperienceSection() {
                 item.id === id ? { ...item, position , company, start, end, details } : item
             )
         );
+        //Update the context data as well
+        
+        const updatedExperiences = items.map(item =>({
+            position: item.position,
+            company: item.company,
+            start: item.start,
+            end: item.end,
+            details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
+        }));
+        setData({ ...data, experiences: updatedExperiences });
     };
     return (
         <div className="collapse collapse-arrow bg-base-200 rounded-lg">
