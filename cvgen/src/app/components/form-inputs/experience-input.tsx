@@ -86,8 +86,8 @@ const ExperienceInput: React.FC<ExperienceInputProps> = ({ id, position, company
             <textarea
                 name="experience_details"
                 value={details}
-                className="textarea textarea-bordered w-full text-black"
-                placeholder="Enter details about your experience"
+                className="textarea textarea-bordered w-full text-black bg-gray-50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all min-h-[100px] resize-vertical"
+                placeholder="Describe your responsibilities, achievements, and technologies used..."
                 onChange={handleDetailsChange}
             />
         </div>

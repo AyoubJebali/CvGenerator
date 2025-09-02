@@ -74,8 +74,8 @@ const ProjectInput: React.FC<ProjectInputProps> = ({ id, title, start, end, deta
       <textarea
         name="project_details"
         value={details}
-        className="textarea textarea-bordered w-full text-black"
-        placeholder="Enter project details, one per line"
+        className="textarea textarea-bordered w-full text-black bg-gray-50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all min-h-[100px] resize-vertical"
+        placeholder="Describe your project, achievements, and technologies used. Put each detail on a new line."
         onChange={handleDetailsChange}
         rows={4}
       />

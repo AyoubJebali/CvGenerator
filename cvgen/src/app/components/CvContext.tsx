@@ -1,27 +1,10 @@
 "use client";
 import React, { createContext, useContext, useState } from "react";
 import { UserProfile } from "@/types" // ✅ import from Zod schema
-
+import data from "../../../public/datapdf.json";
 // Empty initial data
-const emptyCvData: UserProfile = {
-  name: "",
-  title: "",
-  contact: {
-    email: "",
-    phone: "",
-    location: "",
-    linkedin: "",
-    github: "",
-  },
-  about: "",
-  skills: [],
-  languages: [],
-  hobbies: [],
-  objectives: "",
-  projects: [],
-  studies_training: [],
-  experiences: [],
-};
+const emptyCvData: UserProfile = 
+data;
 
 type CvContextType = {
   data: UserProfile;

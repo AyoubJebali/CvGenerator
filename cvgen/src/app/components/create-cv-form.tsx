@@ -12,6 +12,8 @@ import ExperienceSectionBase from "./form-sections/experience-section";
 import { printComponent } from "@/app/components/printCv";
 import CvOneColumn from "@/app/components/templates/CvOneColumn";
 import CvHeaderBanner from "@/app/components/templates/CvHeaderBanner";
+import CvSidebarDark from "@/app/components/templates/CvSideBarDark";
+import CvTwoColumn from "@/app/components/templates/CvTwoColumn";
 export default function Form() {
   const [state, dispatch] = useActionState(validateForm, null);
   // Memoize sections to prevent unnecessary re-renders of heavy subtrees
@@ -38,20 +40,22 @@ export default function Form() {
           <ProjectsSection />
           <SkillSection />
           <LanguagesSection />
-           <HobbiesSection />
+          <HobbiesSection />
           <ObjectivesSection />
         </div>
         <div className="form-control mt-6 md:mt-8">
-          <button type="submit" className="btn btn-primary btn-block text-base md:text-lg">
-            Preview CV
-          </button>
+          {/* // this button is disabled as saving the CV is not implemented yet */}
+          {/* <button type="submit" className="btn btn-primary btn-block text-base md:text-lg">
+            Save CV
+          </button> */}
           <button type="button" onClick={handlePrint} className="btn btn-primary btn-block text-base md:text-lg">
             Download CV
           </button>
         </div>
-        {state?.message && (
+        {/* this is commented out as form validation is not implemented yet */}
+        {/* {state?.message && (
           <div className="text-center mt-4 text-success">{state.message}</div>
-        )}
+        )} */}
       </form>
       
     </div>

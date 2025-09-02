@@ -2,7 +2,6 @@
 
 import ReactDOMServer from "react-dom/server";
 import React from "react";
-
 type PrintOptions = {
   title?: string;
   theme?: string; // daisyUI theme name
@@ -21,7 +20,7 @@ export function printReactToIframe(element: React.ReactElement, opts: PrintOptio
     pageHeightMm = 297,
     marginMm = 2,
   } = opts;
-
+  
   const htmlString = ReactDOMServer.renderToStaticMarkup(element);
 
   const iframe = document.createElement("iframe");

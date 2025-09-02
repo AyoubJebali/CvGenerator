@@ -1,6 +1,6 @@
 import React from "react";
-import data from "../../../../public/datapdf.json";
-
+// import data from "../../../../public/datapdf.json";
+import { useCv } from "../CvContext";
 const getYear = (dateStr: string) => {
   if (!dateStr) return "";
   const d = new Date(dateStr);
@@ -9,6 +9,7 @@ const getYear = (dateStr: string) => {
 
 // ---------------- Template 4: Two-Column Modern ----------------
 const CvTwoColumn = () => {
+  const { data } = useCv();
   return (
     <div className="w-[210mm] h-[297mm] mx-auto bg-white print:w-[210mm] print:h-[297mm] print:p-0 print:m-0 shadow-lg">
       <div className="grid grid-cols-3 h-full">
@@ -55,14 +56,24 @@ const CvTwoColumn = () => {
             <div className="mb-4">
               <h3 className="text-sm font-bold text-blue-700 mb-2 uppercase tracking-wider">Skills</h3>
               <div className="space-y-1">
-                {(data.skills as any[]).map((skill, i) => (
-                  <div key={i} className="flex items-center">
-                    <span className="w-1 h-1 bg-blue-400 rounded-full mr-1"></span>
-                    <span className="text-sm text-gray-700">
-                      {skill.skill} {skill.category && <span className="text-gray-500">({skill.category})</span>}
-                    </span>
-                  </div>
-                ))}
+                {(() => {
+                  // Group skills by category
+                  const grouped: { [key: string]: string[] } = {};
+                  (data.skills as any[]).forEach((skill: any) => {
+                    const cat = skill.category || "Other";
+                    if (!grouped[cat]) grouped[cat] = [];
+                    grouped[cat].push(skill.skill);
+                  });
+                  // Sort categories alphabetically
+                  return Object.entries(grouped)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([cat, skills], idx) => (
+                      <div key={cat + idx} className="flex items-center">
+                        <span className="font-semibold text-blue-700 mr-1">{cat}:</span>
+                        <span className="text-sm text-gray-700">{skills.join(", ")}</span>
+                      </div>
+                    ));
+                })()}
               </div>
             </div>
           )}

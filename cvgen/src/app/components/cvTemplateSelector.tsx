@@ -10,19 +10,24 @@ type TemplateOption = {
 
 const templates: TemplateOption[] = [
     {
-        id: "modern",
-        name: "Modern",
-        preview: "/templates/cvTest-1.png", // static preview image
+        id: "OneColumn",
+        name: "One Column",
+        preview: "/templates/OneColumn.png", // static preview image
     },
     {
-        id: "classic",
-        name: "Classic",
-        preview: "/templates/classic-preview.png",
+        id: "HeaderBanner",
+        name: "Header Banner",
+        preview: "/templates/HeaderBanner.png",
     },
     {
-        id: "minimal",
-        name: "Minimal",
-        preview: "/templates/minimal-preview.png",
+        id: "SidebarDark",
+        name: "Sidebar Dark",
+        preview: "/templates/SidebarDark.png",
+    },
+    {
+        id: "TwoColumn",
+        name: "Two Column",
+        preview: "/templates/TwoColumn.png",
     },
 ];
 
@@ -41,7 +46,7 @@ export default function CVTemplateSelector({
     return (
         <div className="space-y-4 bg-base-100 p-4 rounded-xl shadow text-base-content">
             <h2 className="text-lg font-semibold">Choose a CV Template</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-4 max-h-[85vh] overflow-y-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-4 max-h-[80vh] overflow-y-auto">
                 {templates.map((tpl) => {
                     const isActive = selected === tpl.id;
                     return (

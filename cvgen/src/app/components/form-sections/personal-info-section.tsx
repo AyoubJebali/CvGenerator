@@ -7,7 +7,11 @@ export default function PersonalInfoSection() {
   return (
     <div className="collapse collapse-arrow bg-base-200 rounded-lg	">
       <input type="checkbox" name="personal-info-accordion" defaultChecked />
-      <div className="text-black collapse-title text-xl font-medium">
+      <div className="text-black collapse-title text-xl font-medium flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-icon lucide-user">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
         Personal Information
       </div>
       <div className="collapse-content">

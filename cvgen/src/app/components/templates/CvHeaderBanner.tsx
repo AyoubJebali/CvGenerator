@@ -1,6 +1,6 @@
 import React from "react";
+ import data from '../../../../public/datapdf.json'
 import { useCv } from "../CvContext";
-import data from '../../../../public/datapdf.json'
 
 const getYear = (dateStr: string) => {
   if (!dateStr) return "";
