@@ -1,5 +1,6 @@
-import React, { useMemo } from "react";
-import data from "../../../../public/datapdf.json";
+import React from "react";
+import { UserProfile } from "@/types";
+import { useCv } from "../CvContext";
 
 const getYear = (dateStr: string) => {
   if (!dateStr) return "";
@@ -7,14 +8,21 @@ const getYear = (dateStr: string) => {
   return isNaN(d.getTime()) ? dateStr : d.getFullYear();
 };
 
-const CvSidebarDark = () => {
-  // Memoize data arrays to prevent unnecessary re-renders
-  const experiences = useMemo(() => Array.isArray(data.experiences) ? data.experiences : [], []);
-  const projects = useMemo(() => Array.isArray(data.projects) ? data.projects : [], []);
-  const studies = useMemo(() => Array.isArray(data.studies_training) ? data.studies_training : [], []);
-  const skills = useMemo(() => Array.isArray(data.skills) ? data.skills : [], []);
-  const languages = useMemo(() => Array.isArray(data.languages) ? data.languages : [], []);
-  const hobbies = useMemo(() => Array.isArray(data.hobbies) ? data.hobbies : [], []);
+type CvSidebarDarkProps = {
+  data?: UserProfile;
+};
+
+const CvSidebarDark: React.FC<CvSidebarDarkProps> = ({ data: propData }) => {
+  const context = useCv();
+  const data = propData || context.data;
+
+  // Directly assign arrays, no memoization
+  const experiences = Array.isArray(data.experiences) ? data.experiences : [];
+  const projects = Array.isArray(data.projects) ? data.projects : [];
+  const studies = Array.isArray(data.studies_training) ? data.studies_training : [];
+  const skills = Array.isArray(data.skills) ? data.skills : [];
+  const languages = Array.isArray(data.languages) ? data.languages : [];
+  const hobbies = Array.isArray(data.hobbies) ? data.hobbies : [];
 
   return (
     <div className="w-[210mm] h-[297mm] mx-auto bg-white print:w-[210mm] print:h-[297mm] print:p-0 print:m-0 shadow-lg">
@@ -46,11 +54,23 @@ const CvSidebarDark = () => {
             <div className="mb-4">
               <h3 className="text-blue-300 uppercase font-bold mb-2 text-xs tracking-wider">Skills</h3>
               <ul className="space-y-1 text-xs">
-                {(skills as any[]).map((skill, i) => (
-                  <li key={i}>
-                    {skill.skill} {skill.category && <span className="text-gray-400">({skill.category})</span>}
-                  </li>
-                ))}
+                {(() => {
+                  // Group skills by category
+                  const grouped: { [key: string]: string[] } = {};
+                  skills.forEach((skill: any) => {
+                    const cat = skill.category || "Other";
+                    if (!grouped[cat]) grouped[cat] = [];
+                    grouped[cat].push(skill.skill);
+                  });
+                  // Sort categories alphabetically
+                  return Object.entries(grouped)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([cat, skillArr]) => (
+                      <li key={cat}>
+                        <span className="font-semibold">{cat}:</span> {skillArr.join(", ")}
+                      </li>
+                    ));
+                })()}
               </ul>
             </div>
           )}
@@ -185,4 +205,4 @@ const CvSidebarDark = () => {
   );
 };
 
-export default CvSidebarDark;
+export default React.memo(CvSidebarDark);
