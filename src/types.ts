@@ -54,9 +54,7 @@ export const UserProfileSchema = z.object({
   studies_training: z.array(StudyTrainingSchema),
   experiences: z.array(ExperienceSchema),
 });
-type CvProps = {
-  data?: UserProfile;
-};
+
 
 // 👇 Generate TypeScript types automatically
 export type UserProfile = z.infer<typeof UserProfileSchema>;
@@ -66,4 +64,6 @@ export type Project = z.infer<typeof ProjectSchema>;
 export type StudyTraining = z.infer<typeof StudyTrainingSchema>;
 export type Experience = z.infer<typeof ExperienceSchema>;
 export type Skill = z.infer<typeof SkillSchema>;
-export type CvProps = CvProps;
+export type CvProps = {
+  data?: UserProfile;
+};
