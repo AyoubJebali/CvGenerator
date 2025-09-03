@@ -7,19 +7,19 @@ type ZoomWrapperProps = {
   baseWidth?: number; // width of CV in px, e.g. 800
 };
 
-export default function ZoomWrapper({ children, baseWidth = 800 }: ZoomWrapperProps) {
+export default function ZoomWrapper({
+  children,
+  baseWidth = 800,
+}: ZoomWrapperProps) {
   const [zoom, setZoom] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="flex flex-col items-center gap-4 w-full h-full">
-      
-      
-
+    <div className="flex flex-col items-center gap-4 w-full h-full background-white">
       {/* Zoomable Preview Area */}
       <div
         ref={containerRef}
-        className="overflow-auto border rounded bg-base-200 shadow-inner p-4 w-full h-[70vh] md:h-[80vh] xl:h-[85vh]"
+        className="overflow-auto border rounded bg-base-200 shadow-inner p-4 w-full h-[70vh] md:h-[80vh] xl:h-full"
       >
         <div
           className="mx-auto origin-top"
@@ -39,7 +39,9 @@ export default function ZoomWrapper({ children, baseWidth = 800 }: ZoomWrapperPr
         >
           -
         </button>
-        <span className="min-w-[50px] text-center">{Math.round(zoom * 100)}%</span>
+        <span className="min-w-[50px] text-center">
+          {Math.round(zoom * 100)}%
+        </span>
         <button
           onClick={() => setZoom((z) => Math.min(2, z + 0.1))}
           className="px-3 py-1 rounded border border-gray-300 hover:bg-gray-200"

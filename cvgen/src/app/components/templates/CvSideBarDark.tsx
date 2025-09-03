@@ -1,6 +1,5 @@
 import React from "react";
 import { UserProfile } from "@/types";
-import { useCv } from "../CvContext";
 
 const getYear = (dateStr: string) => {
   if (!dateStr) return "";
@@ -13,8 +12,7 @@ type CvSidebarDarkProps = {
 };
 
 const CvSidebarDark: React.FC<CvSidebarDarkProps> = ({ data: propData }) => {
-  const context = useCv();
-  const data = propData || context.data;
+  const data = propData ;
 
   // Directly assign arrays, no memoization
   const experiences = Array.isArray(data.experiences) ? data.experiences : [];

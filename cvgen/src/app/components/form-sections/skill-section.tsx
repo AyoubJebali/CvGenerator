@@ -26,13 +26,13 @@ export default function SkillSection() {
   const updateItem = (id: string, newSkill: string, newCategory: string) => {
     setItems((prevItems) =>
       prevItems.map(item =>
-        item.id === id ? { ...item, skill: newSkill, catergory: newCategory } : item
+        item.id === id ? { ...item, skill: newSkill, category: newCategory } : item
       )
     );
 
     // Update the context data as well
     const updatedSkills = items.map(item =>
-  item.id === id ? { ...item, skill: newSkill, catergory: newCategory } : item 
+  item.id === id ? { ...item, skill: newSkill, category: newCategory } : item 
   // make sure it's an object
 );
     setData({ ...data, skills: updatedSkills });
@@ -53,7 +53,7 @@ export default function SkillSection() {
                 <SkillInput
                   id={item.id}
                   skill={item.skill}
-                  category={item.catergory}
+                  category={item.category}
                   updateItem={updateItem}
                 />
               </div>

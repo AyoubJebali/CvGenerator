@@ -1,6 +1,6 @@
 import React from "react";
 // import data from "../../../../public/datapdf.json";
-import { useCv } from "../CvContext";
+import { CvProps } from "@/types";
 const getYear = (dateStr: string) => {
   if (!dateStr) return "";
   const d = new Date(dateStr);
@@ -8,8 +8,8 @@ const getYear = (dateStr: string) => {
 };
 
 // ---------------- Template 4: Two-Column Modern ----------------
-const CvTwoColumn = () => {
-  const { data } = useCv();
+const CvTwoColumn = ({data:propData}: CvProps) => {
+  const data = propData;
   return (
     <div className="w-[210mm] h-[297mm] mx-auto bg-white print:w-[210mm] print:h-[297mm] print:p-0 print:m-0 shadow-lg">
       <div className="grid grid-cols-3 h-full">

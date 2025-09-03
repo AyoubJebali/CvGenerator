@@ -36,7 +36,7 @@ export default function CVTemplateSelector({
 }: {
     onSelect: (templateId: string) => void;
 }) {
-    const [selected, setSelected] = useState<string>("modern");
+    const [selected, setSelected] = useState<string>("OneColumn");
 
     const handleSelect = (id: string) => {
         setSelected(id);
