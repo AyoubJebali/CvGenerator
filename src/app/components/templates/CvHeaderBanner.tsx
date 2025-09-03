@@ -1,5 +1,5 @@
 import React from "react";
-//import data from '../../../../public/datapdf.json'
+//import data from '../../../../public/data3.json'
 import { CvProps } from "@/types";
 const getYear = (dateStr: string) => {
   if (!dateStr) return "";
