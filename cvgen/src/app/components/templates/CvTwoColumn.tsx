@@ -8,13 +8,13 @@ const getYear = (dateStr: string) => {
 };
 
 // ---------------- Template 4: Two-Column Modern ----------------
-const CvTwoColumn = ({data:propData}: CvProps) => {
+const CvTwoColumn = ({ data: propData }: CvProps) => {
   const data = propData;
   return (
-    <div className="w-[210mm] h-[297mm] mx-auto bg-white print:w-[210mm] print:h-[297mm] print:p-0 print:m-0 shadow-lg">
-      <div className="grid grid-cols-3 h-full">
+    <div className="w-[210mm] min-h-[297mm] mx-auto bg-white print:w-[210mm] print:min-h-[297mm] print:p-0 print:m-0 shadow-lg">
+      <div className="grid grid-cols-3 h-full min-h-[297mm]">
         {/* Left Column */}
-        <div className="bg-gradient-to-b from-blue-50 to-blue-100 p-4 print:p-3 border-r border-gray-200">
+        <div className="flex flex-col bg-gradient-to-b from-blue-50 to-blue-100 p-4 print:p-3 border-r border-gray-200 h-full min-h-[297mm]">
           {/* Header */}
           <div className="mb-4 pb-3 border-b border-blue-200">
             <h1 className="text-xl font-bold text-blue-800 mb-1">{data.name}</h1>

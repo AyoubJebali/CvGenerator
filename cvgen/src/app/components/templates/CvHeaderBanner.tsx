@@ -14,7 +14,7 @@ const CvHeaderBanner = ({ data: propData }: CvProps) => {
   const data = propData;
   
   return (
-    <div className="w-[210mm] mx-auto bg-white print:w-[210mm] print:h-[297mm] print:p-0 print:m-0 shadow-lg">
+    <div className="w-[210mm] min-h-[297mm] mx-auto bg-white print:w-[210mm] print:min-h-[297mm] print:p-0 print:m-0 shadow-lg print:shadow-none">
       {/* Header */}
       <div className="bg-blue-700 text-white p-4 print:p-3 text-center">
         <h1 className="text-2xl md:text-3xl font-bold mb-2">{data.name}</h1>
@@ -33,7 +33,7 @@ const CvHeaderBanner = ({ data: propData }: CvProps) => {
       </div>
 
       {/* Content */}
-      <div className="p-4 print:p-3 h-[calc(297mm-120px)] overflow-hidden">
+      <div className="p-4 print:p-3 overflow-visible">
         {data.about && (
           <section className="mb-3">
             <h2 className="text-lg font-bold text-gray-800 mb-1 border-b border-gray-300 pb-1">About</h2>
