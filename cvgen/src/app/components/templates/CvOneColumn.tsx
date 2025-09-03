@@ -92,7 +92,7 @@ const CvOneColumn: React.FC<CvProps> = ({ data: propData }) => {
       {/* Projects */}
       {Array.isArray(data.projects) && data.projects.length > 0 && (
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full]">Projects</h2>
+          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Projects</h2>
           {data.projects.map((proj, i) => {
             return (
               <div key={i} className="mt-2 print:text-[12px]">

@@ -40,17 +40,17 @@ export default function Home() {
   }, [selectedTemplate, data]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-900 via-indigo-800 to-fuchsia-900">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-fuchsia-400/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative z-10 flex flex-col xl:grid xl:grid-cols-5 xl:gap-6 min-h-screen p-4 xl:p-6">
         {/* Form Section */}
         <div className="w-full xl:col-start-1 xl:col-span-2 xl:row-start-1 xl:row-span-1">
-          <div className="h-full bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
+          <div className="h-full  rounded-2xl shadow-2xl  overflow-hidden">
             <Form />
           </div>
         </div>
@@ -73,7 +73,7 @@ export default function Home() {
 
         {/* Template Selector Section */}
         <div className="w-full xl:col-start-5 xl:col-span-1 xl:row-start-1 xl:row-span-1 mt-4 xl:mt-0 xl:sticky xl:top-6 xl:h-[calc(100vh-3rem)]">
-          <div className="h-full bg-gradient-to-b from-indigo-500/20 to-purple-600/20 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 p-4 flex flex-col">
+          <div className="h-full bg-transparent backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 p-4 flex flex-col">
             <div className="flex-1 overflow-hidden">
               <CVTemplateSelector onSelect={setSelectedTemplate} />
             </div>
