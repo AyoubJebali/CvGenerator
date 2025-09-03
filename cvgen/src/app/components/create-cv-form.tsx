@@ -9,11 +9,7 @@ import ObjectivesSectionBase from "./form-sections/objectives-section";
 import ProjectsSectionBase from "./form-sections/projects-section";
 import StudiesSectionBase from "./form-sections/education-section";
 import ExperienceSectionBase from "./form-sections/experience-section";
-import { printComponent } from "@/app/components/printCv";
-import CvOneColumn from "@/app/components/templates/CvOneColumn";
-import CvHeaderBanner from "@/app/components/templates/CvHeaderBanner";
-import CvSidebarDark from "@/app/components/templates/CvSideBarDark";
-import CvTwoColumn from "@/app/components/templates/CvTwoColumn";
+
 export default function Form() {
   const [state, dispatch] = useActionState(validateForm, null);
   // Memoize sections to prevent unnecessary re-renders of heavy subtrees
@@ -25,39 +21,36 @@ export default function Form() {
   const LanguagesSection = React.useMemo(() => React.memo(LanguagesSectionBase), []);
   const HobbiesSection = React.useMemo(() => React.memo(HobbiesSectionBase), []);
   const ObjectivesSection = React.useMemo(() => React.memo(ObjectivesSectionBase), []);
-  const handlePrint = useCallback(() => {
-    printComponent(CvHeaderBanner, {}, { title: "My CV", theme: "winter" });
-  }, []);
+  
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 bg-base-100 rounded-2xl shadow-xl md:h-[85vh] border border-base-200">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl text-base-content font-bold text-center mb-6 md:mb-8">Create Your CV</h1>
-      
-      <form action={dispatch} className="space-y-6">
-        <div className="space-y-6 md:max-h-[60vh] overflow-y-auto pr-1">
-          <PersonalInfoSection />
-          <StudiesSection />
-          <ExperienceSection />
-          <ProjectsSection />
-          <SkillSection />
-          <LanguagesSection />
-          <HobbiesSection />
-          <ObjectivesSection />
+    <div className="h-full flex flex-col bg-gradient-to-br from-base-100 via-base-200 to-base-300 rounded-3xl shadow-2xl border border-base-300/50 backdrop-blur-sm overflow-y-auto">
+      {/* Header */}
+      <div className="flex-shrink-0 px-6 py-8 border-b border-base-300/30">
+        <div className="text-center">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
+            Create Your CV
+          </h1>
+          <p className="text-base-content/70 text-sm sm:text-base">
+            Build a professional resume in minutes
+          </p>
         </div>
-        <div className="form-control mt-6 md:mt-8">
-          {/* // this button is disabled as saving the CV is not implemented yet */}
-          {/* <button type="submit" className="btn btn-primary btn-block text-base md:text-lg">
-            Save CV
-          </button> */}
-          <button type="button" onClick={handlePrint} className="btn btn-primary btn-block text-base md:text-lg">
-            Download CV
-          </button>
+      </div>
+
+      {/* Form Content */}
+      <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-8 scrollbar-thin scrollbar-thumb-base-300 scrollbar-track-transparent">
+          <form action={dispatch}>
+            <PersonalInfoSection />
+            <StudiesSection />
+            <ExperienceSection />
+            <ProjectsSection />
+            <SkillSection />
+            <LanguagesSection />
+            <HobbiesSection />
+            <ObjectivesSection />
+          </form>
         </div>
-        {/* this is commented out as form validation is not implemented yet */}
-        {/* {state?.message && (
-          <div className="text-center mt-4 text-success">{state.message}</div>
-        )} */}
-      </form>
-      
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
-import { UserProfile } from "@/types";
-import { useCv } from "../CvContext";
+import { CvProps } from "@/types";
+//import { useCv } from "../CvContext";
 
 const getYear = (dateStr: string) => {
   if (!dateStr) return "";
@@ -9,13 +9,10 @@ const getYear = (dateStr: string) => {
 };
 
 // ---------------- Template 6: One-Column Clean ----------------
-type CvOneColumnProps = {
-  data?: UserProfile;
-};
 
-const CvOneColumn: React.FC<CvOneColumnProps> = ({ data: propData }) => {
-  const context = useCv();
-  const data = propData || context.data;
+const CvOneColumn: React.FC<CvProps> = ({ data: propData }) => {
+  //const context = useCv();
+  const data = propData ;
 
   const groupedSkills = useMemo(() => {
     const grouped: { [key: string]: string[] } = {};

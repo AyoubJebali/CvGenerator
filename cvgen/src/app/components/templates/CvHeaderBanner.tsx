@@ -1,17 +1,18 @@
 import React from "react";
- import data from '../../../../public/datapdf.json'
-import { useCv } from "../CvContext";
-
+//import data from '../../../../public/datapdf.json'
+import { CvProps } from "@/types";
 const getYear = (dateStr: string) => {
   if (!dateStr) return "";
   const d = new Date(dateStr);
   return isNaN(d.getTime()) ? dateStr : d.getFullYear();
 };
 
-// ---------------- Template 5: Top Header Banner ----------------
-const CvHeaderBanner = () => {
-   //const { data } = useCv();
 
+// ---------------- Template 5: Top Header Banner ----------------
+const CvHeaderBanner = ({ data: propData }: CvProps) => {
+   //const { data } = useCv();
+  const data = propData;
+  
   return (
     <div className="w-[210mm] mx-auto bg-white print:w-[210mm] print:h-[297mm] print:p-0 print:m-0 shadow-lg">
       {/* Header */}

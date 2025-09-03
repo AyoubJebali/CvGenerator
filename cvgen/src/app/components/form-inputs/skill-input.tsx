@@ -8,19 +8,12 @@ interface SkillInputProps {
   updateItem: (id: string, skill: string, category: string) => void;
 }
 
-const categories = [
-  "Programming Languages",
-  "Web Technologies",
-  "Databases",
-  "Tools & Frameworks"
-];
-
 const SkillInput: React.FC<SkillInputProps> = ({ id, skill, category, updateItem }) => {
   const handleSkillChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateItem(id, event.target.value, category);
   };
 
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateItem(id, skill, event.target.value);
   };
 
@@ -34,17 +27,14 @@ const SkillInput: React.FC<SkillInputProps> = ({ id, skill, category, updateItem
         placeholder="Enter a skill"
         onChange={handleSkillChange}
       />
-      <select
+      <input
+        type="text"
         name="skill_category"
         value={category}
-        className="select select-bordered w-full text-black"
+        className="input input-bordered w-full text-black"
+        placeholder="Enter category"
         onChange={handleCategoryChange}
-      >
-        <option value="">Select Category</option>
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>{cat}</option>
-        ))}
-      </select>
+      />
     </div>
   );
 };
