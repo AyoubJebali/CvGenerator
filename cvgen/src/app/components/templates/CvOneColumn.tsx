@@ -25,13 +25,13 @@ const CvOneColumn: React.FC<CvProps> = ({ data: propData }) => {
   }, [data.skills]);
 
   return (
-    <div className="bg-white text-black max-w-6xl mx-auto w-[210mm] p-10 space-y-4 print:w-[210mm] print:p-2 print:m-0 text-[12px] print:text-[12px]">
+    <div className="bg-white text-black max-w-6xl mx-auto w-[210mm] min-h-[297mm] p-10 space-y-4 print:w-[210mm] print:p-2 print:m-0 text-[12px] print:text-[12px]">
       {/* Header */}
       <div className="flex items-center">
         {/* Name and Title to the left */}
         <div className="flex-1">
-          <h1 className="text-2xl font-bold mb-1 print:text-[15px]">{data.name}</h1>
-          <h2 className="text-lg mb-0 print:text-[13px]">{data.title}</h2>
+          <h1 className="text-2xl font-bold mb-1">{data.name}</h1>
+          <h2 className="text-lg mb-0 ">{data.title}</h2>
         </div>
         {/* Contact info to the right */}
         <div className="flex flex-col items-end text-sm space-y-1 print:text-[12px]">
@@ -52,7 +52,7 @@ const CvOneColumn: React.FC<CvProps> = ({ data: propData }) => {
       {/* Education */}
       {Array.isArray(data.studies_training) && data.studies_training.length > 0 && (
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full print:text-[13px]">Education & Training</h2>
+          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Education & Training</h2>
           {data.studies_training.map((edu, i) => {
             return (
               <div key={i} className="flex items-center justify-between mt-2 print:text-[12px]">
@@ -73,7 +73,7 @@ const CvOneColumn: React.FC<CvProps> = ({ data: propData }) => {
       {/* Experience */}
       {Array.isArray(data.experiences) && data.experiences.length > 0 && (
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full print:text-[13px]">Experience</h2>
+          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Experience</h2>
           {data.experiences.map((exp, i) => {
             return (
               <div key={i} className="mt-2 print:text-[12px]">
@@ -92,7 +92,7 @@ const CvOneColumn: React.FC<CvProps> = ({ data: propData }) => {
       {/* Projects */}
       {Array.isArray(data.projects) && data.projects.length > 0 && (
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full print:text-[13px]">Projects</h2>
+          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full]">Projects</h2>
           {data.projects.map((proj, i) => {
             return (
               <div key={i} className="mt-2 print:text-[12px]">
@@ -110,7 +110,7 @@ const CvOneColumn: React.FC<CvProps> = ({ data: propData }) => {
       {/* Skills */}
       {Array.isArray(data.skills) && data.skills.length > 0 && (
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full print:text-[13px]">Skills</h2>
+          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Skills</h2>
           <div className="ml-2 mt-2 print:text-[12px]">
             {Object.entries(groupedSkills).map(([cat, skills]) => (
               <p key={cat}>
@@ -124,7 +124,7 @@ const CvOneColumn: React.FC<CvProps> = ({ data: propData }) => {
       {/* Languages */}
       {Array.isArray(data.languages) && data.languages.length > 0 && (
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full print:text-[13px]">Languages</h2>
+          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block w-full">Languages</h2>
           {data.languages.map((lang, i) => (
             <p key={i} className="mt-2 print:text-[12px]">{lang.language} – {lang.proficiency}</p>
           ))}

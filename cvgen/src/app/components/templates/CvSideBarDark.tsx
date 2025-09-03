@@ -23,10 +23,10 @@ const CvSidebarDark: React.FC<CvSidebarDarkProps> = ({ data: propData }) => {
   const hobbies = Array.isArray(data.hobbies) ? data.hobbies : [];
 
   return (
-    <div className="w-[210mm] h-[297mm] mx-auto bg-white print:w-[210mm] print:h-[297mm] print:p-0 print:m-0 shadow-lg">
-      <div className="grid grid-cols-3 h-full">
+    <div className="w-[210mm] min-h-[297mm] mx-auto bg-white print:w-[210mm] print:min-h-[297mm] print:p-0 print:m-0 shadow-lg">
+      <div className="grid grid-cols-3 min-h-[297mm] h-full">
         {/* Sidebar - 1/3 width */}
-        <div className="col-span-1 bg-gray-800 text-white p-4 print:p-3 flex flex-col">
+        <div className="col-span-1 bg-gray-800 text-white p-4 print:p-3 flex flex-col h-full min-h-[297mm]">
           {/* Header Section */}
           <div className="mb-4 border-b border-gray-600 pb-3">
             <h1 className="text-xl font-bold mb-1 text-white">{data.name}</h1>
