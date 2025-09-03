@@ -9,7 +9,9 @@ Choose from multiple templates, customize your content, preview instantly, and e
 ## 📸 Screenshot
 
 <!-- Replace the link below with your screenshot file or URL -->
-![CvGen Screenshot](./screenshots/screencapture.png)
+
+![CvGen Screenshot](./screenshots/screenshot.png)
+
 
 ---
 
