@@ -12,7 +12,20 @@ const getYear = (dateStr: string) => {
 
 const CvOneColumn: React.FC<CvProps> = ({ data: propData }) => {
   //const context = useCv();
-  const data = propData ;
+  // Provide a default empty object if data is undefined
+  const data = propData || {
+    name: "",
+    title: "",
+    contact: { email: "", phone: "", location: "", linkedin: "", github: "" },
+    about: "",
+    objectives: "",
+    experiences: [],
+    projects: [],
+    studies_training: [],
+    skills: [],
+    languages: [],
+    hobbies: []
+  };
 
   const groupedSkills = useMemo(() => {
     const grouped: { [key: string]: string[] } = {};

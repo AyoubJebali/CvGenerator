@@ -11,11 +11,24 @@ const getMonthYear = (dateStr: string) => {
 };
 
 type CvSidebarDarkProps = {
-  data?: UserProfile;
+  data: UserProfile;
 };
 
 const CvSidebarDark: React.FC<CvSidebarDarkProps> = ({ data: propData }) => {
-  const data = propData ;
+  // Provide a default empty object if data is undefined
+  const data = propData || {
+    name: "",
+    title: "",
+    contact: { email: "", phone: "", location: "", linkedin: "", github: "" },
+    about: "",
+    objectives: "",
+    experiences: [],
+    projects: [],
+    studies_training: [],
+    skills: [],
+    languages: [],
+    hobbies: []
+  };
 
   // Directly assign arrays, no memoization
   const experiences = Array.isArray(data.experiences) ? data.experiences : [];

@@ -9,7 +9,20 @@ const getYear = (dateStr: string) => {
 
 // ---------------- Template 4: Two-Column Modern ----------------
 const CvTwoColumn = ({ data: propData }: CvProps) => {
-  const data = propData;
+  // Provide a default empty object if data is undefined
+  const data = propData || {
+    name: "",
+    title: "",
+    contact: { email: "", phone: "", location: "", linkedin: "", github: "" },
+    about: "",
+    objectives: "",
+    experiences: [],
+    projects: [],
+    studies_training: [],
+    skills: [],
+    languages: [],
+    hobbies: []
+  };
   return (
     <div className="w-[210mm] min-h-[297mm] mx-auto bg-white print:w-[210mm] print:min-h-[297mm] print:p-0 print:m-0 shadow-lg">
       <div className="grid grid-cols-3 h-full min-h-[297mm]">

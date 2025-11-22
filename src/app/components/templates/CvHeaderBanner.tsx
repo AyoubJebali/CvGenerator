@@ -11,7 +11,20 @@ const getYear = (dateStr: string) => {
 // ---------------- Template 5: Top Header Banner ----------------
 const CvHeaderBanner = ({ data: propData }: CvProps) => {
    //const { data } = useCv();
-  const data = propData;
+  // Provide a default empty object if data is undefined
+  const data = propData || {
+    name: "",
+    title: "",
+    contact: { email: "", phone: "", location: "", linkedin: "", github: "" },
+    about: "",
+    objectives: "",
+    experiences: [],
+    projects: [],
+    studies_training: [],
+    skills: [],
+    languages: [],
+    hobbies: []
+  };
   
   return (
     <div className="w-[210mm] min-h-[297mm] mx-auto bg-white print:w-[210mm] print:min-h-[297mm] print:p-0 print:m-0 shadow-lg print:shadow-none">
