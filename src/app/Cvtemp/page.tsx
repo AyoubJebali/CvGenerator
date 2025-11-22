@@ -7,7 +7,6 @@ import CvTwoColumn from '../components/templates/CvTwoColumn'
 import Cvtemplate from '../components/templates/cv-template'
 import CvTemplatepdf from '../components/templates/CvTemplatePdf'
 import ZoomWrapper from '../components/zoomWrapper'
-import data from '../../../public/generated-cv.json'
 const home = () => {
   return (
     <div>

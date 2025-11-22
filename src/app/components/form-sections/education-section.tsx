@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import StudyInput from '../form-inputs/study-input';
 import { useCv } from "../CvContext";
@@ -14,31 +14,40 @@ interface Item {
 }
 
 export default function StudiesSection() {
-  const [items, setItems] = useState<Item[]>([]);
   const { data, setData } = useCv();
+  // Initialize items from context data
+  const [items, setItems] = useState<Item[]>([]);
+
+  useEffect(() => {
+    // Map studies_training from context to items with id
+    const initialItems = (data.studies_training || []).map((item, idx) => ({
+      id: uuidv4(),
+      start: item.start || "",
+      end: item.end || "",
+      degree: item.degree || "",
+      institution: item.institution || "",
+      honors: item.honors || "",
+    }));
+    setItems(initialItems);
+  }, [data.studies_training]);
+
   const addToArray = () => {
     const newItem: Item = { id: uuidv4(), start: '', end: '', degree: '', institution: '', honors: '' };
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
   const deleteItem = (id: string) => {
-    setItems((prevItems) => prevItems.filter(item => item.id !== id));
-    // Update the context data as well
-    setData({ ...data, studies_training: items.filter(item => item.id !== id) });
+    const updatedItems = items.filter(item => item.id !== id);
+    setItems(updatedItems);
+    setData({ ...data, studies_training: updatedItems.map(({ id, ...rest }) => rest) });
   };
 
   const updateItem = (id: string, start: string, end: string, degree: string, institution: string, honors: string) => {
-    setItems((prevItems) =>
-      prevItems.map(item =>
-        item.id === id ? { ...item, start, end, degree, institution, honors } : item
-      )
+    const updatedItems = items.map(item =>
+      item.id === id ? { ...item, start, end, degree, institution, honors } : item
     );
-
-    // Update the context data as well
-    const updatedStudies = items.map(item =>
-      item.id === id ? { start, end, degree, institution, honors } : item
-    );
-    setData({ ...data, studies_training: updatedStudies });
+    setItems(updatedItems);
+    setData({ ...data, studies_training: updatedItems.map(({ id, ...rest }) => rest) });
   };
 
   return (

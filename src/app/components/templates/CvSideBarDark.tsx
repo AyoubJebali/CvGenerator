@@ -1,10 +1,13 @@
 import React from "react";
 import { UserProfile } from "@/types";
 
-const getYear = (dateStr: string) => {
+const getMonthYear = (dateStr: string) => {
   if (!dateStr) return "";
   const d = new Date(dateStr);
-  return isNaN(d.getTime()) ? dateStr : d.getFullYear();
+  if (isNaN(d.getTime())) return dateStr;
+  const month = String(d.getMonth() + 1).padStart(2, "0"); // Month as number (01-12)
+  const year = d.getFullYear();
+  return `${month}/${year}`;
 };
 
 type CvSidebarDarkProps = {
@@ -132,7 +135,7 @@ const CvSidebarDark: React.FC<CvSidebarDarkProps> = ({ data: propData }) => {
                         <p className="text-xs text-blue-600">{exp.company}</p>
                       </div>
                       <span className="text-xs text-gray-500">
-                        {getYear(exp.start)} - {getYear(exp.end)}
+                        {getMonthYear(exp.start)} - {getMonthYear(exp.end)}
                       </span>
                     </div>
                     <ul className="list-none space-y-0.5">
@@ -159,7 +162,7 @@ const CvSidebarDark: React.FC<CvSidebarDarkProps> = ({ data: propData }) => {
                     <div className="flex justify-between items-start mb-1">
                       <p className="font-semibold text-xs text-gray-800">{proj.title}</p>
                       <span className="text-xs text-gray-500">
-                        {getYear(proj.start)} - {getYear(proj.end)}
+                        {getMonthYear(proj.start)} - {getMonthYear(proj.end)}
                       </span>
                     </div>
                     <ul className="list-none space-y-0.5">
@@ -189,7 +192,7 @@ const CvSidebarDark: React.FC<CvSidebarDarkProps> = ({ data: propData }) => {
                         <p className="text-xs text-purple-600">{edu.institution}</p>
                       </div>
                       <span className="text-xs text-gray-500">
-                        {getYear(edu.start)} - {getYear(edu.end)}
+                        {getMonthYear(edu.start)} - {getMonthYear(edu.end)}
                       </span>
                     </div>
                   </div>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import HobbyInput from '../form-inputs/hobby-input';
 import { useCv } from "../CvContext";
@@ -9,30 +9,35 @@ interface Item {
 }
 
 export default function HobbiesSection() {
-  const [items, setItems] = useState<Item[]>([]);
   const { data, setData } = useCv();
+  const [items, setItems] = useState<Item[]>([]);
+
+  // Initialize items from context data on mount
+  useEffect(() => {
+    const initialItems = (data.hobbies || []).map(hobby => ({
+      id: uuidv4(),
+      hobby: hobby || "",
+    }));
+    setItems(initialItems);
+  }, []);
+
   const addToArray = () => {
     const newItem: Item = { id: uuidv4(), hobby: '' };
     setItems((prevItems) => [...prevItems, newItem]);
   };
 
   const deleteItem = (id: string) => {
-    setItems((prevItems) => prevItems.filter(item => item.id !== id));
-    // Update the context data as well
-    setData({ ...data, hobbies: items.filter(item => item.id !== id).map(item => item.hobby) });
+    const updatedItems = items.filter(item => item.id !== id);
+    setItems(updatedItems);
+    setData({ ...data, hobbies: updatedItems.map(item => item.hobby) });
   };
 
   const updateItem = (id: string, hobby: string) => {
-    setItems((prevItems) =>
-      prevItems.map(item =>
-        item.id === id ? { ...item, hobby } : item
-      )
+    const updatedItems = items.map(item =>
+      item.id === id ? { ...item, hobby } : item
     );
-    // Update the context data as well
-    const updatedHobbies = items.map(item =>
-      item.id === id ? hobby : item.hobby
-    );
-    setData({ ...data, hobbies: updatedHobbies });
+    setItems(updatedItems);
+    setData({ ...data, hobbies: updatedItems.map(item => item.hobby) });
   };
 
   return (

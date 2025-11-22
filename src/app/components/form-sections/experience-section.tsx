@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import ExperienceInput from "../form-inputs/experience-input";
 import { useCv } from "../CvContext";
@@ -13,44 +13,59 @@ interface Item {
 }
 
 export default function ExperienceSection() {
-
-    const [items, setItems] = useState<Item[]>([]);
     const { data, setData } = useCv();
+    const [items, setItems] = useState<Item[]>([]);
+
+    // Initialize items from context data
+    useEffect(() => {
+        const initialItems = (data.experiences || []).map((item) => ({
+            id: uuidv4(),
+            position: item.position || "",
+            company: item.company || "",
+            start: item.start || "",
+            end: item.end || "",
+            details: Array.isArray(item.details) ? item.details.join('\n') : (item.details || ""),
+        }));
+        setItems(initialItems);
+    }, []);
+
     const addToArray = () => {
-        const newItem: Item = { id: uuidv4(), position: '', company: '',  start: '', end: '', details: '' };
+        const newItem: Item = { id: uuidv4(), position: '', company: '', start: '', end: '', details: '' };
         setItems((prevItems) => [...prevItems, newItem]);
     };
 
     const deleteItem = (id: string) => {
-        setItems((prevItems) => prevItems.filter(item => item.id !== id));
-        //Update the context data as well
-        
-        setData({ ...data, experiences: items.filter(item => item.id !== id).map(item =>({
-            position: item.position,
-            company: item.company,
-            start: item.start,
-            end: item.end,
-            details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
-        })) });
+        const updatedItems = items.filter(item => item.id !== id);
+        setItems(updatedItems);
+        setData({
+            ...data,
+            experiences: updatedItems.map(item => ({
+                position: item.position,
+                company: item.company,
+                start: item.start,
+                end: item.end,
+                details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
+            }))
+        });
     };
 
-    const updateItem = (id: string, position: string, company:string, start: string, end: string, details: string) => {
-        setItems((prevItems) =>
-            prevItems.map(item =>
-                item.id === id ? { ...item, position , company, start, end, details } : item
-            )
+    const updateItem = (id: string, position: string, company: string, start: string, end: string, details: string) => {
+        const updatedItems = items.map(item =>
+            item.id === id ? { ...item, position, company, start, end, details } : item
         );
-        //Update the context data as well
-        
-        const updatedExperiences = items.map(item =>({
-            position: item.position,
-            company: item.company,
-            start: item.start,
-            end: item.end,
-            details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
-        }));
-        setData({ ...data, experiences: updatedExperiences });
+        setItems(updatedItems);
+        setData({
+            ...data,
+            experiences: updatedItems.map(item => ({
+                position: item.position,
+                company: item.company,
+                start: item.start,
+                end: item.end,
+                details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
+            }))
+        });
     };
+
     return (
         <div className="collapse collapse-arrow bg-base-200 rounded-lg">
             <input type="checkbox" name="projects-accordion" />
