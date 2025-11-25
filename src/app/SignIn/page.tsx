@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function SignInPage() {
@@ -11,10 +12,16 @@ export default function SignInPage() {
         <div className="card w-full max-w-md shadow-lg">
           <div className="card-body items-center text-center">
             {session.user.image && (
-              <img src={session.user.image} alt="avatar" className="w-24 h-24 rounded-full" />
+              <Image
+                src={session.user.image}
+                alt="avatar"
+                width={96}
+                height={96}
+                className="w-24 h-24 rounded-full"
+              />
             )}
             <h2 className="card-title mt-2 text-primary">{session.user.name ?? session.user.email}</h2>
-            <p className="text-sm text-neutral">You're signed in.</p>
+            <p className="text-sm text-neutral">You are signed in.</p>
             <div className="card-actions mt-4">
               <button className="btn btn-outline" onClick={() => signOut()}>
                 Sign out
