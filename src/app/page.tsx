@@ -9,9 +9,20 @@ import CvTwoColumn from "./components/templates/CvTwoColumn";
 import { useState, useCallback } from "react";
 import { printComponent } from "./components/printCv";
 import { useCv } from "./components/CvContext";
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation";
+
 export default function Home() {
   const [selectedTemplate, setSelectedTemplate] = useState<string>("OneColumn");
   const { data } = useCv();
+  const router = useRouter();
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // redirect to your sign-in page if not authenticated
+      router.push("/SignIn");
+    },
+  });
   const handlePrint = useCallback(() => {
     let ComponentToPrint;
 
@@ -38,6 +49,17 @@ export default function Home() {
       { title: "My CV", theme: "winter" }
     );
   }, [selectedTemplate, data]);
+  // show a simple loading state while session is being resolved
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="indicator">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      </div>
+    );
+  }
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-900 via-indigo-800 to-fuchsia-900">

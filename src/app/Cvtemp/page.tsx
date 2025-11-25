@@ -12,7 +12,7 @@ const home = () => {
     <div>
       {/* <ZoomWrapper>
       </ZoomWrapper> */}
-        <CvHeaderBanner  ></CvHeaderBanner>
+        <CvHeaderBanner></CvHeaderBanner>
     </div>
   )
 }
