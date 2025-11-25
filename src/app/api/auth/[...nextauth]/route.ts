@@ -1,7 +1,23 @@
-import NextAuth from "next-auth";
+import NextAuth , { DefaultSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { supabaseAdmin } from "@/app/lib/supabaseServer";
 
+declare module "next-auth" {
+  interface Session extends DefaultSession {
+    user: {
+      id?: string;
+    } & DefaultSession["user"];
+  }
+
+  interface User {
+    id?: string | undefined;
+  }
+}
+declare module "next-auth/jwt" {
+  interface JWT {
+    sub?: string;
+  }
+}
 /**
  * Minimal NextAuth config that upserts Google users to Supabase 'users' table
  */
