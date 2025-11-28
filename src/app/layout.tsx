@@ -4,9 +4,9 @@ import "./globals.css";
 import NavBar from "./components/navbar";
 import { CvProvider } from "./components/CvContext";
 import { SessionProvider } from "next-auth/react";
-import  Providers  from "./components/Providers";
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import Providers from "./components/Providers";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,8 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="winter">
-        <Providers>
-      <CvProvider>
+      <Providers>
+        <CvProvider>
           <body className={inter.className}>
             <NavBar></NavBar>
             {children}
@@ -31,7 +31,7 @@ export default function RootLayout({
             <SpeedInsights />
           </body>
         </CvProvider>
-        </Providers>
+      </Providers>
     </html>
   );
 }
