@@ -1,26 +1,47 @@
-import NextAuth , { DefaultSession } from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { supabaseAdmin } from "@/app/lib/supabaseServer";
 
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
-      id?: string;
+      id: string; // UUID from the database
+      email: string;
+      name?: string;
+      image?: string;
+      provider?: string;
+      providerAccountId?: string;
+      lastSignInAt?: string; // ISO timestamp
+      createdAt?: string; // ISO timestamp
+      updatedAt?: string; // ISO timestamp
     } & DefaultSession["user"];
   }
 
   interface User {
-    id?: string | undefined;
+    id: string; // UUID from the database
+    email: string;
+    name?: string;
+    image?: string;
+    provider?: string;
+    providerAccountId?: string;
+    lastSignInAt?: string; // ISO timestamp
+    createdAt?: string; // ISO timestamp
+    updatedAt?: string; // ISO timestamp
   }
 }
+
 declare module "next-auth/jwt" {
   interface JWT {
-    sub?: string;
+    id: string; // UUID from the database
+    email: string;
+    name?: string;
+    image?: string;
+    provider?: string;
+    providerAccountId?: string;
   }
 }
-/**
- * Minimal NextAuth config that upserts Google users to Supabase 'users' table
- */
+
+
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -30,46 +51,73 @@ const handler = NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    // attach id to session.user
+    // Attach the actual database ID to the session.user
     async session({ session, token }) {
-      if (session.user) session.user.id = token.sub ?? undefined;
+      if (session.user) {
+        session.user.id = token.id ?? undefined;
+        session.user.email = token.email ?? undefined;
+        session.user.name = token.name ?? undefined;
+        session.user.image = token.image ?? undefined;
+      }
       return session;
     },
+
+    // Attach the actual database ID to the JWT
     async jwt({ token, user, account }) {
-      // on first sign in, take providerAccountId if available
-      if (user) token.sub = account?.providerAccountId ?? user.id;
+      if (user) {
+        // Fetch the user's actual database ID from Supabase
+        const { data: dbUser, error } = await supabaseAdmin
+          .from("users")
+          .select("id, email, name, image, provider, provider_account_id")
+          .eq("email", user.email)
+          .single();
+
+        if (error) {
+          console.error("Error fetching user ID from Supabase:", error);
+        } else {
+          token.id = dbUser?.id;
+          token.email = dbUser?.email;
+          token.name = dbUser?.name;
+          token.image = dbUser?.image;
+          token.provider = dbUser?.provider;
+          token.providerAccountId = dbUser?.provider_account_id;
+        }
+      }
       return token;
     },
-    // ADD THIS redirect callback
+
+    // Redirect callback
     async redirect({ url, baseUrl }) {
       // If a specific callbackUrl was provided (url), keep it
       if (url && url !== baseUrl) {
-        // allow same-origin or relative urls
-        if (url.startsWith(baseUrl) || url.startsWith("/")) return url.startsWith("/") ? `${baseUrl}${url}` : url;
+        // Allow same-origin or relative URLs
+        if (url.startsWith(baseUrl) || url.startsWith("/")) {
+          return url.startsWith("/") ? `${baseUrl}${url}` : url;
+        }
       }
-      // default after sign in
+      // Default after sign-in
       return `${baseUrl}/`;
     },
   },
   events: {
-    // called after successful sign in - upsert user into Supabase
+    // Called after successful sign-in - upsert user into Supabase
     async signIn({ user, account }) {
       try {
-        const id = account?.providerAccountId ?? user.id ?? null;
         await supabaseAdmin.from("users").upsert(
           {
-            id,
             email: user.email,
             name: user.name,
             image: user.image,
             provider: account?.provider ?? null,
-            provider_account_id: account?.providerAccountId ?? null,
-            updated_at: new Date().toISOString(),
+            providerAccountId: account?.providerAccountId ?? null,
+            updatedAt: new Date().toISOString(),
+            lastSignInAt: new Date().toISOString(),
+            rawUser: user as object,
           },
-          { onConflict: "id" }
+          { onConflict: "email" } // Use email as the unique identifier for upserts
         );
       } catch (err) {
-        console.error("supabase upsert error:", err);
+        console.error("Supabase upsert error:", err);
       }
     },
   },
