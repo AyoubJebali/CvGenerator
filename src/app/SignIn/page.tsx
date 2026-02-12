@@ -1,42 +1,20 @@
 "use client";
-import React from "react";
-import Image from "next/image";
-import { useSession, signIn, signOut } from "next-auth/react";
-
+import React, { useEffect } from "react";
+import { useSession, signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 export default function SignInPage() {
   const { data: session } = useSession();
-
+  const router = useRouter();
+  useEffect(() => {
+    if (session?.user) {
+      router.push("/");
+    }
+  }, [session, router]);
   if (session?.user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-6 bg-base-100">
-        <div className="card w-full max-w-md shadow-lg">
-          <div className="card-body items-center text-center">
-            {session.user.image && (
-              <Image
-                src={session.user.image}
-                alt="avatar"
-                width={96}
-                height={96}
-                className="w-24 h-24 rounded-full"
-              />
-            )}
-            <h2 className="card-title mt-2 text-primary">{session.user.name ?? session.user.email}</h2>
-            <p className="text-sm text-neutral">You are signed in.</p>
-            <div className="card-actions mt-4">
-              <button className="btn btn-outline" onClick={() => signOut()}>
-                Sign out
-              </button>
-              <a href="/" className="btn btn-primary">
-                Go to app
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return null;
   }
 
-  return (
+  else return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         <div className="card bg-white/95 shadow-2xl">

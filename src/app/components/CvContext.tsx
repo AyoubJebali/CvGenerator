@@ -1,10 +1,10 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
-import { UserProfile } from "@/types";
+import { ResumeSchema } from "@/types";
 
 // Empty initial data
-const emptyCvData: UserProfile = {
+const emptyCvData: ResumeSchema = {
   "name": "",
   "title": "",
   "contact": {
@@ -25,15 +25,15 @@ const emptyCvData: UserProfile = {
 };
 
 type CvContextType = {
-  data: UserProfile;
-  setData: React.Dispatch<React.SetStateAction<UserProfile>>;
+  data: ResumeSchema;
+  setData: React.Dispatch<React.SetStateAction<ResumeSchema>>;
   reset: () => void; // <--- added
 };
 
 const CvContext = createContext<CvContextType | null>(null);
 
 export const CvProvider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = useState<UserProfile>(emptyCvData);
+  const [data, setData] = useState<ResumeSchema>(emptyCvData);
   const { status } = useSession();
   const prevStatus = useRef(status);
 
