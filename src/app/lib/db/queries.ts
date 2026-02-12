@@ -29,7 +29,7 @@ export const getUserResumes = async (userId: string) => {
       .select()
       .from(resumes)
       .where(eq(resumes.userId, userId)); // Filter by userId
-
+      
     return userResumes; // Return all resumes for the user
   } catch (error) {
     console.error('Error retrieving user resumes:', error);
