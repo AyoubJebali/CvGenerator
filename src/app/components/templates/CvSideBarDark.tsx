@@ -1,5 +1,5 @@
 import React from "react";
-import { UserProfile } from "@/types";
+import { CvProps } from "@/types";
 
 const getMonthYear = (dateStr: string) => {
   if (!dateStr) return "";
@@ -10,11 +10,8 @@ const getMonthYear = (dateStr: string) => {
   return `${month}/${year}`;
 };
 
-type CvSidebarDarkProps = {
-  data: UserProfile;
-};
 
-const CvSidebarDark: React.FC<CvSidebarDarkProps> = ({ data: propData }) => {
+const CvSidebarDark: React.FC<CvProps> = ({ data: propData }) => {
   // Provide a default empty object if data is undefined
   const data = propData || {
     name: "",
