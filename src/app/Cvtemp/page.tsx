@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { fetchResumeById, updateUserResume } from "@/app/dashboard/actions                                                                                                                                                                                                                                                                                  ";
+import { fetchResumeById, updateUserResume } from "@/app/dashboard/actions";
 import { Resume, ResumeSchema } from "@/types";
 import { FiArrowLeft, FiSave, FiEye } from "react-icons/fi";
 import Link from "next/link";
