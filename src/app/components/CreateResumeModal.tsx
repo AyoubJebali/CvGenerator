@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createUserResume } from "../api";
+import { createUserResume } from "@/app/dashboard/actions";
 import { ResumeSchema } from "@/types";
 
 interface CreateResumeModalProps {
@@ -39,7 +39,7 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
 
   const handleCreateResume = async () => {
     try {
-      await createUserResume(userId, newResumeName, emptyCvData);
+      await createUserResume(userId, newResumeName);
       onResumeCreated(); // Refresh resumes after creation
       onClose(); // Close the modal
     } catch (err) {
