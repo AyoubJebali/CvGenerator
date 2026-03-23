@@ -70,7 +70,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
               <FiEdit2 size={16} />
             </button>
             <button
-              className="btn btn-circle btn-sm btn-error"
+              className="btn btn-circle btn-sm border border-outline-variant bg-surface-container-low text-on-surface hover:bg-surface-container-high"
               onClick={() => setShowConfirm(true)}
               title="Delete"
             >
@@ -83,8 +83,8 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
         <div className="card-body p-4">
           <div className="flex justify-between items-start">
             <div className="flex-1 min-w-0">
-              <h2 className="card-title text-base truncate text-black">{title}</h2>
-              <p className="text-sm text-base-content/60">
+              <h2 className="card-title truncate text-base text-on-surface">{title}</h2>
+              <p className="text-sm text-on-surface-variant">
                 {formatEditedTime(editedDaysAgo)}
               </p>
             </div>
@@ -108,7 +108,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
                   </a>
                 </li>
                 <li>
-                  <a className="text-error" onClick={() => setShowConfirm(true)}>
+                  <a className="text-on-surface" onClick={() => setShowConfirm(true)}>
                     <FiTrash2 size={14} /> Delete
                   </a>
                 </li>
@@ -135,7 +135,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
               Cancel
             </button>
             <button
-              className="btn btn-error"
+              className="btn border border-outline-variant bg-surface-container-low text-on-surface hover:bg-surface-container-high"
               onClick={handleDelete}
               disabled={isDeleting}
             >

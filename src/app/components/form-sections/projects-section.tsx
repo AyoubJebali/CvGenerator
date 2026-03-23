@@ -1,85 +1,79 @@
 "use client";
-import React, { useState, useCallback, useMemo } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import ProjectInputBase from '../form-inputs/project-input';
+import React, { useCallback } from "react";
+import ProjectInput from "../form-inputs/project-input";
 import { useCv } from "../CvContext";
 
-interface Item {
-  id: string;
-  title: string;
-  start: string;
-  end: string;
-  details: string;
-}
-
 export default function ProjectsSection() {
-  const [items, setItems] = useState<Item[]>([]);
-  const { setData } = useCv();
-  const ProjectInput = useMemo(() => React.memo(ProjectInputBase), []);
+  const { data, setData } = useCv();
+  const items = (Array.isArray(data.projects) ? data.projects : []).map((item) => ({
+    title: item.title ?? "",
+    start: item.start ?? "",
+    end: item.end ?? "",
+    details: Array.isArray(item.details) ? item.details.join("\n") : "",
+  }));
+
   const addToArray = useCallback(() => {
-    const newItem: Item = { id: uuidv4(), title: '', start: '', end: '', details: '' };
-    setItems((prevItems) => {
-      const next = [...prevItems, newItem];
-      setData((prev: any) => ({
-        ...prev,
-        projects: next.map(item => ({
-          title: item.title,
-          start: item.start,
-          end: item.end,
-          details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
-        }))
-      }));
-      return next;
-    });
+    setData((prev) => ({
+      ...prev,
+      projects: [
+        ...(Array.isArray(prev.projects) ? prev.projects : []),
+        { title: "", start: "", end: "", details: [] },
+      ],
+    }));
   }, [setData]);
 
   const deleteItem = useCallback((id: string) => {
-    setItems((prevItems) => {
-      const next = prevItems.filter(item => item.id !== id);
-      setData((prev: any) => ({
-        ...prev,
-        projects: next.map(item => ({
-          title: item.title,
-          start: item.start,
-          end: item.end,
-          details: item.details.split('\n').map(line => line.trim()).filter(line => line !== ''),
-        }))
-      }));
-      return next;
-    });
+    const index = Number(id);
+    if (Number.isNaN(index)) return;
+
+    setData((prev) => ({
+      ...prev,
+      projects: (Array.isArray(prev.projects) ? prev.projects : []).filter((_, idx) => idx !== index),
+    }));
   }, [setData]);
 
   const updateItem = useCallback((id: string, title: string, start: string, end: string, details: string) => {
-    setItems((prevItems) => {
-      const next = prevItems.map(item =>
-        item.id === id ? { ...item, title, start, end, details } : item
-      );
-      setData((prev: any) => ({
-        ...prev,
-        projects: next.map(item => ({
-          title: item.title,
-          start: item.start,
-          end: item.end,
-          details: item.details.split('\n').map(line => line.trim()).filter(line => line !== ''),
-        }))
-      }));
-      return next;
-    });
+    const index = Number(id);
+    if (Number.isNaN(index)) return;
+
+    setData((prev) => ({
+      ...prev,
+      projects: (Array.isArray(prev.projects) ? prev.projects : []).map((item, idx) =>
+        idx === index
+          ? {
+              ...item,
+              title,
+              start,
+              end,
+              details: details.split("\n").map((line) => line.trim()).filter((line) => line !== ""),
+            }
+          : item
+      ),
+    }));
   }, [setData]);
 
   return (
-    <div className="collapse collapse-arrow bg-base-200 rounded-lg">
-      <input type="checkbox" name="projects-accordion" />
-      <div className="text-black collapse-title text-xl font-medium flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-folder-open-icon lucide-folder-open"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></svg>
-        Projects
+    <section className="editor-section p-5 md:p-7">
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-[34px] font-extrabold text-on-surface">Projects</h3>
+        <button
+          className="editor-action-btn"
+          type="button"
+          onClick={addToArray}
+        >
+          + Add Project
+        </button>
       </div>
-      <div className="collapse-content">
-        <div className="space-y-6">
-          {items.map((item) => (
-            <div key={item.id} className="p-4 border border-base-300 rounded-lg">
+      <div className="space-y-6">
+        {items.length === 0 ? (
+          <div className="rounded-2xl border-2 border-dashed border-outline-variant bg-surface-container-high px-6 py-10 text-center">
+            <p className="text-2xl font-medium text-on-surface-variant">Show your best projects</p>
+          </div>
+        ) : (
+          items.map((item, index) => (
+            <div key={`project-${index}`} className="rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
               <ProjectInput
-                id={item.id}
+                id={`${index}`}
                 title={item.title}
                 start={item.start}
                 end={item.end}
@@ -88,26 +82,17 @@ export default function ProjectsSection() {
               />
               <div className="text-right mt-2">
                 <button
-                  className="btn btn-outline btn-error btn-sm"
+                  className="rounded-lg border border-outline-variant bg-surface-container-low px-3 py-1.5 text-sm font-semibold text-on-surface transition-colors hover:bg-surface-container-high"
                   type="button"
-                  onClick={() => deleteItem(item.id)}
+                  onClick={() => deleteItem(`${index}`)}
                 >
                   Delete
                 </button>
               </div>
             </div>
-          ))}
-        </div>
-        <div className="text-right mt-4">
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={addToArray}
-          >
-            Add Project/Experience
-          </button>
-        </div>
+          ))
+        )}
       </div>
-    </div>
+    </section>
   );
 }

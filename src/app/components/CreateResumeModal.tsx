@@ -50,12 +50,12 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="modal bg-white rounded-lg p-6 w-full max-w-md">
-        <h2 className="text-xl font-bold mb-4">Create New Resume</h2>
+    <div className="modal-overlay fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+      <div className="modal w-full max-w-md rounded-lg bg-surface-container-lowest p-6">
+        <h2 className="mb-4 text-xl font-bold text-on-surface">Create New Resume</h2>
         <input
           type="text"
-          className="w-full border border-gray-300 text-black rounded-md p-2 mb-4"
+          className="mb-4 w-full rounded-md border border-outline-variant bg-surface-container-high p-2 text-on-surface"
           placeholder="Enter resume name"
           value={newResumeName}
           onChange={(e) => setNewResumeName(e.target.value)}

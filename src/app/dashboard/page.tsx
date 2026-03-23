@@ -174,7 +174,7 @@ const Dashboard = () => {
 
       {/* Create Resume Modal */}
       <dialog className={`modal ${isModalOpen ? "modal-open" : ""}`}>
-        <div className="modal-box text-black">
+        <div className="modal-box bg-surface-container-lowest text-on-surface">
           <h3 className="font-bold text-lg mb-4">Create New Resume</h3>
           <div className="form-control w-full">
             <label className="label">

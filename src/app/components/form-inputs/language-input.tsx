@@ -23,14 +23,14 @@ const LanguageInput: React.FC<LanguageInputProps> = ({ id, language, proficiency
         type="text"
         name="language"
         value={language}
-        className="input input-bordered w-full text-black"
+        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
         placeholder="Enter a language"
         onChange={handleLanguageChange}
       />
       <select
         name="proficiency"
         value={proficiency}
-        className="select select-bordered w-full text-black"
+        className="select select-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
         onChange={handleProficiencyChange}
       >
         <option value="">Select proficiency</option>

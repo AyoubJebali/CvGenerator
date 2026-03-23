@@ -36,7 +36,7 @@ const ProjectInput: React.FC<ProjectInputProps> = ({ id, title, start, end, deta
         type="text"
         name="project_title"
         value={title}
-        className="input input-bordered w-full text-black"
+        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
         placeholder="Enter project title"
         onChange={handleTitleChange}
       />
@@ -49,7 +49,7 @@ const ProjectInput: React.FC<ProjectInputProps> = ({ id, title, start, end, deta
             type="date"
             name="project_start"
             value={start}
-            className="input input-bordered w-full text-black"
+            className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
             placeholder="Start date"
             onChange={handleStartChange}
           />
@@ -62,7 +62,7 @@ const ProjectInput: React.FC<ProjectInputProps> = ({ id, title, start, end, deta
             type="date"
             name="project_end"
             value={end}
-            className="input input-bordered w-full text-black"
+            className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
             placeholder="End date"
             onChange={handleEndChange}
           />
@@ -74,7 +74,7 @@ const ProjectInput: React.FC<ProjectInputProps> = ({ id, title, start, end, deta
       <textarea
         name="project_details"
         value={details}
-        className="textarea textarea-bordered w-full text-black bg-gray-50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all min-h-[100px] resize-vertical"
+        className="textarea textarea-bordered min-h-[100px] w-full resize-vertical rounded-lg border-outline-variant bg-surface-container-lowest text-on-surface shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-secondary"
         placeholder="Describe your project, achievements, and technologies used. Put each detail on a new line."
         onChange={handleDetailsChange}
         rows={4}

@@ -15,12 +15,12 @@ export default function SignInPage() {
   }
 
   else return (
-    <div className="min-h-screen flex items-center justify-center p-6">
+    <div className="min-h-screen flex items-center justify-center bg-surface p-6">
       <div className="w-full max-w-md">
-        <div className="card bg-white/95 shadow-2xl">
+        <div className="card bg-surface-container-lowest/95 shadow-2xl">
           <div className="card-body">
             <h1 className="text-2xl font-semibold text-center text-primary">Welcome back</h1>
-            <p className="text-sm text-center text-neutral">Sign in to save and manage your CVs</p>
+            <p className="text-center text-sm text-on-surface-variant">Sign in to save and manage your CVs</p>
 
             <div className="mt-6">
               <button className="btn btn-primary btn-block btn-lg flex items-center justify-center gap-3" onClick={() => signIn("google")}>
@@ -31,7 +31,7 @@ export default function SignInPage() {
               </button>
             </div>
 
-            <p className="text-xs text-center text-neutral mt-6">
+            <p className="mt-6 text-center text-xs text-on-surface-variant">
               By continuing you agree to our <a href="#" className="link link-primary">Terms</a> and <a href="#" className="link link-primary">Privacy Policy</a>.
             </p>
           </div>

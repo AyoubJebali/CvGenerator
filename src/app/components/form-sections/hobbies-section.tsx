@@ -41,15 +41,24 @@ export default function HobbiesSection() {
   };
 
   return (
-    <div className="collapse collapse-arrow bg-base-200 rounded-lg">
-      <input type="checkbox" name="hobbies-accordion" />
-      <div className="text-black collapse-title text-xl font-medium flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-puzzle-icon lucide-puzzle"><path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z"/></svg>
-        Hobbies
+    <section className="editor-section p-5 md:p-7">
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-[34px] font-extrabold text-on-surface">Hobbies</h3>
+        <button
+          className="editor-action-btn"
+          type="button"
+          onClick={addToArray}
+        >
+          + Add Hobby
+        </button>
       </div>
-      <div className="collapse-content">
-        <div className="space-y-4">
-          {items.map((item) => (
+      <div className="space-y-4">
+        {items.length === 0 ? (
+          <div className="rounded-2xl border-2 border-dashed border-outline-variant bg-surface-container-high px-6 py-10 text-center">
+            <p className="text-2xl font-medium text-on-surface-variant">Share your interests</p>
+          </div>
+        ) : (
+          items.map((item) => (
             <div key={item.id} className="flex items-center gap-4">
               <div className="flex-grow">
                 <HobbyInput
@@ -59,25 +68,16 @@ export default function HobbiesSection() {
                 />
               </div>
               <button
-                className="btn btn-outline btn-error btn-sm"
+                className="rounded-lg border border-outline-variant bg-surface-container-low px-3 py-1.5 text-sm font-semibold text-on-surface transition-colors hover:bg-surface-container-high"
                 type="button"
                 onClick={() => deleteItem(item.id)}
               >
                 Delete
               </button>
             </div>
-          ))}
-        </div>
-        <div className="text-right mt-4">
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={addToArray}
-          >
-            Add Hobby
-          </button>
-        </div>
+          ))
+        )}
       </div>
-    </div>
+    </section>
   );
 }

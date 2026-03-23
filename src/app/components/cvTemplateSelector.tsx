@@ -1,104 +1,99 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo } from "react";
+import Image from "next/image";
 
 type TemplateOption = {
-    id: string;
-    name: string;
-    preview: string;
+  id: string;
+  name: string;
+  preview: string;
+  description: string;
 };
 
 const templates: TemplateOption[] = [
-    {
-        id: "OneColumn",
-        name: "One Column",
-        preview: "/templates/OneColumn.png", // static preview image
-    },
-    {
-        id: "HeaderBanner",
-        name: "Header Banner",
-        preview: "/templates/HeaderBanner.png",
-    },
-    {
-        id: "SidebarDark",
-        name: "Sidebar Dark",
-        preview: "/templates/SidebarDark.png",
-    },
-    {
-        id: "TwoColumn",
-        name: "Two Column",
-        preview: "/templates/TwoColumn.png",
-    },
+  {
+    id: "OneColumn",
+    name: "One Column",
+    preview: "/templates/OneColumn.png",
+    description: "Classic, ATS-safe and balanced for most roles.",
+  },
+  {
+    id: "HeaderBanner",
+    name: "Header Banner",
+    preview: "/templates/HeaderBanner.png",
+    description: "Strong top identity section and modern hierarchy.",
+  },
+  {
+    id: "SidebarDark",
+    name: "Sidebar Dark",
+    preview: "/templates/SidebarDark.png",
+    description: "Bold sidebar layout for design-forward profiles.",
+  },
+  {
+    id: "TwoColumn",
+    name: "Two Column",
+    preview: "/templates/TwoColumn.png",
+    description: "Dense but clean split layout for rich content.",
+  },
 ];
 
 export default function CVTemplateSelector({
-    onSelect,
+  onSelect,
+  selected,
 }: {
-    onSelect: (templateId: string) => void;
+  onSelect: (templateId: string) => void;
+  selected: string;
 }) {
-    const [selected, setSelected] = useState<string>("OneColumn");
+  const activeTemplate = useMemo(
+    () => templates.find((tpl) => tpl.id === selected) ?? templates[0],
+    [selected]
+  );
 
-    const handleSelect = (id: string) => {
-        setSelected(id);
-        onSelect(id);
-    };
+  return (
+    <details className="dropdown dropdown-end">
+      <summary className="flex cursor-pointer list-none items-center gap-2 rounded-xl bg-surface-container-lowest px-4 py-2 text-sm font-semibold text-on-surface shadow-sm marker:content-['']">
+        <span className="text-on-surface-variant">Switch Template</span>
+        <span className="rounded-md bg-surface-container-high px-2 py-1 text-xs text-on-surface">
+          {activeTemplate.name}
+        </span>
+      </summary>
 
-    return (
-        <div className="space-y-4 bg-base-100 p-4 rounded-xl shadow text-base-content">
-            <h2 className="text-lg font-semibold">Choose a CV Template</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-4 max-h-[80vh] overflow-y-auto">
-                {templates.map((tpl) => {
-                    const isActive = selected === tpl.id;
-                    return (
-                        <div
-                            key={tpl.id}
-                            role="button"
-                            tabIndex={0}
-                            aria-pressed={isActive}
-                            onClick={() => handleSelect(tpl.id)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') handleSelect(tpl.id);
-                            }}
-                            className={`card bg-base-100 shadow-md hover:shadow-xl transition duration-200 border overflow-hidden 
-                            ${isActive ? 'border-primary ring-2 ring-primary/30' : 'border-base-200 hover:border-base-300'}
-                            `}
-                        >
-                            <div className="relative w-full bg-base-200">
-                                <div className="relative w-full aspect-[3/4]">
-                                    <img
-                                        src={tpl.preview}
-                                        alt={tpl.name}
-                                        className="absolute inset-0 w-full h-full object-contain p-2"
-                                    />
-                                </div>
-                                {isActive && (
-                                    <div className="absolute top-2 right-2 badge badge-primary gap-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
-                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3.25-3.25a1 1 0 111.414-1.414l2.543 2.543 6.543-6.543a1 1 0 011.414 0z" clipRule="evenodd" />
-                                        </svg>
-                                        Selected
-                                    </div>
-                                )}
-                            </div>
-                            <div className="card-body p-3">
-                                <div className="flex items-center justify-between">
-                                    <h3 className="card-title text-base">{tpl.name}</h3>
-                                    <button
-                                        className={`btn btn-xs ${isActive ? 'btn-primary' : 'btn-outline btn-primary'}`}
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleSelect(tpl.id);
-                                        }}
-                                    >
-                                        Use
-                                    </button>
-                                </div>
-                                <p className="text-xs opacity-70">Clean, ATS-friendly layout</p>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
+      <div className="dropdown-content z-30 mt-2 w-[360px] rounded-2xl border border-outline-variant bg-surface-container-low p-3 shadow-a4">
+        <p className="mb-2 px-1 text-xs font-semibold tracking-wide text-on-surface-variant">
+          Choose a layout
+        </p>
+        <div className="grid grid-cols-1 gap-2">
+          {templates.map((tpl) => {
+            const isActive = selected === tpl.id;
+            return (
+              <button
+                key={tpl.id}
+                type="button"
+                onClick={() => onSelect(tpl.id)}
+                className={`flex items-center gap-3 rounded-xl p-2 text-left transition ${
+                  isActive
+                    ? "bg-surface-container-lowest ring-2 ring-primary/30"
+                    : "bg-surface-container-high hover:bg-surface-container-lowest"
+                }`}
+              >
+                <div className="relative h-[66px] w-[50px] shrink-0 overflow-hidden rounded-md bg-surface-container">
+                  <Image
+                    src={tpl.preview}
+                    alt={tpl.name}
+                    fill
+                    className="object-contain p-1"
+                    sizes="50px"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold text-on-surface">{tpl.name}</p>
+                  <p className="line-clamp-2 text-xs text-on-surface-variant">{tpl.description}</p>
+                </div>
+              </button>
+            );
+          })}
         </div>
-    );
+      </div>
+    </details>
+  );
 }
