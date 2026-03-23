@@ -27,7 +27,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       />
 
       {/* Modal content */}
-      <div className="relative z-50 w-full max-w-md rounded-2xl bg-gray-800 p-6 shadow-xl">
+      <div className="relative z-50 w-full max-w-md rounded-2xl bg-surface-container-lowest p-6 text-on-surface shadow-xl">
         {children}
       </div>
     </div>

@@ -3,20 +3,55 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 25, 28, 29;
+  --background-start-rgb: 248, 249, 250;
+  --background-end-rgb: 248, 249, 250;
+  --surface: #f8f9fa;
+  --surface-container-low: #f3f4f5;
+  --surface-container: #edeeef;
+  --surface-container-high: #e7e8e9;
+  --surface-container-highest: #e1e3e4;
+  --surface-container-lowest: #ffffff;
+  --on-surface: #191c1d;
+  --on-surface-variant: #45474c;
+  --primary: #091426;
+  --primary-container: #1e293b;
+  --secondary: #0051d5;
+  --tertiary: #1c0048;
+  --primary-fixed: #d8e3fb;
+  --tertiary-fixed: #eaddff;
+  --on-primary: #ffffff;
+  --on-primary-fixed-variant: #3c475a;
+  --outline-variant: rgba(197, 198, 205, 0.2);
+  --a4-shadow: 0 20px 40px rgba(9, 20, 38, 0.05);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+[data-theme="curatordark"] {
+  --foreground-rgb: 233, 237, 255;
+  --background-start-rgb: 11, 19, 38;
+  --background-end-rgb: 11, 19, 38;
+  --surface: #0b1326;
+  --surface-container-low: #131b2e;
+  --surface-container: #1d2438;
+  --surface-container-high: #242c40;
+  --surface-container-highest: #2d3449;
+  --surface-container-lowest: #060e20;
+  --on-surface: #e9edff;
+  --on-surface-variant: #c2c6d6;
+  --primary: #adc6ff;
+  --primary-container: #4d8eff;
+  --secondary: #8db3ff;
+  --tertiary: #ffb786;
+  --primary-fixed: #89a9e8;
+  --tertiary-fixed: #3f2a1f;
+  --on-primary: #001737;
+  --on-primary-fixed-variant: #c2c6d6;
+  --outline-variant: rgba(66, 71, 84, 0.15);
+  --a4-shadow: 0 20px 40px rgba(6, 14, 32, 0.4);
 }
 
 body {
+  font-family: var(--font-inter), sans-serif;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -24,7 +59,77 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-    min-width: 320px;
+  min-width: 320px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-manrope), sans-serif;
+}
+
+.a4-shadow {
+  box-shadow: var(--a4-shadow);
+}
+
+.curator-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.curator-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.curator-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: 9999px;
+}
+
+.editor-section {
+  border-radius: 18px;
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  box-shadow: 0 6px 20px rgba(17, 24, 39, 0.03);
+}
+
+.editor-section-title {
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.editor-action-btn {
+  border-radius: 12px;
+  background: var(--surface-container-high);
+  color: var(--on-surface);
+  font-size: 22px;
+  font-weight: 600;
+  padding: 8px 16px;
+  transition: background-color 0.2s ease;
+}
+
+.editor-action-btn:hover {
+  background: var(--surface-container-highest);
+}
+
+.input[type="date"] {
+  color-scheme: light;
+}
+
+[data-theme="curatordark"] .input[type="date"] {
+  color-scheme: dark;
+}
+
+[data-theme="curatordark"] .input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.9) brightness(1.2);
+}
+
+[data-theme="curatorlight"] .input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: none;
 }
 
 @layer utilities {

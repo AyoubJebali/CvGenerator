@@ -23,7 +23,7 @@ const SkillInput: React.FC<SkillInputProps> = ({ id, skill, category, updateItem
         type="text"
         name="skill"
         value={skill}
-        className="input input-bordered w-full text-black"
+        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
         placeholder="Enter a skill"
         onChange={handleSkillChange}
       />
@@ -31,7 +31,7 @@ const SkillInput: React.FC<SkillInputProps> = ({ id, skill, category, updateItem
         type="text"
         name="skill_category"
         value={category}
-        className="input input-bordered w-full text-black"
+        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
         placeholder="Enter category"
         onChange={handleCategoryChange}
       />

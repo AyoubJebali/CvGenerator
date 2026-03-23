@@ -67,20 +67,20 @@ const EditResumePage = () => {
 
   if (status === "loading" || loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <span className="loading loading-spinner loading-lg text-blue-600"></span>
+      <div className="flex min-h-screen items-center justify-center">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
       </div>
     );
   }
 
   if (error || !resume) {
     return (
-      <div className="container mx-auto text-center py-16">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">Resume Not Found</h1>
-        <p className="text-gray-500 mb-6">{error || "The resume you're looking for doesn't exist."}</p>
+      <div className="container mx-auto py-16 text-center">
+        <h1 className="mb-4 text-2xl font-bold text-on-surface">Resume Not Found</h1>
+        <p className="mb-6 text-on-surface-variant">{error || "The resume you're looking for doesn't exist."}</p>
         <Link
           href="/dashboard/resumes"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-on-primary transition-colors hover:bg-primary-container"
         >
           <FiArrowLeft size={18} />
           Back to Resumes
@@ -92,17 +92,17 @@ const EditResumePage = () => {
   return (
     <div className="container mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+      <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div className="flex items-center gap-4">
           <Link
             href="/dashboard/resumes"
-            className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            className="rounded-lg p-2 text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
           >
             <FiArrowLeft size={24} />
           </Link>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Edit: {resume.name}</h1>
-            <p className="text-gray-500 mt-1">
+            <h1 className="text-3xl font-bold text-on-surface">Edit: {resume.name}</h1>
+            <p className="mt-1 text-on-surface-variant">
               Make changes to your resume
             </p>
           </div>
@@ -110,13 +110,13 @@ const EditResumePage = () => {
         <div className="flex items-center gap-3">
           <Link
             href={`/dashboard/resumes/${resumeId}`}
-            className="flex items-center gap-2 px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-2 rounded-lg border border-outline-variant px-4 py-2 text-on-surface transition-colors hover:bg-surface-container-high"
           >
             <FiEye size={18} />
             Preview
           </Link>
           <button
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-on-primary transition-colors hover:bg-primary-container disabled:opacity-50"
             onClick={handleSave}
             disabled={saving}
           >
@@ -138,17 +138,17 @@ const EditResumePage = () => {
       {/* Editor */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Form Section */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Resume Details</h2>
+        <div className="rounded-lg bg-surface-container-lowest p-6 shadow-lg">
+          <h2 className="mb-4 text-xl font-bold text-on-surface">Resume Details</h2>
           {/* Add your form fields here */}
-          <p className="text-gray-500">Form fields go here...</p>
+          <p className="text-on-surface-variant">Form fields go here...</p>
         </div>
 
         {/* Preview Section */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Live Preview</h2>
+        <div className="rounded-lg bg-surface-container-lowest p-6 shadow-lg">
+          <h2 className="mb-4 text-xl font-bold text-on-surface">Live Preview</h2>
           {/* Render your CV template here */}
-          <pre className="text-sm text-gray-600 whitespace-pre-wrap">
+          <pre className="whitespace-pre-wrap text-sm text-on-surface-variant">
             {JSON.stringify(resumeData, null, 2)}
           </pre>
         </div>
