@@ -6,7 +6,7 @@ import CvHeaderBanner from "./components/templates/CvHeaderBanner";
 import CvSidebarDark from "./components/templates/CvSideBarDark";
 import CvTwoColumn from "./components/templates/CvTwoColumn";
 import CVTemplateSelector from "./components/cvTemplateSelector";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, Suspense } from "react";
 import { printComponent } from "./components/printCv";
 import { useCv } from "./components/CvContext";
 import { ResumeSchema } from "@/types";
@@ -16,7 +16,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { FiSave } from "react-icons/fi";
 import { createUserResume, updateUserResume } from "./dashboard/actions";
 
-export default function Home() {
+function HomeContent() {
   const [selectedTemplate, setSelectedTemplate] = useState<string>("OneColumn");
   const { data, setData } = useCv();
   const router = useRouter();
@@ -237,5 +237,13 @@ export default function Home() {
         </button>
       </div>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
   );
 }

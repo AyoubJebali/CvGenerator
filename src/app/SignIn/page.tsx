@@ -10,6 +10,7 @@ export default function SignInPage() {
       router.push("/");
     }
   }, [session, router]);
+
   if (session?.user) {
     return null;
   }
