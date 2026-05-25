@@ -1,6 +1,6 @@
 import { db } from './drizzle'; 
 import { resumes } from './schema'; 
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 
 // Function to create a new resume
 export const createResume = async (userId: string, name: string, resumeData: object) => {
@@ -48,5 +48,56 @@ export const deleteResume = async (resumeId: string) => {
   } catch (error) {
     console.error('Error deleting resume:', error);
     throw error; // Rethrow the error for the caller to handle
+  }
+};
+
+export const deleteResumeForUser = async (resumeId: string, userId: string) => {
+  try {
+    const deletedResume = await db
+      .delete(resumes)
+      .where(and(eq(resumes.id, resumeId), eq(resumes.userId, userId)))
+      .returning();
+
+    return deletedResume[0] ?? null;
+  } catch (error) {
+    console.error('Error deleting resume for user:', error);
+    throw error;
+  }
+};
+
+export const getResumeByIdForUser = async (resumeId: string, userId: string) => {
+  try {
+    const result = await db
+      .select()
+      .from(resumes)
+      .where(and(eq(resumes.id, resumeId), eq(resumes.userId, userId)))
+      .limit(1);
+
+    return result[0] ?? null;
+  } catch (error) {
+    console.error('Error retrieving resume by id for user:', error);
+    throw error;
+  }
+};
+
+export const updateResumeForUser = async (
+  resumeId: string,
+  userId: string,
+  resumeData: object
+) => {
+  try {
+    const updatedResume = await db
+      .update(resumes)
+      .set({
+        resumeData,
+        lastModified: new Date(),
+      })
+      .where(and(eq(resumes.id, resumeId), eq(resumes.userId, userId)))
+      .returning();
+
+    return updatedResume[0] ?? null;
+  } catch (error) {
+    console.error('Error updating resume for user:', error);
+    throw error;
   }
 };

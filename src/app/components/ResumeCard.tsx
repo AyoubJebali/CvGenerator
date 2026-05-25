@@ -7,7 +7,7 @@ interface ResumeCardProps {
   editedDaysAgo: number;
   imageSrc: string;
   onDelete: (id: string) => Promise<void>;
-  onEdit?: (id: string) => void;
+  onEdit?: (id: string) => void | Promise<void>;
   onView?: (id: string) => void;
 }
 

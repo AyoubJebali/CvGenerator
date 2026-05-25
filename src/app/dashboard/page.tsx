@@ -3,23 +3,26 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import ResumeCard from "../components/ResumeCard";
 import { useSession } from "next-auth/react";
-import { Resume } from "@/types";
-import { fetchUserResumes, createUserResume, deleteUserResume } from "./actions";
+import { Resume, ResumeSchema } from "@/types";
+import { fetchUserResumes, createUserResume, deleteUserResume, fetchResumeById } from "./actions";
 import { FiPlus, FiFileText } from "react-icons/fi";
+import { useCv } from "../components/CvContext";
 
 const Dashboard = () => {
   const { data: session, status } = useSession();
+  const { setData } = useCv();
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newResumeName, setNewResumeName] = useState("");
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [loading, setLoading] = useState(true);
   const [isCreating, setIsCreating] = useState(false);
+  const [isPrefilling, setIsPrefilling] = useState(false);
 
   // Check for session and redirect if not authenticated
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/signin");
+      router.push("/SignIn");
     }
   }, [status, router]);
 
@@ -27,7 +30,7 @@ const Dashboard = () => {
   const loadResumes = useCallback(async () => {
     if (!session?.user?.id) return;
     setLoading(true);
-    const result = await fetchUserResumes(session.user.id);
+    const result = await fetchUserResumes();
     if (result.success) {
       setResumes(result.resumes ?? []);
     } else {
@@ -51,8 +54,22 @@ const Dashboard = () => {
   };
 
   // Handle edit resume
-  const handleEditResume = (resumeId: string) => {
-    router.push(`/dashboard/resumes/${resumeId}/edit`);
+  const handleEditResume = async (resumeId: string) => {
+    setIsPrefilling(true);
+    try {
+      const result = await fetchResumeById(resumeId);
+      if (!result.success) {
+        console.error(result.error);
+        return;
+      }
+
+      setData(result.resume.resumeData as ResumeSchema);
+      router.push(`/?resumeId=${resumeId}`);
+    } catch (error) {
+      console.error("Error loading resume for edit:", error);
+    } finally {
+      setIsPrefilling(false);
+    }
   };
 
   // Handle view resume
@@ -65,7 +82,7 @@ const Dashboard = () => {
     if (!session?.user?.id || !newResumeName.trim()) return;
     setIsCreating(true);
     try {
-      const result = await createUserResume(session.user.id, newResumeName);
+      const result = await createUserResume(newResumeName);
       if (result.success) {
         loadResumes();
       }
@@ -85,7 +102,7 @@ const Dashboard = () => {
   };
 
   // Loading state
-  if (status === "loading" || loading) {
+  if (status === "loading" || loading || isPrefilling) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <span className="loading loading-spinner loading-lg text-primary"></span>

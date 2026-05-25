@@ -3,23 +3,26 @@ import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { fetchResumeById } from "@/app/dashboard/actions";
-import { Resume } from "@/types";
+import { Resume, ResumeSchema } from "@/types";
 import { FiArrowLeft, FiEdit2, FiDownload, FiPrinter } from "react-icons/fi";
 import Link from "next/link";
+import { useCv } from "@/app/components/CvContext";
 
 const ViewResumePage = () => {
   const params = useParams();
   const router = useRouter();
   const { data: session, status } = useSession();
+  const { setData } = useCv();
   const [resume, setResume] = useState<Resume | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isPrefilling, setIsPrefilling] = useState(false);
 
   const resumeId = params.id as string;
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/signin");
+      router.push("/SignIn");
     }
   }, [status, router]);
 
@@ -44,7 +47,19 @@ const ViewResumePage = () => {
     loadResume();
   }, [resumeId]);
 
-  if (status === "loading" || loading) {
+  const handleEditResume = async () => {
+    if (!resume) return;
+
+    setIsPrefilling(true);
+    try {
+      setData(resume.resumeData as ResumeSchema);
+      router.push(`/?resumeId=${resumeId}`);
+    } finally {
+      setIsPrefilling(false);
+    }
+  };
+
+  if (status === "loading" || loading || isPrefilling) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <span className="loading loading-spinner loading-lg text-primary"></span>
@@ -95,13 +110,13 @@ const ViewResumePage = () => {
             <FiDownload size={18} />
             Download PDF
           </button>
-          <Link
-            href={`/dashboard/resumes/${resumeId}/edit`}
+          <button
+            onClick={handleEditResume}
             className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-on-primary transition-colors hover:bg-primary-container"
           >
             <FiEdit2 size={18} />
             Edit Resume
-          </Link>
+          </button>
         </div>
       </div>
 
