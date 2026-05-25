@@ -1,11 +1,17 @@
 "use server";
 
-import { db } from "@/app/lib/db/drizzle";
-import { resumes } from "@/app/lib/db/schema";
-import { eq } from "drizzle-orm";
-import { ResumeSchema } from "@/types";
-import { Resume } from "@/types";
-import {createResume, getUserResumes} from '@/app/lib/db/queries';
+import { getServerSession } from "next-auth";
+import { z } from "zod";
+import { authOptions } from "@/app/lib/auth";
+import {
+  createResume,
+  deleteResumeForUser,
+  getResumeByIdForUser,
+  getUserResumes,
+  updateResumeForUser,
+} from "@/app/lib/db/queries";
+import { ResumeSchema, Resume, UserProfileSchema } from "@/types";
+
 // Empty initial data
 const emptyCvData: ResumeSchema = {
   name: "",
@@ -26,26 +32,46 @@ const emptyCvData: ResumeSchema = {
   studies_training: [],
   experiences: [],
 };
+
+const ResumeIdSchema = z.string().uuid();
+
 type FetchSingleResult =
   | { success: true; resume: Resume }
   | { success: false; error: string };
 
-  type CreateResult =
+type CreateResult =
   | { success: true; resume: Resume }
   | { success: false; error: string };
-  
+
+const getAuthenticatedUserId = async () => {
+  const session = await getServerSession(authOptions);
+  return session?.user?.id ?? null;
+};
+
+const mapResume = (resume: {
+  id: string;
+  name: string | null;
+  userId: string;
+  resumeData: unknown;
+  lastModified: Date | null;
+}): Resume => ({
+  id: resume.id,
+  name: resume.name ?? "",
+  userId: resume.userId,
+  resumeData: resume.resumeData as object,
+  lastModified: resume.lastModified?.toISOString() ?? new Date().toISOString(),
+});
+
 // Fetch all resumes for a specific user
-export const fetchUserResumes = async (userId: string) => {
+export const fetchUserResumes = async () => {
   try {
+    const userId = await getAuthenticatedUserId();
+    if (!userId) {
+      return { success: false, error: "Unauthorized" };
+    }
+
     const userResumes = await getUserResumes(userId);
-    //   // Map database results to Resume type
-    const mappedResumes: Resume[] = userResumes.map((r) => ({
-      id: r.id,
-      name: r.name ?? "",
-      userId: r.userId,
-      resumeData: r.resumeData as object,
-      lastModified: r.lastModified?.toISOString() ?? new Date().toISOString(),
-    }));
+    const mappedResumes: Resume[] = userResumes.map(mapResume);
     return { success: true, resumes: mappedResumes };
   } catch (error) {
     console.error("Error fetching user resumes:", error);
@@ -54,18 +80,29 @@ export const fetchUserResumes = async (userId: string) => {
 };
 
 // Create a new resume for a specific user
-export const createUserResume = async (userId: string, name: string) => {
+export const createUserResume = async (name: string, resumeData?: ResumeSchema) => {
   try {
-    const newResume = await db
-      .insert(resumes)
-      .values({
-        userId,
-        name,
-        resumeData: emptyCvData,
-        lastModified: new Date(),
-      })
-      .returning();
-    return { success: true, resume: newResume[0] };
+    const userId = await getAuthenticatedUserId();
+    if (!userId) {
+      return { success: false, error: "Unauthorized" };
+    }
+
+    const trimmedName = name.trim();
+    if (!trimmedName) {
+      return { success: false, error: "Resume name is required" };
+    }
+
+    const parsedResumeData = resumeData ? UserProfileSchema.safeParse(resumeData) : null;
+    if (parsedResumeData && !parsedResumeData.success) {
+      return { success: false, error: "Invalid resume data" };
+    }
+
+    const newResume = await createResume(
+      userId,
+      trimmedName,
+      parsedResumeData?.data ?? emptyCvData,
+    );
+    return { success: true, resume: mapResume(newResume) };
   } catch (error) {
     console.error("Error creating resume:", error);
     return { success: false, error: "Failed to create resume" };
@@ -75,38 +112,36 @@ export const createUserResume = async (userId: string, name: string) => {
 // Delete a resume by its ID
 export const deleteUserResume = async (resumeId: string) => {
   try {
-    const deletedResume = await db
-      .delete(resumes)
-      .where(eq(resumes.id, resumeId))
-      .returning();
-    return { success: true, resume: deletedResume[0] };
+    const userId = await getAuthenticatedUserId();
+    if (!userId) {
+      return { success: false, error: "Unauthorized" };
+    }
+
+    const deletedResume = await deleteResumeForUser(resumeId, userId);
+    if (!deletedResume) {
+      return { success: false, error: "Resume not found" };
+    }
+    return { success: true, resume: mapResume(deletedResume) };
   } catch (error) {
     console.error("Error deleting resume:", error);
     return { success: false, error: "Failed to delete resume" };
   }
 };
+
 // Fetch a single resume by ID
 export const fetchResumeById = async (resumeId: string): Promise<FetchSingleResult> => {
   try {
-    const result = await db
-      .select()
-      .from(resumes)
-      .where(eq(resumes.id, resumeId))
-      .limit(1);
+    const userId = await getAuthenticatedUserId();
+    if (!userId) {
+      return { success: false, error: "Unauthorized" };
+    }
 
-    if (!result[0]) {
+    const resume = await getResumeByIdForUser(resumeId, userId);
+    if (!resume) {
       return { success: false, error: "Resume not found" };
     }
 
-    const mapped: Resume = {
-      id: result[0].id,
-      name: result[0].name ?? "",
-      userId: result[0].userId,
-      resumeData: result[0].resumeData as object,
-      lastModified: result[0].lastModified?.toISOString() ?? new Date().toISOString(),
-    };
-
-    return { success: true, resume: mapped };
+    return { success: true, resume: mapResume(resume) };
   } catch (error) {
     console.error("Error fetching resume:", error);
     return { success: false, error: "Failed to fetch resume" };
@@ -116,28 +151,27 @@ export const fetchResumeById = async (resumeId: string): Promise<FetchSingleResu
 // Update a resume
 export const updateUserResume = async (resumeId: string, resumeData: ResumeSchema): Promise<CreateResult> => {
   try {
-    const updatedResume = await db
-      .update(resumes)
-      .set({
-        resumeData,
-        lastModified: new Date(),
-      })
-      .where(eq(resumes.id, resumeId))
-      .returning();
+    const userId = await getAuthenticatedUserId();
+    if (!userId) {
+      return { success: false, error: "Unauthorized" };
+    }
 
-    if (!updatedResume[0]) {
+    const parsedResumeId = ResumeIdSchema.safeParse(resumeId);
+    if (!parsedResumeId.success) {
+      return { success: false, error: "Invalid resume ID" };
+    }
+
+    const parsed = UserProfileSchema.safeParse(resumeData);
+    if (!parsed.success) {
+      return { success: false, error: "Invalid resume data" };
+    }
+
+    const updatedResume = await updateResumeForUser(parsedResumeId.data, userId, parsed.data);
+    if (!updatedResume) {
       return { success: false, error: "Resume not found" };
     }
 
-    const mapped: Resume = {
-      id: updatedResume[0].id,
-      name: updatedResume[0].name ?? "",
-      userId: updatedResume[0].userId,
-      resumeData: updatedResume[0].resumeData as object,
-      lastModified: updatedResume[0].lastModified?.toISOString() ?? new Date().toISOString(),
-    };
-
-    return { success: true, resume: mapped };
+    return { success: true, resume: mapResume(updatedResume) };
   } catch (error) {
     console.error("Error updating resume:", error);
     return { success: false, error: "Failed to update resume" };

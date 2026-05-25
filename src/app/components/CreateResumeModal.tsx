@@ -1,36 +1,13 @@
 import React, { useState } from "react";
 import { createUserResume } from "@/app/dashboard/actions";
-import { ResumeSchema } from "@/types";
 
 interface CreateResumeModalProps {
-  userId: string;
   isOpen: boolean;
   onClose: () => void;
   onResumeCreated: () => void; // Callback to refresh resumes after creation
 }
 
-const emptyCvData: ResumeSchema = {
-  name: "",
-  title: "",
-  contact: {
-    email: "",
-    phone: "",
-    location: "",
-    linkedin: "",
-    github: "",
-  },
-  about: "",
-  skills: [],
-  languages: [],
-  hobbies: [],
-  objectives: "",
-  projects: [],
-  studies_training: [],
-  experiences: [],
-};
-
 const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
-  userId,
   isOpen,
   onClose,
   onResumeCreated,
@@ -39,7 +16,7 @@ const CreateResumeModal: React.FC<CreateResumeModalProps> = ({
 
   const handleCreateResume = async () => {
     try {
-      await createUserResume(userId, newResumeName);
+      await createUserResume(newResumeName);
       onResumeCreated(); // Refresh resumes after creation
       onClose(); // Close the modal
     } catch (err) {

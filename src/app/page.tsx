@@ -6,18 +6,24 @@ import CvHeaderBanner from "./components/templates/CvHeaderBanner";
 import CvSidebarDark from "./components/templates/CvSideBarDark";
 import CvTwoColumn from "./components/templates/CvTwoColumn";
 import CVTemplateSelector from "./components/cvTemplateSelector";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, Suspense } from "react";
 import { printComponent } from "./components/printCv";
 import { useCv } from "./components/CvContext";
 import { ResumeSchema } from "@/types";
 import previewSeedData from "./lib/preview-seed.json";
 import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FiSave } from "react-icons/fi";
+import { createUserResume, updateUserResume } from "./dashboard/actions";
 
-export default function Home() {
+function HomeContent() {
   const [selectedTemplate, setSelectedTemplate] = useState<string>("OneColumn");
   const { data, setData } = useCv();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [currentResumeId, setCurrentResumeId] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -51,6 +57,53 @@ export default function Home() {
       { title: "My CV", theme: "curatorlight" }
     );
   }, [selectedTemplate, data]);
+
+  useEffect(() => {
+    setCurrentResumeId(searchParams.get("resumeId"));
+  }, [searchParams]);
+
+  const handleSaveResume = useCallback(async () => {
+    setIsSaving(true);
+    setSaveMessage(null);
+
+    try {
+      if (currentResumeId) {
+        const result = await updateUserResume(currentResumeId, data);
+        if (!result.success) {
+          setSaveMessage({ type: "error", text: result.error ?? "Failed to update resume" });
+          return;
+        }
+
+        setSaveMessage({ type: "success", text: "Resume saved." });
+        return;
+      }
+
+      const createResult = await createUserResume(data.name.trim() || "Untitled Resume");
+      if (!createResult.success) {
+        setSaveMessage({ type: "error", text: createResult.error ?? "Failed to create resume" });
+        return;
+      }
+      if (!createResult.resume || !createResult.resume.id) {
+        setSaveMessage({ type: "error", text: "Failed to retrieve created resume ID." });
+        return;
+      }
+      const createdResumeId = createResult.resume.id;
+      const updateResult = await updateUserResume(createdResumeId, data);
+      if (!updateResult.success) {
+        setSaveMessage({ type: "error", text: updateResult.error });
+        return;
+      }
+
+      setCurrentResumeId(createdResumeId);
+      router.replace(`/?resumeId=${createdResumeId}`);
+      setSaveMessage({ type: "success", text: "Resume saved." });
+    } catch (error) {
+      console.error("Error saving resume:", error);
+      setSaveMessage({ type: "error", text: "Failed to save resume" });
+    } finally {
+      setIsSaving(false);
+    }
+  }, [currentResumeId, data, router]);
 
   const handleLoadTestData = useCallback(() => {
     setData(previewSeedData as ResumeSchema);
@@ -153,6 +206,44 @@ export default function Home() {
           </div>
         </section>
       </div>
+      <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+        {saveMessage && (
+          <div
+            className={`rounded-lg px-3 py-2 text-sm shadow-lg ${
+              saveMessage.type === "success"
+                ? "bg-green-600 text-white"
+                : "bg-red-600 text-white"
+            }`}
+          >
+            {saveMessage.text}
+          </div>
+        )}
+        <button
+          onClick={handleSaveResume}
+          disabled={isSaving}
+          className="flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-on-primary shadow-xl transition-colors hover:bg-primary-container disabled:opacity-60"
+        >
+          {isSaving ? (
+            <>
+              <span className="loading loading-spinner loading-sm"></span>
+              Saving...
+            </>
+          ) : (
+            <>
+              <FiSave size={16} />
+              Save
+            </>
+          )}
+        </button>
+      </div>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
   );
 }
