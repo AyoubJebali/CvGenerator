@@ -1,43 +1,32 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React from 'react';
 import HobbyInput from '../form-inputs/hobby-input';
 import { useCv } from "../CvContext";
-interface Item {
-  id: string;
-  hobby: string;
-}
 
 export default function HobbiesSection() {
   const { data, setData } = useCv();
-  const [items, setItems] = useState<Item[]>([]);
-
-  // Initialize items from context data on mount
-  useEffect(() => {
-    const initialItems = (data.hobbies || []).map(hobby => ({
-      id: uuidv4(),
-      hobby: hobby || "",
-    }));
-    setItems(initialItems);
-  }, []);
+  const items = (data.hobbies || []).map(hobby => hobby || "");
 
   const addToArray = () => {
-    const newItem: Item = { id: uuidv4(), hobby: '' };
-    setItems((prevItems) => [...prevItems, newItem]);
+    setData((prev) => ({ ...prev, hobbies: [...(prev.hobbies || []), ''] }));
   };
 
   const deleteItem = (id: string) => {
-    const updatedItems = items.filter(item => item.id !== id);
-    setItems(updatedItems);
-    setData({ ...data, hobbies: updatedItems.map(item => item.hobby) });
+    const index = Number(id);
+    if (Number.isNaN(index)) return;
+    setData((prev) => ({
+      ...prev,
+      hobbies: (prev.hobbies || []).filter((_, idx) => idx !== index),
+    }));
   };
 
   const updateItem = (id: string, hobby: string) => {
-    const updatedItems = items.map(item =>
-      item.id === id ? { ...item, hobby } : item
-    );
-    setItems(updatedItems);
-    setData({ ...data, hobbies: updatedItems.map(item => item.hobby) });
+    const index = Number(id);
+    if (Number.isNaN(index)) return;
+    setData((prev) => ({
+      ...prev,
+      hobbies: (prev.hobbies || []).map((item, idx) => (idx === index ? hobby : item)),
+    }));
   };
 
   return (
@@ -58,19 +47,19 @@ export default function HobbiesSection() {
             <p className="text-2xl font-medium text-on-surface-variant">Share your interests</p>
           </div>
         ) : (
-          items.map((item) => (
-            <div key={item.id} className="flex items-center gap-4">
+          items.map((hobby, index) => (
+            <div key={`hobby-${index}`} className="flex items-center gap-4">
               <div className="flex-grow">
                 <HobbyInput
-                  id={item.id}
-                  hobby={item.hobby}
+                  id={`${index}`}
+                  hobby={hobby}
                   updateItem={updateItem}
                 />
               </div>
               <button
                 className="rounded-lg border border-outline-variant bg-surface-container-low px-3 py-1.5 text-sm font-semibold text-on-surface transition-colors hover:bg-surface-container-high"
                 type="button"
-                onClick={() => deleteItem(item.id)}
+                onClick={() => deleteItem(`${index}`)}
               >
                 Delete
               </button>

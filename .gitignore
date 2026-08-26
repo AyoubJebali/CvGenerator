@@ -39,3 +39,10 @@ yarn-error.log*
 next-env.d.ts
 # md files
 *.md
+
+# leaked CV data (see ANALYSIS.md #7)
+/public/generated-cv.json
+
+# claude code tooling artifacts
+/.lavish/
+skills-lock.json

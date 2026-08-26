@@ -1,6 +1,5 @@
 "use client";
-import React, { useActionState } from "react";
-import { validateForm } from "@/app/lib/actions";
+import React from "react";
 import SkillSectionBase from "./form-sections/skill-section";
 import PersonalInfoSectionBase from "./form-sections/personal-info-section";
 import LanguagesSectionBase from "./form-sections/languages-section";
@@ -11,11 +10,9 @@ import StudiesSectionBase from "./form-sections/education-section";
 import ExperienceSectionBase from "./form-sections/experience-section";
 
 export default function Form() {
-  const [, dispatch] = useActionState(validateForm, null);
-
   return (
     <div className="max-w-4xl">
-      <form action={dispatch} className="space-y-6">
+      <div className="space-y-6">
         <PersonalInfoSectionBase />
         <ExperienceSectionBase />
         <StudiesSectionBase />
@@ -24,7 +21,7 @@ export default function Form() {
         <LanguagesSectionBase />
         <HobbiesSectionBase />
         <ObjectivesSectionBase />
-      </form>
+      </div>
     </div>
   );
 }

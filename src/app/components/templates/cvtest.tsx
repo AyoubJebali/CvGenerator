@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 const resumeData = {
   "name": "Mahdi BARHOUMI",
@@ -73,11 +74,11 @@ const Cvtest = () => {
   return (
     <div className="grid grid-cols-3 gap-4 max-w-5xl mx-auto my-24 shadow-lg bg-red-700 cursor-zoom-in">
       <div className="col-span-1 p-12 bg-blue-600 text-white">
-        <img 
+        <Image
           className="rounded-full mx-auto mb-12"
-          src="/images/portrait.png" 
-          alt="Portrait" 
-          width={200} 
+          src="/images/portrait.png"
+          alt="Portrait"
+          width={200}
           height={200}
         />
         <div className="mb-6">
@@ -87,11 +88,11 @@ const Cvtest = () => {
             rel="noopener noreferrer"
             className="flex items-center mb-4"
           >
-            <img 
-              src="/CV/images/linkedin.png" 
-              alt="LinkedIn" 
-              width={15} 
-              height={15} 
+            <Image
+              src="/CV/images/linkedin.png"
+              alt="LinkedIn"
+              width={15}
+              height={15}
               className="mr-2"
             />
             {resumeData.contact.linkedin.split('/').pop()}
@@ -106,11 +107,11 @@ const Cvtest = () => {
           <ul className="list-none p-0 text-lg tracking-wider">
             {resumeData.skills.map(skill => (
               <li key={skill} className="flex items-center mb-2">
-                <img 
-                  src="/CV/images/checkmark.png" 
-                  alt="Checkmark" 
-                  width={15} 
-                  height={15} 
+                <Image
+                  src="/CV/images/checkmark.png"
+                  alt="Checkmark"
+                  width={15}
+                  height={15}
                   className="mr-2"
                 />
                 <strong>{skill}</strong>
@@ -142,31 +143,31 @@ const Cvtest = () => {
           <p className="mb-4">{resumeData.title}</p>
           <ul className="columns-2 list-none p-0">
             <li className="flex items-center mb-2">
-              <img 
-                src="/CV/images/email.png" 
-                alt="Email" 
-                width={15} 
-                height={15} 
+              <Image
+                src="/CV/images/email.png"
+                alt="Email"
+                width={15}
+                height={15}
                 className="mr-2"
               />
               <a href={`mailto:${resumeData.contact.email}`}>{resumeData.contact.email}</a>
             </li>
             <li className="flex items-center mb-2">
-              <img 
-                src="/CV/images/phone.png" 
-                alt="Phone" 
-                width={15} 
-                height={15} 
+              <Image
+                src="/CV/images/phone.png"
+                alt="Phone"
+                width={15}
+                height={15}
                 className="mr-2"
               />
               {resumeData.contact.phone}
             </li>
             <li className="flex items-center mb-2">
-              <img 
-                src="/CV/images/location.png" 
-                alt="Location" 
-                width={15}  
-                height={15} 
+              <Image
+                src="/CV/images/location.png"
+                alt="Location"
+                width={15}
+                height={15}
                 className="mr-2"
               />
               {resumeData.contact.location}

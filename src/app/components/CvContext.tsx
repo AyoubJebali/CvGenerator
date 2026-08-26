@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
-import { ResumeSchema } from "@/types";
+import { ResumeSchema, UserProfileSchema } from "@/types";
 
 // Empty initial data
 const emptyCvData: ResumeSchema = {
@@ -33,15 +33,19 @@ type CvContextType = {
 const CvContext = createContext<CvContextType | null>(null);
 
 export const CvProvider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = useState<ResumeSchema>(emptyCvData);
+  const [data, setData] = useState<ResumeSchema>(() => {
+    if (typeof window === "undefined") return emptyCvData;
+    const saved = localStorage.getItem("cvData");
+    if (!saved) return emptyCvData;
+    try {
+      const result = UserProfileSchema.safeParse(JSON.parse(saved));
+      return result.success ? result.data : emptyCvData;
+    } catch {
+      return emptyCvData;
+    }
+  });
   const { status } = useSession();
   const prevStatus = useRef(status);
-
-  // On mount (client only), load from localStorage if available
-  useEffect(() => {
-    const saved = typeof window !== "undefined" ? localStorage.getItem("cvData") : null;
-    if (saved) setData(JSON.parse(saved));
-  }, []);
 
   // Save to localStorage whenever data changes
   useEffect(() => {
