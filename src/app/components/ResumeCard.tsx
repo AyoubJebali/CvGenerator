@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { FiEye, FiEdit2, FiTrash2, FiMoreVertical } from "react-icons/fi";
 
 interface ResumeCardProps {
@@ -48,10 +49,11 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
       <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow group">
         {/* Card Image */}
         <figure className="relative h-48 bg-base-200 overflow-hidden">
-          <img
+          <Image
             src={imageSrc}
             alt={`${title} Preview`}
-            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+            fill
+            className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
           />
           {/* Overlay with actions */}
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
@@ -124,7 +126,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
         <div className="modal-box">
           <h3 className="font-bold text-lg">Delete Resume</h3>
           <p className="py-4">
-            Are you sure you want to delete <strong>"{title}"</strong>? This action cannot be undone.
+            Are you sure you want to delete <strong>&ldquo;{title}&rdquo;</strong>? This action cannot be undone.
           </p>
           <div className="modal-action">
             <button

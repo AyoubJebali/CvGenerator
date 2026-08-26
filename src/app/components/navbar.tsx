@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { useSession, signOut, signIn } from "next-auth/react";
 import { useCv } from "./CvContext";
 import ThemeToggle from "./themeToggle";
@@ -17,10 +18,12 @@ const NavBar: React.FC = () => {
       {session?.user ? (
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <img
+          <Image
             src={session.user.image ?? "/default-avatar.png"}
             alt={session.user.name ?? session.user.email ?? "User"}
-            className="w-9 h-9 rounded-full object-cover"
+            width={36}
+            height={36}
+            className="rounded-full object-cover"
           />
           <span className="text-sm font-medium text-primary">
             {session.user.name ?? session.user.email}

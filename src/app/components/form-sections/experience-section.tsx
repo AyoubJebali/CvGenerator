@@ -1,69 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import React from "react";
 import ExperienceInput from "../form-inputs/experience-input";
 import { useCv } from "../CvContext";
 
-interface Item {
-    id: string;
-    position: string;
-    company: string;
-    start: string;
-    end: string;
-    details: string;
-}
-
 export default function ExperienceSection() {
     const { data, setData } = useCv();
-    const [items, setItems] = useState<Item[]>([]);
-
-    // Initialize items from context data
-    useEffect(() => {
-        const initialItems = (data.experiences || []).map((item) => ({
-            id: uuidv4(),
-            position: item.position || "",
-            company: item.company || "",
-            start: item.start || "",
-            end: item.end || "",
-            details: Array.isArray(item.details) ? item.details.join('\n') : (item.details || ""),
-        }));
-        setItems(initialItems);
-    }, []);
+    const items = (data.experiences || []).map((item) => ({
+        position: item.position || "",
+        company: item.company || "",
+        start: item.start || "",
+        end: item.end || "",
+        details: Array.isArray(item.details) ? item.details.join('\n') : (item.details || ""),
+    }));
 
     const addToArray = () => {
-        const newItem: Item = { id: uuidv4(), position: '', company: '', start: '', end: '', details: '' };
-        setItems((prevItems) => [...prevItems, newItem]);
+        setData((prev) => ({
+            ...prev,
+            experiences: [...(prev.experiences || []), { position: '', company: '', start: '', end: '', details: [] }],
+        }));
     };
 
     const deleteItem = (id: string) => {
-        const updatedItems = items.filter(item => item.id !== id);
-        setItems(updatedItems);
-        setData({
-            ...data,
-            experiences: updatedItems.map(item => ({
-                position: item.position,
-                company: item.company,
-                start: item.start,
-                end: item.end,
-                details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
-            }))
-        });
+        const index = Number(id);
+        if (Number.isNaN(index)) return;
+        setData((prev) => ({
+            ...prev,
+            experiences: (prev.experiences || []).filter((_, idx) => idx !== index),
+        }));
     };
 
     const updateItem = (id: string, position: string, company: string, start: string, end: string, details: string) => {
-        const updatedItems = items.map(item =>
-            item.id === id ? { ...item, position, company, start, end, details } : item
-        );
-        setItems(updatedItems);
-        setData({
-            ...data,
-            experiences: updatedItems.map(item => ({
-                position: item.position,
-                company: item.company,
-                start: item.start,
-                end: item.end,
-                details: item.details.split('\n').map(line => line.trim()).filter(line => line !== '')
-            }))
-        });
+        const index = Number(id);
+        if (Number.isNaN(index)) return;
+        setData((prev) => ({
+            ...prev,
+            experiences: (prev.experiences || []).map((item, idx) =>
+                idx === index
+                    ? {
+                        position,
+                        company,
+                        start,
+                        end,
+                        details: details.split('\n').map(line => line.trim()).filter(line => line !== ''),
+                    }
+                    : item
+            ),
+        }));
     };
 
     return (
@@ -85,10 +66,10 @@ export default function ExperienceSection() {
                 </div>
             ) : (
                 <div className="space-y-4">
-                    {items.map((item) => (
-                        <div key={item.id} className="rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
+                    {items.map((item, index) => (
+                        <div key={`experience-${index}`} className="rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
                             <ExperienceInput
-                                id={item.id}
+                                id={`${index}`}
                                 position={item.position}
                                 company={item.company}
                                 start={item.start}
@@ -100,7 +81,7 @@ export default function ExperienceSection() {
                                 <button
                                     className="rounded-lg border border-outline-variant bg-surface-container-low px-3 py-1.5 text-sm font-semibold text-on-surface transition-colors hover:bg-surface-container-high"
                                     type="button"
-                                    onClick={() => deleteItem(item.id)}
+                                    onClick={() => deleteItem(`${index}`)}
                                 >
                                     Delete
                                 </button>

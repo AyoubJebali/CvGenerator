@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
@@ -76,7 +77,7 @@ export default function DashboardLayout({
             {session?.user?.image ? (
               <div className="avatar">
                 <div className="w-10 rounded-full">
-                  <img src={session.user.image} alt="User avatar" />
+                  <Image src={session.user.image} alt="User avatar" width={40} height={40} className="rounded-full object-cover" />
                 </div>
               </div>
             ) : (
@@ -127,7 +128,7 @@ export default function DashboardLayout({
                 {session.user.image ? (
                   <div className="avatar">
                     <div className="w-12 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-surface-container-lowest">
-                      <img src={session.user.image} alt="User avatar" />
+                      <Image src={session.user.image} alt="User avatar" width={48} height={48} className="rounded-full object-cover" />
                     </div>
                   </div>
                 ) : (

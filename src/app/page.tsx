@@ -78,7 +78,7 @@ function HomeContent() {
         return;
       }
 
-      const createResult = await createUserResume(data.name.trim() || "Untitled Resume");
+      const createResult = await createUserResume(data.name.trim() || "Untitled Resume", data);
       if (!createResult.success) {
         setSaveMessage({ type: "error", text: createResult.error ?? "Failed to create resume" });
         return;
@@ -88,11 +88,6 @@ function HomeContent() {
         return;
       }
       const createdResumeId = createResult.resume.id;
-      const updateResult = await updateUserResume(createdResumeId, data);
-      if (!updateResult.success) {
-        setSaveMessage({ type: "error", text: updateResult.error });
-        return;
-      }
 
       setCurrentResumeId(createdResumeId);
       router.replace(`/?resumeId=${createdResumeId}`);
