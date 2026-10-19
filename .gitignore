@@ -9,6 +9,8 @@
 # testing
 /coverage
 
+#design
+/design
 # next.js
 /.next/
 /out/
@@ -26,6 +28,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
 
 # vercel
@@ -34,3 +37,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# md files
+*.md
+
+# leaked CV data (see ANALYSIS.md #7)
+/public/generated-cv.json
+
+# claude code tooling artifacts
+/.lavish/
+skills-lock.json

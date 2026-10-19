@@ -57,7 +57,7 @@ export const UserProfileSchema = z.object({
 
 
 // 👇 Generate TypeScript types automatically
-export type UserProfile = z.infer<typeof UserProfileSchema>;
+export type ResumeSchema = z.infer<typeof UserProfileSchema>;
 export type Contact = z.infer<typeof ContactSchema>;
 export type Language = z.infer<typeof LanguageSchema>;
 export type Project = z.infer<typeof ProjectSchema>;
@@ -65,5 +65,21 @@ export type StudyTraining = z.infer<typeof StudyTrainingSchema>;
 export type Experience = z.infer<typeof ExperienceSchema>;
 export type Skill = z.infer<typeof SkillSchema>;
 export type CvProps = {
-  data?: UserProfile;
+  data?: ResumeSchema;
 };
+export interface User {
+  id: string; // UUID
+  email: string;
+  name?: string;
+  image?: string;
+  provider?: string;
+  provider_account_id?: string;
+  updated_at: string; // ISO timestamp
+}
+export interface Resume {
+  id: string; // UUID
+  name: string; // Name of the resume
+  userId: string; // UUID of the user (foreign key to users table)
+  resumeData: object; // JSON data for the resume
+  lastModified: string; // ISO timestamp for the last modification date
+}

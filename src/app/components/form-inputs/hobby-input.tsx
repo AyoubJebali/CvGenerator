@@ -18,7 +18,7 @@ const HobbyInput: React.FC<HobbyInputProps> = ({ id, hobby, updateItem }) => {
         type="text"
         name="hobby"
         value={hobby}
-        className="input input-bordered w-full text-black"
+        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
         placeholder="Enter a hobby"
         onChange={handleHobbyChange}
       />

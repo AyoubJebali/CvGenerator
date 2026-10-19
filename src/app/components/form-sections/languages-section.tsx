@@ -1,108 +1,84 @@
 "use client";
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
-import LanguageInputBase from '../form-inputs/language-input';
+import React from "react";
+import LanguageInput from "../form-inputs/language-input";
 import { useCv } from "../CvContext";
-interface Item {
-  id: string;
-  language: string;
-  proficiency: string;
-}
+import type { Language } from "@/types";
 
 export default function LanguagesSection() {
-  const [items, setItems] = useState<Item[]>([]);
   const { data, setData } = useCv();
-  const MemoLanguageInput = useMemo(() => React.memo(LanguageInputBase), []);
+  const items = (Array.isArray(data.languages) ? data.languages : []).map((item) => ({
+    language: item.language ?? "",
+    proficiency: item.proficiency ?? "",
+  }));
 
-  const generateId = () => {
-    try {
-      // @ts-ignore
-      if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-        // @ts-ignore
-        return crypto.randomUUID();
-      }
-    } catch {}
-    return Math.random().toString(36).slice(2);
+  const addToArray = () => {
+    setData((prev) => ({
+      ...prev,
+      languages: [...(Array.isArray(prev.languages) ? prev.languages : []), { language: "", proficiency: "" }],
+    }));
   };
 
-  // Initialize from context if languages exist
-  useEffect(() => {
-    if (Array.isArray(data?.languages) && data.languages.length) {
-      const normalized = data.languages.map((l: any) => ({
-        id: generateId(),
-        language: l.language || '',
-        proficiency: l.proficiency || '',
-      }));
-      setItems(normalized);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const deleteItem = (id: string) => {
+    const index = Number(id);
+    if (Number.isNaN(index)) return;
 
-  const addToArray = useCallback(() => {
-    const newItem: Item = { id: generateId(), language: '', proficiency: '' };
-    setItems((prevItems) => {
-      const next = [...prevItems, newItem];
-      setData((prev: any) => ({ ...prev, languages: next }));
-      return next;
-    });
-  }, [setData]);
+    setData((prev) => ({
+      ...prev,
+      languages: (Array.isArray(prev.languages) ? prev.languages : []).filter((_, idx) => idx !== index),
+    }));
+  };
 
-  const deleteItem = useCallback((id: string) => {
-    setItems((prevItems) => {
-      const next = prevItems.filter(item => item.id !== id);
-      setData((prev: any) => ({ ...prev, languages: next }));
-      return next;
-    });
-  }, [setData]);
+  const updateItem = (id: string, language: string, proficiency: string) => {
+    const index = Number(id);
+    if (Number.isNaN(index)) return;
 
-  const updateItem = useCallback((id: string, language: string, proficiency: string) => {
-    setItems((prevItems) => {
-      const next = prevItems.map(item =>
-        item.id === id ? { ...item, language, proficiency } : item
-      );
-      setData((prev: any) => ({ ...prev, languages: next }));
-      return next;
-    });
-  }, [setData]);
+    setData((prev) => ({
+      ...prev,
+      languages: (Array.isArray(prev.languages) ? prev.languages : []).map((item: Language, idx) =>
+        idx === index ? { ...item, language, proficiency } : item
+      ),
+    }));
+  };
 
   return (
-    <div className="collapse collapse-arrow bg-base-200 rounded-lg">
-      <input type="checkbox" name="languages-accordion" />
-      <div className="text-black collapse-title text-xl font-medium flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-languages-icon lucide-languages"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
-        Languages
+    <section className="editor-section p-5 md:p-7">
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-[34px] font-extrabold text-on-surface">Languages</h3>
+        <button
+          className="editor-action-btn"
+          type="button"
+          onClick={addToArray}
+        >
+          + Add Language
+        </button>
       </div>
-      <div className="collapse-content">
-        <div className="space-y-4">
-          {items.map((item) => (
-            <div key={item.id} className="flex items-center gap-4">
+      <div className="space-y-4">
+        {items.length === 0 ? (
+          <div className="rounded-2xl border-2 border-dashed border-outline-variant bg-surface-container-high px-6 py-10 text-center">
+            <p className="text-2xl font-medium text-on-surface-variant">Add spoken languages</p>
+          </div>
+        ) : (
+          items.map((item, index) => (
+            <div key={`language-${index}`} className="flex items-center gap-4">
               <div className="flex-grow">
-                <MemoLanguageInput
-                  id={item.id}
+                <LanguageInput
+                  id={`${index}`}
                   language={item.language}
                   proficiency={item.proficiency}
                   updateItem={updateItem}
                 />
               </div>
               <button
-                className="btn btn-outline btn-error btn-sm"
+                className="rounded-lg border border-outline-variant bg-surface-container-low px-3 py-1.5 text-sm font-semibold text-on-surface transition-colors hover:bg-surface-container-high"
                 type="button"
-                onClick={() => deleteItem(item.id)}
+                onClick={() => deleteItem(`${index}`)}
               >
                 Delete
               </button>
             </div>
-          ))}
-        </div>
-        <div className="text-right mt-4">
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={addToArray}
-          >
-            Add Language
-          </button>
-        </div>
+          ))
+        )}
       </div>
-    </div>
+    </section>
   );
 }

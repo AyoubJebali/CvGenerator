@@ -37,7 +37,7 @@ const ExperienceInput: React.FC<ExperienceInputProps> = ({ id, position, company
                 type="text"
                 name="experience_position"
                 value={position}
-                className="input input-bordered w-full text-black"
+                className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
                 placeholder="Enter position title"
                 onChange={handlePositionChange}
             />
@@ -48,7 +48,7 @@ const ExperienceInput: React.FC<ExperienceInputProps> = ({ id, position, company
                 type="text"
                 name="experience_company"
                 value={company}
-                className="input input-bordered w-full text-black"
+                className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
                 placeholder="Enter company name"
                 onChange={handleCompanyChange}
             />
@@ -61,7 +61,7 @@ const ExperienceInput: React.FC<ExperienceInputProps> = ({ id, position, company
                         type="date"
                         name="experience_start"
                         value={start}
-                        className="input input-bordered w-full text-black"
+                        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
                         placeholder="Start date"
                         onChange={handleStartChange}
                     />
@@ -74,7 +74,7 @@ const ExperienceInput: React.FC<ExperienceInputProps> = ({ id, position, company
                         type="date"
                         name="experience_end"
                         value={end}
-                        className="input input-bordered w-full text-black"
+                        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
                         placeholder="End date"
                         onChange={handleEndChange}
                     />
@@ -86,7 +86,7 @@ const ExperienceInput: React.FC<ExperienceInputProps> = ({ id, position, company
             <textarea
                 name="experience_details"
                 value={details}
-                className="textarea textarea-bordered w-full text-black bg-gray-50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all min-h-[100px] resize-vertical"
+                className="textarea textarea-bordered min-h-[100px] w-full resize-vertical rounded-lg border-outline-variant bg-surface-container-lowest text-on-surface shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-secondary"
                 placeholder="Describe your responsibilities, achievements, and technologies used..."
                 onChange={handleDetailsChange}
             />

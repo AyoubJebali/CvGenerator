@@ -1,0 +1,84 @@
+{
+  "name": "Amina El Idrissi",
+  "title": "Senior Full Stack Engineer",
+  "contact": {
+    "email": "amina.elidrissi@example.com",
+    "phone": "+212 6 12 34 56 78",
+    "location": "Rabat, Morocco",
+    "linkedin": "https://www.linkedin.com/in/amina-elidrissi",
+    "github": "https://github.com/aminaelidrissi"
+  },
+  "about": "Senior Full Stack Engineer with 8+ years building SaaS platforms and internal tools. Strong in product thinking, performance optimization, and API design.",
+  "skills": [
+    { "skill": "TypeScript", "category": "Programming Languages" },
+    { "skill": "JavaScript", "category": "Programming Languages" },
+    { "skill": "React", "category": "Frontend" },
+    { "skill": "Next.js", "category": "Frontend" },
+    { "skill": "Node.js", "category": "Backend" },
+    { "skill": "PostgreSQL", "category": "Databases" },
+    { "skill": "Docker", "category": "DevOps" },
+    { "skill": "AWS", "category": "Cloud" }
+  ],
+  "languages": [
+    { "language": "Arabic", "proficiency": "Native" },
+    { "language": "English", "proficiency": "Fluent" },
+    { "language": "French", "proficiency": "Fluent" }
+  ],
+  "hobbies": ["Running", "Photography", "Mentoring"],
+  "objectives": "Lead high-impact product engineering while coaching teams and shipping reliable, user-centered software.",
+  "projects": [
+    {
+      "title": "Multi-tenant Billing Platform",
+      "start": "2023-02-01",
+      "end": "2024-03-01",
+      "details": [
+        "Designed and implemented subscription workflows for 20k+ active users.",
+        "Reduced payment failure rates by 31% through retry orchestration.",
+        "Integrated Stripe webhooks with idempotent event processing."
+      ]
+    },
+    {
+      "title": "Recruitment Analytics Dashboard",
+      "start": "2021-01-01",
+      "end": "2022-12-01",
+      "details": [
+        "Built a data visualization suite for hiring funnel metrics.",
+        "Improved dashboard load time from 4.5s to 1.7s.",
+        "Implemented role-based access control and audit logging."
+      ]
+    }
+  ],
+  "studies_training": [
+    {
+      "start": "2012-09-01",
+      "end": "2017-06-01",
+      "degree": "Master's in Software Engineering",
+      "institution": "Mohammed V University",
+      "honors": "With distinction"
+    }
+  ],
+  "experiences": [
+    {
+      "position": "Senior Full Stack Engineer",
+      "company": "Atlas Digital",
+      "start": "2022-01-01",
+      "end": "Present",
+      "details": [
+        "Led architecture decisions for customer-facing SaaS modules.",
+        "Introduced typed API contracts reducing production bugs by 27%.",
+        "Mentored 4 mid-level engineers across frontend and backend topics."
+      ]
+    },
+    {
+      "position": "Full Stack Engineer",
+      "company": "NorthHub",
+      "start": "2018-04-01",
+      "end": "2021-12-01",
+      "details": [
+        "Developed B2B workflow tools used by 150+ enterprise clients.",
+        "Built CI pipelines and release automation to shorten delivery cycles.",
+        "Partnered with product designers to improve onboarding completion."
+      ]
+    }
+  ]
+}

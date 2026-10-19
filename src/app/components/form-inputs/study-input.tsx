@@ -29,7 +29,7 @@ const StudyInput: React.FC<StudyInputProps> = ({ id, start, end, degree, institu
         type="date"
         name="study_start"
         value={start}
-        className="input input-bordered w-full text-black"
+        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
         placeholder="Start date"
         onChange={handleInputChange('start')}
       />
@@ -37,7 +37,7 @@ const StudyInput: React.FC<StudyInputProps> = ({ id, start, end, degree, institu
         type="date"
         name="study_end"
         value={end}
-        className="input input-bordered w-full text-black"
+        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
         placeholder="End date"
         onChange={handleInputChange('end')}
       />
@@ -45,7 +45,7 @@ const StudyInput: React.FC<StudyInputProps> = ({ id, start, end, degree, institu
         type="text"
         name="study_degree"
         value={degree}
-        className="input input-bordered w-full text-black"
+        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
         placeholder="e.g., Bachelor's degree"
         onChange={handleInputChange('degree')}
       />
@@ -53,7 +53,7 @@ const StudyInput: React.FC<StudyInputProps> = ({ id, start, end, degree, institu
         type="text"
         name="study_institution"
         value={institution}
-        className="input input-bordered w-full text-black"
+        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
         placeholder="e.g., University of Anytown"
         onChange={handleInputChange('institution')}
       />
@@ -61,7 +61,7 @@ const StudyInput: React.FC<StudyInputProps> = ({ id, start, end, degree, institu
         type="text"
         name="study_honors"
         value={honors}
-        className="input input-bordered w-full text-black"
+        className="input input-bordered w-full border-outline-variant bg-surface-container-lowest text-on-surface"
         placeholder="e.g., Graduated with Honors"
         onChange={handleInputChange('honors')}
       />

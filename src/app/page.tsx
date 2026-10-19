@@ -2,16 +2,35 @@
 import Form from "./components/create-cv-form";
 import CvOneColumn from "./components/templates/CvOneColumn";
 import ZoomWrapper from "./components/zoomWrapper";
-import CVTemplateSelector from "./components/cvTemplateSelector";
 import CvHeaderBanner from "./components/templates/CvHeaderBanner";
 import CvSidebarDark from "./components/templates/CvSideBarDark";
 import CvTwoColumn from "./components/templates/CvTwoColumn";
-import { useState, useCallback } from "react";
+import CVTemplateSelector from "./components/cvTemplateSelector";
+import { useState, useCallback, useEffect, Suspense } from "react";
 import { printComponent } from "./components/printCv";
 import { useCv } from "./components/CvContext";
-export default function Home() {
+import { ResumeSchema } from "@/types";
+import previewSeedData from "./lib/preview-seed.json";
+import { useSession } from "next-auth/react"
+import { useRouter, useSearchParams } from "next/navigation";
+import { FiSave } from "react-icons/fi";
+import { createUserResume, updateUserResume } from "./dashboard/actions";
+
+function HomeContent() {
   const [selectedTemplate, setSelectedTemplate] = useState<string>("OneColumn");
-  const { data } = useCv();
+  const { data, setData } = useCv();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [currentResumeId, setCurrentResumeId] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // redirect to your sign-in page if not authenticated
+      router.push("/SignIn");
+    },
+  });
   const handlePrint = useCallback(() => {
     let ComponentToPrint;
 
@@ -35,29 +54,140 @@ export default function Home() {
     printComponent(
       ComponentToPrint,
       { data },
-      { title: "My CV", theme: "winter" }
+      { title: "My CV", theme: "curatorlight" }
     );
   }, [selectedTemplate, data]);
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-900 via-indigo-800 to-fuchsia-900">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-fuchsia-400/10 rounded-full blur-3xl"></div>
-      </div>
+  useEffect(() => {
+    setCurrentResumeId(searchParams.get("resumeId"));
+  }, [searchParams]);
 
-      <div className="relative z-10 flex flex-col xl:grid xl:grid-cols-5 xl:gap-6 min-h-screen p-4 xl:p-6">
-        {/* Form Section */}
-        <div className="w-full xl:col-start-1 xl:col-span-2 xl:row-start-1 xl:row-span-1">
-          <div className="h-full  rounded-2xl shadow-2xl  overflow-hidden">
-            <Form />
-          </div>
+  const handleSaveResume = useCallback(async () => {
+    setIsSaving(true);
+    setSaveMessage(null);
+
+    try {
+      if (currentResumeId) {
+        const result = await updateUserResume(currentResumeId, data);
+        if (!result.success) {
+          setSaveMessage({ type: "error", text: result.error ?? "Failed to update resume" });
+          return;
+        }
+
+        setSaveMessage({ type: "success", text: "Resume saved." });
+        return;
+      }
+
+      const createResult = await createUserResume(data.name.trim() || "Untitled Resume", data);
+      if (!createResult.success) {
+        setSaveMessage({ type: "error", text: createResult.error ?? "Failed to create resume" });
+        return;
+      }
+      if (!createResult.resume || !createResult.resume.id) {
+        setSaveMessage({ type: "error", text: "Failed to retrieve created resume ID." });
+        return;
+      }
+      const createdResumeId = createResult.resume.id;
+
+      setCurrentResumeId(createdResumeId);
+      router.replace(`/?resumeId=${createdResumeId}`);
+      setSaveMessage({ type: "success", text: "Resume saved." });
+    } catch (error) {
+      console.error("Error saving resume:", error);
+      setSaveMessage({ type: "error", text: "Failed to save resume" });
+    } finally {
+      setIsSaving(false);
+    }
+  }, [currentResumeId, data, router]);
+
+  const handleLoadTestData = useCallback(() => {
+    setData(previewSeedData as ResumeSchema);
+  }, [setData]);
+  // show a simple loading state while session is being resolved
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-surface">
+        <div className="indicator">
+          <span className="loading loading-spinner loading-lg"></span>
         </div>
+      </div>
+    );
+  }
+  
 
-        {/* Preview Section */}
-        <div className="w-full xl:col-start-3 xl:col-span-2 xl:row-start-1 xl:row-span-1 mt-4 xl:mt-0 xl:sticky xl:top-6  xl:h-[calc(100vh-3rem)] flex flex-col">
-          <div className="h-full bg-white/5 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/10 p-4">
+  return (
+    <div className="h-[calc(100vh-56px)] bg-surface">
+      <div className="grid h-full grid-cols-1 xl:grid-cols-[240px_minmax(640px,860px)_minmax(520px,1fr)]">
+        <aside className="hidden xl:flex h-full flex-col bg-surface-container px-6 py-8">
+          <div>
+            <h2 className="text-[38px] leading-none font-semibold text-on-surface">Resume Editor</h2>
+            <p className="mt-2 text-xs tracking-[0.16em] text-on-surface-variant">V2.1 PROFESSIONAL</p>
+          </div>
+
+          <div className="mt-8 space-y-2">
+            <button className="flex w-full items-center gap-3 rounded-xl bg-surface-container-lowest px-4 py-3 text-left text-base font-semibold text-primary shadow-sm">
+              <span aria-hidden className="text-lg">📝</span>
+              <span>Content</span>
+            </button>
+            <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-base font-medium text-on-surface hover:bg-surface-container-high">
+              <span aria-hidden className="text-lg">📐</span>
+              <span>Layout</span>
+            </button>
+            <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-base font-medium text-on-surface hover:bg-surface-container-high">
+              <span aria-hidden className="text-lg">🎨</span>
+              <span>Style</span>
+            </button>
+            <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-base font-medium text-on-surface hover:bg-surface-container-high">
+              <span aria-hidden className="text-lg">✨</span>
+              <span>Optimize</span>
+            </button>
+          </div>
+
+          <div className="mt-auto space-y-2">
+            <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-base font-medium text-on-surface hover:bg-surface-container-high">
+              <span aria-hidden className="text-lg">❓</span>
+              <span>Help</span>
+            </button>
+            <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-base font-medium text-on-surface hover:bg-surface-container-high">
+              <span aria-hidden className="text-lg">↪️</span>
+              <span>Logout</span>
+            </button>
+          </div>
+        </aside>
+
+        <section className="h-full overflow-y-auto curator-scrollbar bg-surface-container-low p-6 lg:p-10">
+          <header className="mb-10">
+            <h1 className="text-5xl font-extrabold tracking-tight text-on-surface">Build Your Story</h1>
+            <p className="mt-3 max-w-xl text-2xl leading-snug text-on-surface-variant">
+              Start filling the form to build your resume. AI will help you polish it later.
+            </p>
+            <div className="mt-5">
+              <button
+                type="button"
+                onClick={handleLoadTestData}
+                className="rounded-xl bg-surface-container-high px-4 py-2 text-sm font-semibold text-on-surface transition-colors hover:bg-surface-container-highest"
+              >
+                Load Test Data
+              </button>
+            </div>
+          </header>
+          <Form />
+        </section>
+
+        <section className="relative flex h-full min-h-0 flex-col overflow-hidden bg-surface p-4 lg:p-8">
+          <div className="mb-4 flex flex-wrap items-center justify-end gap-3">
+            <CVTemplateSelector onSelect={setSelectedTemplate} selected={selectedTemplate} />
+            <button className="rounded-lg bg-surface-container-high px-5 py-2 text-sm font-semibold text-on-surface-variant/70" disabled>
+              Optimize (AI)
+            </button>
+            <button
+              onClick={handlePrint}
+              className="rounded-lg bg-gradient-to-br from-primary to-primary-container px-5 py-2 text-sm font-semibold text-on-primary"
+            >
+              Download PDF
+            </button>
+          </div>
+          <div className="min-h-0 flex-1">
             <ZoomWrapper>
               {selectedTemplate === "OneColumn" && <CvOneColumn data={data} />}
               {selectedTemplate === "HeaderBanner" && (
@@ -69,39 +199,46 @@ export default function Home() {
               {selectedTemplate === "TwoColumn" && <CvTwoColumn data={data} />}
             </ZoomWrapper>
           </div>
-        </div>
-
-        {/* Template Selector Section */}
-        <div className="w-full xl:col-start-5 xl:col-span-1 xl:row-start-1 xl:row-span-1 mt-4 xl:mt-0 xl:sticky xl:top-6 xl:h-[calc(100vh-3rem)]">
-          <div className="h-full bg-transparent backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 p-4 flex flex-col">
-            <div className="flex-1 overflow-hidden">
-              <CVTemplateSelector onSelect={setSelectedTemplate} />
-            </div>
-
-            <div className="mt-6 space-y-3">
-              <button
-                onClick={handlePrint}
-                className="btn btn-primary w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 border-none shadow-lg text-white font-semibold"
-              >
-                <svg
-                  className="w-5 h-5 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
-                  />
-                </svg>
-                Print/Download CV
-              </button>
-            </div>
+        </section>
+      </div>
+      <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+        {saveMessage && (
+          <div
+            className={`rounded-lg px-3 py-2 text-sm shadow-lg ${
+              saveMessage.type === "success"
+                ? "bg-green-600 text-white"
+                : "bg-red-600 text-white"
+            }`}
+          >
+            {saveMessage.text}
           </div>
-        </div>
+        )}
+        <button
+          onClick={handleSaveResume}
+          disabled={isSaving}
+          className="flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-on-primary shadow-xl transition-colors hover:bg-primary-container disabled:opacity-60"
+        >
+          {isSaving ? (
+            <>
+              <span className="loading loading-spinner loading-sm"></span>
+              Saving...
+            </>
+          ) : (
+            <>
+              <FiSave size={16} />
+              Save
+            </>
+          )}
+        </button>
       </div>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
   );
 }
