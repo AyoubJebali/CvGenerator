@@ -1,41 +1,55 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect, useRef } from "react";
-import { useSession } from "next-auth/react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { ResumeSchema, UserProfileSchema } from "@/types";
 
 // Empty initial data
-const emptyCvData: ResumeSchema = {
-  "name": "",
-  "title": "",
-  "contact": {
-    "email": "",
-    "phone": "",
-    "location": "",
-    "linkedin": "",
-    "github": ""
+export const emptyCvData: ResumeSchema = {
+  name: "",
+  title: "",
+  contact: {
+    email: "",
+    phone: "",
+    location: "",
+    linkedin: "",
+    github: "",
   },
-  "about": "",
-  "skills": [],
-  "languages": [],
-  "hobbies": [],
-  "objectives": "",
-  "projects": [],
-  "studies_training": [],
-  "experiences": []
+  about: "",
+  skills: [],
+  languages: [],
+  hobbies: [],
+  objectives: "",
+  projects: [],
+  studies_training: [],
+  experiences: [],
 };
 
 type CvContextType = {
   data: ResumeSchema;
   setData: React.Dispatch<React.SetStateAction<ResumeSchema>>;
-  reset: () => void; // <--- added
+  reset: () => void;
 };
 
 const CvContext = createContext<CvContextType | null>(null);
 
-export const CvProvider = ({ children }: { children: React.ReactNode }) => {
+interface CvProviderProps {
+  children: React.ReactNode;
+  initialData?: ResumeSchema;
+  storageKey?: string | null;
+}
+
+export const CvProvider = ({
+  children,
+  initialData,
+  storageKey,
+}: CvProviderProps) => {
   const [data, setData] = useState<ResumeSchema>(() => {
-    if (typeof window === "undefined") return emptyCvData;
-    const saved = localStorage.getItem("cvData");
+    if (initialData) {
+      return initialData;
+    }
+    if (typeof window === "undefined" || !storageKey) {
+      return emptyCvData;
+    }
+    const saved = localStorage.getItem(storageKey);
     if (!saved) return emptyCvData;
     try {
       const result = UserProfileSchema.safeParse(JSON.parse(saved));
@@ -44,18 +58,20 @@ export const CvProvider = ({ children }: { children: React.ReactNode }) => {
       return emptyCvData;
     }
   });
-  const { status } = useSession();
-  const prevStatus = useRef(status);
 
-  // Save to localStorage whenever data changes
+  // Save to localStorage only if storageKey is explicitly set
   useEffect(() => {
-    localStorage.setItem("cvData", JSON.stringify(data));
-  }, [data]);
+    if (storageKey && typeof window !== "undefined") {
+      localStorage.setItem(storageKey, JSON.stringify(data));
+    }
+  }, [data, storageKey]);
 
   // reset function callable from components
   const reset = () => {
     setData(emptyCvData);
-    if (typeof window !== "undefined") localStorage.removeItem("cvData");
+    if (storageKey && typeof window !== "undefined") {
+      localStorage.removeItem(storageKey);
+    }
   };
 
   return (

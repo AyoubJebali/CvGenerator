@@ -4,20 +4,17 @@ import { useRouter } from "next/navigation";
 import ResumeCard from "../components/ResumeCard";
 import { useSession } from "next-auth/react";
 import { Resume, ResumeSchema } from "@/types";
-import { fetchUserResumes, createUserResume, deleteUserResume, fetchResumeById } from "./actions";
+import { fetchUserResumes, createUserResume, deleteUserResume } from "./actions";
 import { FiPlus, FiFileText } from "react-icons/fi";
-import { useCv } from "../components/CvContext";
 
 const Dashboard = () => {
   const { data: session, status } = useSession();
-  const { setData } = useCv();
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newResumeName, setNewResumeName] = useState("");
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [loading, setLoading] = useState(true);
   const [isCreating, setIsCreating] = useState(false);
-  const [isPrefilling, setIsPrefilling] = useState(false);
 
   // Check for session and redirect if not authenticated
   useEffect(() => {
@@ -41,7 +38,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadResumes();
-  }, [session?.user?.id]);
+  }, [loadResumes]);
 
   // Handle delete resume
   const handleDeleteResume = async (resumeId: string) => {
@@ -53,23 +50,9 @@ const Dashboard = () => {
     }
   };
 
-  // Handle edit resume
-  const handleEditResume = async (resumeId: string) => {
-    setIsPrefilling(true);
-    try {
-      const result = await fetchResumeById(resumeId);
-      if (!result.success) {
-        console.error(result.error);
-        return;
-      }
-
-      setData(result.resume.resumeData as ResumeSchema);
-      router.push(`/?resumeId=${resumeId}`);
-    } catch (error) {
-      console.error("Error loading resume for edit:", error);
-    } finally {
-      setIsPrefilling(false);
-    }
+  // Handle edit resume - direct navigation to server route
+  const handleEditResume = (resumeId: string) => {
+    router.push(`/resumes/${resumeId}/edit`);
   };
 
   // Handle view resume
@@ -83,9 +66,13 @@ const Dashboard = () => {
     setIsCreating(true);
     try {
       const result = await createUserResume(newResumeName);
-      if (result.success) {
-        loadResumes();
+      if (result.success && result.resume?.id) {
+        setIsModalOpen(false);
+        setNewResumeName("");
+        router.push(`/resumes/${result.resume.id}/edit`);
+        return;
       }
+      loadResumes();
     } catch (error) {
       console.error("Error creating resume:", error);
     } finally {
@@ -102,7 +89,7 @@ const Dashboard = () => {
   };
 
   // Loading state
-  if (status === "loading" || loading || isPrefilling) {
+  if (status === "loading" || loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <span className="loading loading-spinner loading-lg text-primary"></span>
