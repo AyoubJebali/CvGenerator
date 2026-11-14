@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom/vitest";
+import "dotenv/config";
 import { vi } from "vitest";
 
 // Mock next/navigation

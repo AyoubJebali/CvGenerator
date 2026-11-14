@@ -7,8 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "vitest run --exclude 'src/test/db/**'",
+    "test:watch": "vitest --exclude 'src/test/db/**'",
+    "test:db": "vitest run src/test/db",
+    "test:all": "vitest run"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.84.0",
