@@ -16,7 +16,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Cv Genator - Create Your Professional CV with Ease",
+  title: "CvGen - Create Your Professional CV with Ease",
   description:
     "Generate a professional CV effortlessly with our intuitive CV generator. Customize templates, add your details, and download your CV in minutes.",
 };

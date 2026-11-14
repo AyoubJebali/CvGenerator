@@ -19,6 +19,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   if (session?.user?.id) {
     redirect("/dashboard");
   } else {
-    redirect("/SignIn");
+    redirect("/signin");
   }
 }

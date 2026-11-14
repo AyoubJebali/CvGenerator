@@ -9,6 +9,9 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
   ],
+  pages: {
+    signIn: "/signin",
+  },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async session({ session, token }) {
@@ -20,23 +23,39 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
-        const { data: dbUser, error } = await supabaseAdmin
-          .from("users")
-          .select("id, email, name, image, provider, provider_account_id")
-          .eq("email", user.email)
-          .single();
+        try {
+          const { data: dbUser, error } = await supabaseAdmin
+            .from("users")
+            .upsert(
+              {
+                email: user.email,
+                name: user.name,
+                image: user.image,
+                provider: account?.provider ?? null,
+                provider_account_id: account?.providerAccountId ?? null,
+                updated_at: new Date().toISOString(),
+                last_sign_in_at: new Date().toISOString(),
+                raw_user: user as object,
+              },
+              { onConflict: "email" }
+            )
+            .select("id, email, name, image, provider, provider_account_id")
+            .single();
 
-        if (error) {
-          console.error("Error fetching user ID from Supabase:", error);
-        } else {
-          token.id = dbUser?.id;
-          token.email = dbUser?.email;
-          token.name = dbUser?.name;
-          token.image = dbUser?.image;
-          token.provider = dbUser?.provider;
-          token.providerAccountId = dbUser?.provider_account_id;
+          if (error) {
+            console.error("Error upserting/fetching user in Supabase:", error);
+          } else if (dbUser) {
+            token.id = dbUser.id;
+            token.email = dbUser.email;
+            token.name = dbUser.name;
+            token.image = dbUser.image;
+            token.provider = dbUser.provider;
+            token.providerAccountId = dbUser.provider_account_id;
+          }
+        } catch (err) {
+          console.error("Supabase upsert error in jwt callback:", err);
         }
       }
       return token;
@@ -47,28 +66,7 @@ export const authOptions: NextAuthOptions = {
           return url.startsWith("/") ? `${baseUrl}${url}` : url;
         }
       }
-      return `${baseUrl}/`;
-    },
-  },
-  events: {
-    async signIn({ user, account }) {
-      try {
-        await supabaseAdmin.from("users").upsert(
-          {
-            email: user.email,
-            name: user.name,
-            image: user.image,
-            provider: account?.provider ?? null,
-            provider_account_id: account?.providerAccountId ?? null,
-            updated_at: new Date().toISOString(),
-            last_sign_in_at: new Date().toISOString(),
-            raw_user: user as object,
-          },
-          { onConflict: "email" }
-        );
-      } catch (err) {
-        console.error("Supabase upsert error:", err);
-      }
+      return `${baseUrl}/dashboard`;
     },
   },
 };

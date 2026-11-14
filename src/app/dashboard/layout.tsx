@@ -15,20 +15,28 @@ import {
   FiMenu,
   FiHome,
   FiSettings,
+  FiPlus,
 } from "react-icons/fi";
 
-const menuItems = [
+type NavItem = {
+  href: string;
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  disabled?: boolean;
+};
+
+const menuItems: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: FiHome },
-  { href: "/dashboard/resumes", label: "Resumes", icon: FiFileText },
-  { href: "/dashboard/cover-letters", label: "Cover Letters", icon: FiMail },
-  { href: "/dashboard/job-tracker", label: "Job Tracker", icon: FiBriefcase },
+  { href: "/resumes/new", label: "+ New Resume", icon: FiPlus },
+  { href: "#", label: "Cover Letters", icon: FiMail, disabled: true },
+  { href: "#", label: "Job Tracker", icon: FiBriefcase, disabled: true },
 ];
 
-const secondaryMenuItems = [
-  { href: "/plans", label: "Plans & Pricing", icon: FiCreditCard },
-  { href: "/student-benefits", label: "Student Benefits", icon: FiAward },
-  { href: "/account", label: "My Account", icon: FiUser },
-  { href: "/settings", label: "Settings", icon: FiSettings },
+const secondaryMenuItems: NavItem[] = [
+  { href: "#", label: "Plans & Pricing", icon: FiCreditCard, disabled: true },
+  { href: "#", label: "Student Benefits", icon: FiAward, disabled: true },
+  { href: "#", label: "My Account", icon: FiUser, disabled: true },
+  { href: "#", label: "Settings", icon: FiSettings, disabled: true },
 ];
 
 export default function DashboardLayout({
@@ -44,6 +52,41 @@ export default function DashboardLayout({
   const closeSidebar = () => setIsSidebarOpen(false);
 
   const isActive = (href: string) => pathname === href;
+
+  const renderNavItem = (item: NavItem) => {
+    if (item.disabled) {
+      return (
+        <li key={item.label}>
+          <div className="flex items-center justify-between px-3 py-2 rounded-lg text-on-surface-variant/40 cursor-not-allowed select-none">
+            <div className="flex items-center gap-3">
+              <item.icon size={18} />
+              <span className="font-medium text-sm">{item.label}</span>
+            </div>
+            <span className="badge badge-ghost badge-xs text-[9px] uppercase font-bold tracking-wider opacity-60">
+              Soon
+            </span>
+          </div>
+        </li>
+      );
+    }
+
+    return (
+      <li key={item.href}>
+        <Link
+          href={item.href}
+          className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
+            isActive(item.href)
+              ? "bg-primary text-on-primary font-semibold"
+              : "text-on-surface hover:bg-surface-container-high font-medium"
+          }`}
+          onClick={closeSidebar}
+        >
+          <item.icon size={18} />
+          <span>{item.label}</span>
+        </Link>
+      </li>
+    );
+  };
 
   return (
     <div className="drawer min-h-screen bg-surface lg:drawer-open">
@@ -159,22 +202,7 @@ export default function DashboardLayout({
                 Main Menu
               </p>
               <ul className="space-y-1">
-                {menuItems.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
-                        isActive(item.href)
-                          ? "bg-primary text-on-primary"
-                          : "text-on-surface hover:bg-surface-container-high"
-                      }`}
-                      onClick={closeSidebar}
-                    >
-                      <item.icon size={18} />
-                      <span className="font-medium">{item.label}</span>
-                    </Link>
-                  </li>
-                ))}
+                {menuItems.map(renderNavItem)}
               </ul>
             </div>
 
@@ -183,22 +211,7 @@ export default function DashboardLayout({
                 Account
               </p>
               <ul className="space-y-1">
-                {secondaryMenuItems.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
-                        isActive(item.href)
-                          ? "bg-primary text-on-primary"
-                          : "text-on-surface hover:bg-surface-container-high"
-                      }`}
-                      onClick={closeSidebar}
-                    >
-                      <item.icon size={18} />
-                      <span className="font-medium">{item.label}</span>
-                    </Link>
-                  </li>
-                ))}
+                {secondaryMenuItems.map(renderNavItem)}
               </ul>
             </div>
           </nav>

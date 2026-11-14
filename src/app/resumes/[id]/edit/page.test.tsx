@@ -33,13 +33,13 @@ describe("/resumes/[id]/edit Server Component", () => {
     vi.clearAllMocks();
   });
 
-  it("redirects unauthenticated users to /SignIn", async () => {
+  it("redirects unauthenticated users to /signin with callbackUrl", async () => {
     vi.mocked(getServerSession).mockResolvedValueOnce(null);
 
     await expect(EditResumePage({ params: Promise.resolve({ id: validUuid }) })).rejects.toThrow(
-      "NEXT_REDIRECT:/SignIn"
+      `NEXT_REDIRECT:/signin?callbackUrl=/resumes/${validUuid}/edit`
     );
-    expect(redirect).toHaveBeenCalledWith("/SignIn");
+    expect(redirect).toHaveBeenCalledWith(`/signin?callbackUrl=/resumes/${validUuid}/edit`);
   });
 
   it("calls notFound when resume is not found or not owned by user", async () => {

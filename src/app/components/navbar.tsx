@@ -23,7 +23,7 @@ const NavBar: React.FC = () => {
           href={session?.user ? "/dashboard" : "/"}
           className="text-lg font-extrabold text-primary tracking-tight hover:opacity-90 transition-opacity"
         >
-          CuratorAI
+          CvGen
         </Link>
         {session?.user && (
           <div className="hidden sm:flex items-center gap-4 text-sm font-medium text-on-surface-variant">
@@ -77,7 +77,7 @@ const NavBar: React.FC = () => {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <button
-            onClick={() => signIn("google")}
+            onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
             className="px-3 py-1 rounded-lg bg-gradient-to-br from-primary to-primary-container text-on-primary text-sm hover:opacity-90"
           >
             Sign in

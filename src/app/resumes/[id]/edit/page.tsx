@@ -10,12 +10,12 @@ interface PageProps {
 }
 
 export default async function EditResumePage({ params }: PageProps) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) {
-    redirect("/SignIn");
+    redirect(`/signin?callbackUrl=/resumes/${id}/edit`);
   }
 
-  const { id } = await params;
   const resume = await getResumeByIdForUser(id, session.user.id);
 
   if (!resume) {

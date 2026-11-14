@@ -19,7 +19,7 @@ const ViewResumePage = () => {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/SignIn");
+      router.push("/signin");
     }
   }, [status, router]);
 

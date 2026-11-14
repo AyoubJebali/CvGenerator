@@ -19,7 +19,7 @@ const Dashboard = () => {
   // Check for session and redirect if not authenticated
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/SignIn");
+      router.push("/signin");
     }
   }, [status, router]);
 

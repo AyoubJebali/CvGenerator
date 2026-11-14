@@ -35,12 +35,12 @@ describe("Root / Route Redirects", () => {
     expect(redirect).toHaveBeenCalledWith("/dashboard");
   });
 
-  it("redirects unauthenticated users to /SignIn", async () => {
+  it("redirects unauthenticated users to /signin", async () => {
     vi.mocked(getServerSession).mockResolvedValueOnce(null);
 
     await expect(
       HomePage({ searchParams: Promise.resolve({}) })
-    ).rejects.toThrow("NEXT_REDIRECT:/SignIn");
-    expect(redirect).toHaveBeenCalledWith("/SignIn");
+    ).rejects.toThrow("NEXT_REDIRECT:/signin");
+    expect(redirect).toHaveBeenCalledWith("/signin");
   });
 });

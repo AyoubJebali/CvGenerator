@@ -25,11 +25,11 @@ describe("/resumes/new Server Component", () => {
     vi.clearAllMocks();
   });
 
-  it("redirects unauthenticated users to /SignIn", async () => {
+  it("redirects unauthenticated users to /signin", async () => {
     vi.mocked(getServerSession).mockResolvedValueOnce(null);
 
-    await expect(NewResumePage()).rejects.toThrow("NEXT_REDIRECT:/SignIn");
-    expect(redirect).toHaveBeenCalledWith("/SignIn");
+    await expect(NewResumePage()).rejects.toThrow("NEXT_REDIRECT:/signin?callbackUrl=/resumes/new");
+    expect(redirect).toHaveBeenCalledWith("/signin?callbackUrl=/resumes/new");
   });
 
   it("renders ResumeEditor with resumeId=null for authenticated users", async () => {

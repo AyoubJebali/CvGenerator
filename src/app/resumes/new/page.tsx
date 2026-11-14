@@ -7,7 +7,7 @@ import { emptyCvData } from "@/app/components/CvContext";
 export default async function NewResumePage() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) {
-    redirect("/SignIn");
+    redirect("/signin?callbackUrl=/resumes/new");
   }
 
   return <ResumeEditor resumeId={null} initialData={emptyCvData} />;
