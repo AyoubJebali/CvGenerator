@@ -43,6 +43,10 @@ next-env.d.ts
 # leaked CV data (see ANALYSIS.md #7)
 /public/generated-cv.json
 
+# agent memory / instructions
+AGENTS.md
+CLAUDE.md
+
 # claude code tooling artifacts
 /.lavish/
 skills-lock.json
